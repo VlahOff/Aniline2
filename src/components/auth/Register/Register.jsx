@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import { validateEmail } from '../../../utils/emailValidation';
 import { validatePassword } from '../../../utils/passwordValidation';
@@ -5,9 +6,12 @@ import { validateUsername } from '../../../utils/usernameValidation';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 import classes from './Register.module.css';
+import { onRegister } from '../../../store/auth-actions';
+import Card from '../../UI/Card/Card';
 
 const Register = () => {
-  const { values, isFormValid, changeHandler, blurHandler, doPasswordMatch } = useForm({
+  const dispatch = useDispatch();
+  const { formValues, isFormValid, changeHandler, blurHandler, doPasswordMatch, resetValues } = useForm({
     email: '',
     emailValid: null,
     username: '',
@@ -34,24 +38,32 @@ const Register = () => {
     doPasswordMatch(event);
   };
 
+  const onFormSubmitHandler = (event) => {
+    event.preventDefault();
+    if (isFormValid) {
+      dispatch(onRegister(formValues));
+    }
+    resetValues();
+  };
+
   return (
-    <>
-      <h1>Register</h1>
-      <form>
+    <Card className={classes.card}>
+      <h1 className={classes.title}>Register</h1>
+      <form onSubmit={onFormSubmitHandler} className={classes.form}>
         <Input
           label='Email'
           id='email'
           type='email'
           onChange={changeHandler}
           onBlur={emailBlurHandler}
-          value={values.email}
+          value={formValues.email}
         />
         <Input
           label='Username'
           id='username'
           onChange={changeHandler}
           onBlur={usernameBlurHandler}
-          value={values.username}
+          value={formValues.username}
         />
         <Input
           label='Password'
@@ -59,7 +71,7 @@ const Register = () => {
           type='password'
           onChange={changeHandler}
           onBlur={passwordBlurHandler}
-          value={values.password}
+          value={formValues.password}
         />
         <Input
           label='Repeat Password'
@@ -67,13 +79,15 @@ const Register = () => {
           type='password'
           onChange={changeHandler}
           onBlur={rePassBlurHandler}
-          value={values.rePass}
+          value={formValues.rePass}
         />
         <Button
+          className={classes.btn}
           disabled={!isFormValid}
+          type='submit'
         >Register</Button>
       </form>
-    </>
+    </Card>
   );
 };
 

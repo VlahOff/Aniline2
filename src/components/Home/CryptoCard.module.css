@@ -1,0 +1,35 @@
+.card {
+  min-width: 220px;
+  color: white;
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.5rem;
+  background-color: #444444;
+}
+
+.coin-logo {
+  width: 36px;
+}
+
+.main {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.main p {
+  margin-bottom: 0.3rem;
+}
+
+.footer {
+  text-align: center;
+}

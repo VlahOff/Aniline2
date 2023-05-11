@@ -12,7 +12,7 @@ const Input = (props) => {
         onChange={props.onChange}
         onBlur={props.onBlur}
         value={props.value}
-        autoComplete="off"
+        // autoComplete="off"
       />
       <label htmlFor={props.id} className={classes.label}>{props.label}</label>
       {props.error === false &&

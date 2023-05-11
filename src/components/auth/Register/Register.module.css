@@ -1,0 +1,18 @@
+.card {
+  width: 500px;
+  margin: 120px auto;
+}
+
+.title {
+  color: white;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn {
+  margin-top: 1rem;
+}

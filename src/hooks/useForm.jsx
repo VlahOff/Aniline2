@@ -44,11 +44,16 @@ export const useForm = (initialValues) => {
     });
   };
 
+  const resetValues = () => {
+    setValues(initialValues);
+  };
+
   return {
-    values,
+    formValues: values,
     isFormValid,
     changeHandler,
     blurHandler,
     doPasswordMatch,
+    resetValues
   };
 };

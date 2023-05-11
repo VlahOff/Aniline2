@@ -4,9 +4,13 @@ import { useForm } from '../../../hooks/useForm';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 import classes from './Login.module.css';
+import { useDispatch } from 'react-redux';
+import { onLogin } from '../../../store/auth-actions';
+import Card from '../../UI/Card/Card';
 
 const Login = () => {
-  const { values, isFormValid, changeHandler, blurHandler } = useForm({
+  const dispatch = useDispatch();
+  const { formValues, isFormValid, changeHandler, blurHandler, resetValues } = useForm({
     email: '',
     emailValid: null,
     password: '',
@@ -21,17 +25,25 @@ const Login = () => {
     blurHandler(event, validatePassword);
   };
 
+  const onFormSubmitHandler = (event) => {
+    event.preventDefault();
+    if (isFormValid) {
+      dispatch(onLogin(formValues));
+    }
+    resetValues();
+  };
+
   return (
-    <>
-      <h1>Login</h1>
-      <form>
+    <Card className={classes.card}>
+      <h1 className={classes.title}>Login</h1>
+      <form onSubmit={onFormSubmitHandler} className={classes.form}>
         <Input
           label='Email'
           id='email'
           type='email'
           onChange={changeHandler}
           onBlur={emailBlurHandler}
-          value={values.email}
+          value={formValues.email}
         />
         <Input
           label='Password'
@@ -39,11 +51,15 @@ const Login = () => {
           type='password'
           onChange={changeHandler}
           onBlur={passwordBlurHandler}
-          value={values.password}
+          value={formValues.password}
         />
-        <Button>Login</Button>
+        <Button
+          className={classes.btn}
+          disabled={!isFormValid}
+          type='submit'
+        >Login</Button>
       </form>
-    </>
+    </Card>
   );
 };
 
