@@ -1,21 +1,35 @@
-import classes from './Navigation.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { onLogout } from '../../store/auth-actions';
+import { toggleTheme } from '../../store/ui-actions';
+import ButtonLink from '../UI/ButtonLink/ButtonLink';
 import LinkTo from '../UI/LinkTo/LinkTo';
+
+import darkLogo from '../../assets/logo-dark.png';
+import lightLogo from '../../assets/logo-white.png';
+import classes from './Navigation.module.css';
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const theme = useSelector(state => state.ui.theme);
   const user = useSelector(state => state.auth.user);
 
   const logoutHandler = () => {
     dispatch(onLogout());
   };
 
+  const toggleThemeHandler = () => {
+    dispatch(toggleTheme());
+  };
+
   return (
     <>
       <nav className={classes.nav}>
         <div className={classes['logo-wrapper']}>
-          <h2>Aniline 2</h2>
+          <img
+            src={theme === 'light' ? darkLogo : lightLogo}
+            alt="site logo"
+            className={classes.logo}
+          />
         </div>
         <ul className={classes.links}>
           <li>
@@ -56,6 +70,15 @@ const Navigation = () => {
               </li>
             </>
           }
+          <li>
+            <ButtonLink onClick={toggleThemeHandler}>
+              {theme === 'light' ?
+                <i className={`fa-regular fa-sun ${classes['theme-indicator']}`}></i>
+                :
+                <i className={`fa-regular fa-moon ${classes['theme-indicator']}`}></i>
+              }
+            </ButtonLink>
+          </li>
         </ul>
       </nav>
     </>

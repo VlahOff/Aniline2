@@ -1,3 +1,17 @@
+:root {
+  --text-color: black;
+  --primary-color: #31FCEE;
+  --background: #EFEBF6;
+  --container-bg: #a0a2a7;
+}
+
+[data-theme='dark'] {
+  --text-color: white;
+  --primary-color: #c778dd;
+  --background: #474747;
+  --container-bg: #282c33;
+}
+
 *,
 *::before,
 *::after {
@@ -7,6 +21,8 @@
 * {
   margin: 0;
   padding: 0;
+  transition: color ease-in-out 300ms;
+  transition: background-color ease-in-out 300ms;
 }
 
 ul,
@@ -21,7 +37,6 @@ html:focus-within {
 }
 
 body {
-  background-color: #646464;
   font-family: 'Poppins', sans-serif;
   text-rendering: optimizeSpeed;
   line-height: 1.5;

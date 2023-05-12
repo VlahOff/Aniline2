@@ -1,13 +1,14 @@
 .btn {
-  color: white;
+  color: black;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  background-color: #c778dd;
+  background-color: var(--primary-color);
   border-radius: 0.5rem;
   text-align: center;
 }
 
 .btn:disabled {
+  color: white;
   background-color: #454d59;
   cursor: not-allowed;
 }

@@ -2,12 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: black;
+  background-color: var(--background);
   padding: 0.5rem 1rem;
 }
 
 .logo-wrapper {
-  color: white;
+  color: var(--text-color);
+}
+
+.logo {
+  width: 100px;
 }
 
 .links {
@@ -15,6 +19,6 @@
   gap: 1rem;
 }
 
-.links a {
-  color: white;
+.theme-indicator {
+  color: var(--text-color);
 }

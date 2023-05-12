@@ -1,13 +1,13 @@
-.link {
+.btn {
   display: block;
   position: relative;
   padding: 1rem 2rem;
   text-decoration: none;
-  color: var(--text-color);
+  color: white;
   overflow: hidden;
 }
 
-.link::after {
+.btn::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -21,7 +21,7 @@
   transform: translate3d(-102%, 0, 0);
 }
 
-.link:hover::after,
-.link:focus::after {
+.btn:hover::after,
+.btn:focus::after {
   transform: translate3d(0, 0, 0);
 }
