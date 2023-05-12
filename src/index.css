@@ -3,6 +3,7 @@
   --primary-color: #31FCEE;
   --background: #EFEBF6;
   --container-bg: #a0a2a7;
+  --hover-element: #cecece;
 }
 
 [data-theme='dark'] {
@@ -10,6 +11,7 @@
   --primary-color: #c778dd;
   --background: #474747;
   --container-bg: #282c33;
+  --hover-element: #4b4b4d;
 }
 
 *,

@@ -3,14 +3,14 @@
   overflow: auto;
   white-space: nowrap;
   border-radius: 8px;
-  background-color: #1f1f1f;
+  background-color: var(--container-bg);
 }
 
 .table {
   border-collapse: collapse;
   width: 100%;
-  background-color: #1f1f1f;
-  color: white;
+  background-color: var(--container-bg);
+  color: var(--text-color);
 }
 
 .table tr {
@@ -27,7 +27,7 @@
 .table tr:hover .first-col,
 .table tr:hover .second-col,
 .table tr:hover .third-col {
-  background-color: #2f2f30;
+  background-color: var(--hover-element);
   transition: background-color ease 600ms;
 }
 
@@ -48,7 +48,7 @@
   min-width: 32px;
   max-width: 32px;
   left: 0px;
-  background-color: #1f1f1f;
+  background-color: var(--container-bg);
   justify-content: center;
 }
 
@@ -57,7 +57,7 @@
   min-width: 38px;
   max-width: 38px;
   left: 32px;
-  background-color: #1f1f1f;
+  background-color: var(--container-bg);
 }
 
 .second-col>img {
@@ -70,7 +70,7 @@
   max-width: 200px;
   left: 70px;
   text-align: left;
-  background-color: #1f1f1f;
+  background-color: var(--container-bg);
   overflow: hidden;
 }
 

@@ -3,6 +3,8 @@ import { uiActions } from './ui';
 
 export const getTheme = () => {
   return (dispatch) => {
+    // const deviceTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // console.log(deviceTheme);
     const theme = localStorage.getItem('theme');
     dispatch(uiActions.setTheme(theme));
   };
