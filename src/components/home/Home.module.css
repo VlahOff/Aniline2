@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  margin: 2rem auto;
+  width: 80%;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  color: var(--text-color);
+  margin-top: 12rem;
+}
+
+.card-wrapper {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+}

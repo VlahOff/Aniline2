@@ -1,0 +1,16 @@
+.container {
+  width: 90%;
+  min-width: 600px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.global-data {
+  margin: 2rem 0;
+}
+
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}

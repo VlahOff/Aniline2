@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import authSlice from './auth';
 import cryptoSlice from './crypto';
 import uiSlice from './ui';

@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   topThree: [],
   topHundred: [],
-  newCoins: []
+  newCoins: [],
+  globalData: {}
 };
 
 const cryptoSlice = createSlice({
@@ -18,6 +19,9 @@ const cryptoSlice = createSlice({
     },
     setNewCoins(state, action) {
       state.newCoins = action.payload;
+    },
+    setGlobalData(state, action) {
+      state.globalData = action.payload;
     }
   }
 });

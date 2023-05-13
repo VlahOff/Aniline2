@@ -3,9 +3,15 @@ import { uiActions } from './ui';
 
 export const getTheme = () => {
   return (dispatch) => {
-    // const deviceTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    // console.log(deviceTheme);
+    const deviceTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const theme = localStorage.getItem('theme');
+
+    if (!theme) {
+      dispatch(uiActions.setTheme(deviceTheme ? 'dark' : 'light'));
+      localStorage.setItem('theme', deviceTheme ? 'dark' : 'light');
+      return;
+    }
+
     dispatch(uiActions.setTheme(theme));
   };
 };

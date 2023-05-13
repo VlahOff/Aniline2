@@ -1,38 +1,78 @@
 import * as cryptoService from '../services/cryptoService';
 import { cryptoActions } from './crypto';
+import { uiActions } from './ui';
 
 export const getTopThree = () => {
-  return async (dispatch) => {
-    const response = await cryptoService.fetchTopThree();
-    if (response.message) {
-      console.log(response);
-      return;
-    }
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService.fetchTopThree()
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
 
-    dispatch(cryptoActions.setTopThree(response));
+        dispatch(cryptoActions.setTopThree(res));
+      })
+      .catch(err => {
+        dispatch(uiActions.setErrorMessage(err));
+      })
+      .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
 
 export const getTopHundred = () => {
-  return async (dispatch) => {
-    const response = await cryptoService.fetchTopHundred();
-    if (response.message) {
-      console.log(response);
-      return;
-    }
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService.fetchTopHundred()
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
 
-    dispatch(cryptoActions.setTopHundred(response));
+        dispatch(cryptoActions.setTopHundred(res));
+      })
+      .catch(err => {
+        dispatch(uiActions.setErrorMessage(err));
+      })
+      .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
 
 export const getNewCoins = () => {
-  return async (dispatch) => {
-    const response = await cryptoService.fetchNewCoins();
-    if (response.message) {
-      console.log(response);
-      return;
-    }
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService.fetchNewCoins()
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
 
-    dispatch(cryptoActions.setNewCoins(response));
+        dispatch(cryptoActions.setNewCoins(res));
+      })
+      .catch(err => {
+        dispatch(uiActions.setErrorMessage(err));
+      })
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const getGlobalData = () => {
+  return (dispatch) => {
+    cryptoService.fetchGlobalData()
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(cryptoActions.setGlobalData(res));
+      })
+      .catch(err => {
+        dispatch(uiActions.setErrorMessage(err));
+      })
+      .finally(() => dispatch(uiActions.stopLoading()));
   };
 };

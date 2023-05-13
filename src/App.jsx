@@ -1,15 +1,19 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import RootLayout from './RootLayout';
-import Home from './components/Home/Home';
-import Login from './components/auth/Login/Login';
-import Register from './components/auth/Register/Register';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { isUserLoggedIn } from './store/auth-actions';
-import TopHundred from './components/CoinViews/TopHundred/TopHundred';
-import NewCoins from './components/CoinViews/NewCoins/NewCoins';
 import { getTheme } from './store/ui-actions';
+
+import RootLayout from './RootLayout';
+import Login from './components/auth/login/Login';
+import Register from './components/auth/register/Register';
+import NewCoins from './components/coinViews/newCoins/NewCoins';
+import TopHundred from './components/coinViews/topHundred/TopHundred';
+import CryptoConverter from './components/cryptoConverter/CryptoConverter';
+import Home from './components/home/Home';
+import Portfolio from './components/portfolio/Portfolio';
+import Profile from './components/profile/Profile';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +39,18 @@ const router = createBrowserRouter([
       {
         path: '/new-coins',
         element: <NewCoins />
+      },
+      {
+        path: '/crypto-converter',
+        element: <CryptoConverter />
+      },
+      {
+        path: '/portfolio',
+        element: <Portfolio />
+      },
+      {
+        path: '/profile',
+        element: <Profile />
       }
     ]
   },
