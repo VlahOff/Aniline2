@@ -47,6 +47,8 @@ const Login = () => {
           onChange={changeHandler}
           onBlur={emailBlurHandler}
           value={formValues.email}
+          error={formValues.emailValid}
+          errorMessage={'Invalid e-mail.'}
         />
         <Input
           label='Password'
@@ -55,6 +57,8 @@ const Login = () => {
           onChange={changeHandler}
           onBlur={passwordBlurHandler}
           value={formValues.password}
+          error={formValues.passwordValid}
+          errorMessage={'Invalid password.'}
         />
         <Button
           className={classes.btn}

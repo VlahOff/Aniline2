@@ -15,7 +15,7 @@ import classes from './Register.module.css';
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler, doPasswordMatch, resetValues } = useForm({
+  const { formValues, isFormValid, changeHandler, blurHandler, doPasswordMatch } = useForm({
     email: '',
     emailValid: null,
     username: '',
@@ -60,6 +60,8 @@ const Register = () => {
           onChange={changeHandler}
           onBlur={emailBlurHandler}
           value={formValues.email}
+          error={formValues.emailValid}
+          errorMessage={'Invalid e-mail.'}
         />
         <Input
           label='Username'
@@ -67,6 +69,8 @@ const Register = () => {
           onChange={changeHandler}
           onBlur={usernameBlurHandler}
           value={formValues.username}
+          error={formValues.usernameValid}
+          errorMessage={'Username must be between 3 and 30 characters long.'}
         />
         <Input
           label='Password'
@@ -75,6 +79,8 @@ const Register = () => {
           onChange={changeHandler}
           onBlur={passwordBlurHandler}
           value={formValues.password}
+          error={formValues.passwordValid}
+          errorMessage={<PasswordErrorMessage />}
         />
         <Input
           label='Repeat Password'
@@ -83,6 +89,8 @@ const Register = () => {
           onChange={changeHandler}
           onBlur={rePassBlurHandler}
           value={formValues.rePass}
+          error={formValues.rePassValid}
+          errorMessage={'Passwords don`t match.'}
         />
         <Button
           className={classes.btn}
@@ -91,6 +99,18 @@ const Register = () => {
         >Register</Button>
       </form>
     </Card>
+  );
+};
+
+const PasswordErrorMessage = () => {
+  return (
+    <div>
+      <p>Password must contain</p>
+      <p>one uppercase</p>
+      <p>one lowercase</p>
+      <p>one number</p>
+      <p>and must be at least 8 characters long.</p>
+    </div>
   );
 };
 

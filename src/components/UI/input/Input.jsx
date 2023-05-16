@@ -16,7 +16,7 @@ const Input = (props) => {
       />
       <label htmlFor={props.id} className={classes.label}>{props.label}</label>
       {props.error === false &&
-        <p className={classes['error-message']}>{props.errorMessage}</p>
+        <div className={classes['error-message']}>{props.errorMessage}</div>
       }
     </div>
   );
