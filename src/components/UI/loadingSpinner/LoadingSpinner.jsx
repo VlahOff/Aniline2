@@ -9,7 +9,7 @@ const Backdrop = () => {
 const Loader = () => {
   return (
     <div className={classes.wrapper}>
-      <div className={classes['custom-loader']}></div>
+      <span className={classes.loader}></span>
     </div>
   );
 };

@@ -16,17 +16,32 @@
   transform: translate(-50%, -50%);
 }
 
-.custom-loader {
-  width: 80px;
-  height: 80px;
+.loader {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 8px solid;
-  border-color: var(--primary-color) #0000;
-  animation: s1 1s infinite;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  color: var(--primary-color);
+  box-sizing: border-box;
+  animation: loader 1s linear infinite alternate;
 }
 
-@keyframes s1 {
-  to {
-    transform: rotate(.5turn)
+@keyframes loader {
+  0% {
+    box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
+  }
+
+  33% {
+    box-shadow: -38px 0px, -14px -12px, 14px 0, 38px 0;
+  }
+
+  66% {
+    box-shadow: -38px 0px, -14px 0, 14px -12px, 38px 0;
+  }
+
+  100% {
+    box-shadow: -38px 0, -14px 0, 14px 0, 38px -12px;
   }
 }
