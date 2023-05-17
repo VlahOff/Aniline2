@@ -22,15 +22,25 @@ const CryptoConverter = () => {
     selectedToInput
   } = useSelector(state => state.converter);
 
+  const [isFormValid, setIsFormValid] = useState(null);
   const [fromValue, setFromValue] = useState('');
+  const [fromValueValid, setFromValueValid] = useState(null);
   const [toValue, setToValue] = useState('');
+  const [toValueValid, setToValueValid] = useState(null);
   const [amount, setAmount] = useState('');
+  const [amountValid, setAmountValid] = useState(null);
 
   useEffect(() => {
     dispatch(getCurrencyMaps());
   }, []);
 
+  useEffect(() => {
+    setIsFormValid(fromValueValid, toValueValid, amountValid);
+  }, [fromValueValid, toValueValid, amountValid]);
+
   const onInputFromHandler = (event) => {
+    event.target.value === '' ? setFromValueValid(false) : setFromValueValid(true);
+
     setFromValue(event.target.value);
     if (fromCryptoToFiat) {
       dispatch(filterCryptoData(fromValue));
@@ -40,6 +50,8 @@ const CryptoConverter = () => {
   };
 
   const onInputToHandler = (event) => {
+    event.target.value === '' ? setToValueValid(false) : setToValueValid(true);
+
     setToValue(event.target.value);
     if (!fromCryptoToFiat) {
       dispatch(filterCryptoData(toValue));
@@ -49,11 +61,20 @@ const CryptoConverter = () => {
   };
 
   const onAmountInputHandler = (event) => {
+    if (event.target.value <= 0) {
+      setAmountValid(false);
+      return;
+    }
+
+    setAmountValid(true);
     setAmount(event.target.value);
   };
 
   const onConvertSubmitHandler = (event) => {
     event.preventDefault();
+    if (!isFormValid) {
+      return;
+    }
     dispatch(getConvertResult(amount));
   };
 
@@ -97,6 +118,8 @@ const CryptoConverter = () => {
             id='from'
             onChange={onInputFromHandler}
             value={fromValue}
+            error={fromValueValid}
+            errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
           >
             {(fromCryptoToFiat ? cryptoMapResult : fiatMapResult)
@@ -117,6 +140,8 @@ const CryptoConverter = () => {
             id='to'
             onChange={onInputToHandler}
             value={toValue}
+            error={toValueValid}
+            errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
           >
             {(fromCryptoToFiat ? fiatMapResult : cryptoMapResult)
@@ -138,8 +163,14 @@ const CryptoConverter = () => {
           type={'number'}
           onChange={onAmountInputHandler}
           value={amount}
+          error={amountValid}
+          errorMessage={'Please provide a value greater than 0.'}
         />
-        <Button type='submit' className={classes['submit-btn']}>Convert</Button>
+        <Button
+          type='submit'
+          disabled={!isFormValid}
+          className={classes['submit-btn']}
+        >Convert</Button>
       </form>
       {result &&
         <p className={classes.result}>

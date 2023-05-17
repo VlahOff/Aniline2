@@ -34,6 +34,10 @@ form {
   cursor: pointer;
 }
 
+.item:hover {
+  background-color: rgb(104, 104, 104);
+}
+
 .item:last-child {
   border-bottom: none;
 }
