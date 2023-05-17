@@ -54,6 +54,7 @@ export const useForm = (initialValues) => {
     changeHandler,
     blurHandler,
     doPasswordMatch,
-    resetValues
+    resetValues,
+    setValues
   };
 };
