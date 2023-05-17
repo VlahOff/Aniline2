@@ -17,3 +17,15 @@ export const fetchNewCoins = async () => {
 export const fetchGlobalData = async () => {
   return fetchApi.get(`${BASE_URL}/getGlobalData`);
 };
+
+export const fetchCryptoMap = async () => {
+  return fetchApi.get(`${BASE_URL}/cryptoMap`);
+};
+
+export const fetchFiatMap = async () => {
+  return fetchApi.get(`${BASE_URL}/fiatMap`);
+};
+
+export const convertCurrency = async (amount, from, to) => {
+  return fetchApi.get(`${BASE_URL}/convert?amount=${amount}&from=${from}&to=${to}`);
+};

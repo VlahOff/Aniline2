@@ -1,112 +1,151 @@
-import { useForm } from '../../hooks/useForm';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { converterActions } from '../../store/converter';
+import { filterCryptoData, filterFiatData, getConvertResult, getCurrencyMaps } from '../../store/converter-actions';
+import { priceParser } from '../../utils/priceParser';
+import Button from '../UI/button/Button';
 import Card from '../UI/card/Card';
 import Input from '../UI/input/Input';
+import InputWithDropdown from '../UI/inputWithDropdown/InputWithDropdown';
+
 import classes from './CryptoConverter.module.css';
 
 const CryptoConverter = () => {
-  const { formValues, isFormValid, changeHandler, blurHandler, resetValues } = useForm({
-    from: '',
-    to: '',
-  });
+  const dispatch = useDispatch();
+  const {
+    cryptoMapResult,
+    fiatMapResult,
+    result,
+    fromCryptoToFiat,
+    toObject,
+    selectedToInput
+  } = useSelector(state => state.converter);
+
+  const [fromValue, setFromValue] = useState('');
+  const [toValue, setToValue] = useState('');
+  const [amount, setAmount] = useState('');
+
+  useEffect(() => {
+    dispatch(getCurrencyMaps());
+  }, []);
+
+  const onInputFromHandler = (event) => {
+    setFromValue(event.target.value);
+    if (fromCryptoToFiat) {
+      dispatch(filterCryptoData(fromValue));
+      return;
+    }
+    dispatch(filterFiatData(fromValue));
+  };
+
+  const onInputToHandler = (event) => {
+    setToValue(event.target.value);
+    if (!fromCryptoToFiat) {
+      dispatch(filterCryptoData(toValue));
+      return;
+    }
+    dispatch(filterFiatData(toValue));
+  };
+
+  const onAmountInputHandler = (event) => {
+    setAmount(event.target.value);
+  };
 
   const onConvertSubmitHandler = (event) => {
     event.preventDefault();
-    if (isFormValid) {
+    dispatch(getConvertResult(amount));
+  };
 
+  const selectFrom = (item) => {
+    setFromValue(item.name);
+    dispatch(converterActions.setSelectedFromInput(item.id));
+
+    if (fromCryptoToFiat) {
+      dispatch(converterActions.clearCryptoResults());
+      return;
     }
+    dispatch(converterActions.clearFiatResults());
+  };
+
+  const selectTo = (item) => {
+    setToValue(item.name);
+    dispatch(converterActions.setSelectedToInput(item.id));
+
+    if (!fromCryptoToFiat) {
+      dispatch(converterActions.clearCryptoResults());
+      return;
+    }
+    dispatch(converterActions.clearFiatResults());
+  };
+
+  const toggleFromTo = () => {
+    dispatch(converterActions.toggleFromCryptoToFiat());
+    dispatch(converterActions.setConvertResult(null));
+    setFromValue('');
+    setToValue('');
+    setAmount('');
   };
 
   return (
     <Card className={classes.converter}>
       <form onSubmit={onConvertSubmitHandler}>
         <h1 className={classes.title}>Cryptocurrency Converter</h1>
+        <div className={classes['inputs-wrapper']}>
+          <InputWithDropdown
+            label='From'
+            id='from'
+            onChange={onInputFromHandler}
+            value={fromValue}
+            isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
+          >
+            {(fromCryptoToFiat ? cryptoMapResult : fiatMapResult)
+              .map(item => {
+                return <p
+                  className={classes.item}
+                  key={item.id}
+                  onClick={() => selectFrom(item)}
+                >
+                  {item.name} - {item.symbol}
+                </p>;
+              })
+            }
+          </InputWithDropdown>
+          <Button onClick={toggleFromTo}><i className="fa-solid fa-repeat"></i></Button>
+          <InputWithDropdown
+            label='To'
+            id='to'
+            onChange={onInputToHandler}
+            value={toValue}
+            isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
+          >
+            {(fromCryptoToFiat ? fiatMapResult : cryptoMapResult)
+              .map(item => {
+                return <p
+                  className={classes.item}
+                  key={item.id}
+                  onClick={() => selectTo(item)}
+                >
+                  {item.name} - {item.symbol}
+                </p>;
+              })
+            }
+          </InputWithDropdown>
+        </div>
         <Input
-          label='From'
-          id='from'
-          onChange={changeHandler}
-          value={formValues.from}
+          label={'Amount'}
+          id={amount}
+          type={'number'}
+          onChange={onAmountInputHandler}
+          value={amount}
         />
-
-        <Input
-          label='To'
-          id='to'
-          onChange={changeHandler}
-          value={formValues.to}
-        />
-
-        {/* <div className="amount-input-container">
-          <div className="input-container">
-            <div className="input">
-              <i className="input-icon fa-solid fa-coins"></i>
-              <input type="text" placeholder="Enter amount"
-                formControlName="amount" (keyup)="setAmount()" autofocus>
-              <div className="input-icon"></div>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="currency-selector-container">
-
-          <div className="input-container">
-            <div className="input">
-              <div className="input-icon"></div>
-              <input #inputFrom 
-            (input)="filterFrom(inputFrom.value)"
-              autocomplete="off"
-              className="input" id="from"
-              placeholder="Bitcoin"
-              formControlName="from" 
-            type="text">
-              <i className="input-icon fa-regular fa-square-caret-down"></i>
-              <div className="menu-content" [class.on]="(cryptoMap$ | async)" >
-              <button type="button" 
-              *ngFor="let coin of (cryptoMap$ | async)"
-              (click)="fromCrypto(coin)"
-              >{{ coin.name }} - {{ coin.symbol | uppercase }}</button>
-          </div>
-
-        </div> */}
-
-        {/* <div className="input-container">
-        <div className="input">
-          <div className="input-icon"></div>
-          <input #inputTo 
-            (input)="filterTo(inputTo.value)"
-          autocomplete="off"
-          className="input" id="to"
-          placeholder="USD"
-          formControlName="to" 
-            type="text">
-          <i className="input-icon fa-regular fa-square-caret-down"></i>
-          <div className="menu-content" [class.on]="(fiatMap$ | async)">
-          <button type="button" 
-              *ngFor="let coin of (fiatMap$ | async)"
-          (click)="toFiat(coin)"
-              >{{ coin.name }} - {{ coin.symbol | uppercase }}</button>
-      </div>
-    </div >
-        </div >
-          
-      </div >
-
-  <div className="button-container">
-    <button type="submit" className="button" [disabled]="!converterForm.valid">
-    <i className="fa-solid fa-arrows-rotate"></i> Convert</button>
-      </div >
-
-  <div className="output">
-    <p className="output-field" *ngIf="result$ | async">
-    {{ (result$ | async)!.amount}}
-    {{ (result$ | async)!.name}}
-    ({{ (result$ | async)!.symbol}}) =
-    {{ (result$ | async)!.quote[(to$ | async)!.id].price | number:'1.2-2' }}
-    {{ (to$ | async)!.name}}
-    "{{ (to$ | async)!.sign}}"
-    ({{ (to$ | async)!.symbol}})
-  </p>
-      </div > */}
-
-      </form >
+        <Button type='submit' className={classes['submit-btn']}>Convert</Button>
+      </form>
+      {result &&
+        <p className={classes.result}>
+          {result?.amount} {result?.name} ({result?.symbol}) = {priceParser(result?.quote[selectedToInput]?.price)} {toObject?.name} ({toObject?.symbol})
+        </p>
+      }
     </Card>
   );
 };
