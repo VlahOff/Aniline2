@@ -4,13 +4,17 @@ import { createPortal } from 'react-dom';
 import Card from '../card/Card';
 import classes from './Modal.module.css';
 
-const Backdrop = (props) => {
-  return <div className={classes.backdrop} onClick={props.onClose}></div>;
+const Backdrop = ({ onClose }) => {
+  return <div className={classes.backdrop} onClick={onClose}></div>;
 };
 
 const portal = document.getElementById('overlays');
 
-const Modal = (props) => {
+const Modal = ({
+  className,
+  children,
+  onClose
+}) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -19,12 +23,12 @@ const Modal = (props) => {
     };
   });
 
-  const styles = `${classes.modal} ${props.className}`;
+  const styles = `${classes.modal} ${className}`;
 
   return (
     <>
-      {createPortal(<Backdrop onClose={props.onClose} />, portal)}
-      {createPortal(<Card className={styles}>{props.children}</Card>, portal)}
+      {createPortal(<Backdrop onClose={onClose} />, portal)}
+      {createPortal(<Card className={styles}>{children}</Card>, portal)}
     </>
   );
 };

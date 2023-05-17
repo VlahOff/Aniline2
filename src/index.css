@@ -1,6 +1,7 @@
 :root {
   --text-color: black;
-  --primary-color: #2e79ba;
+  --primary-color: #1986e6;
+  --primary-color-hover: #4ca4f0;
   --background: #EFEBF6;
   --container-bg: #a0a2a7;
   --hover-element: #cecece;
@@ -9,6 +10,7 @@
 [data-theme='dark'] {
   --text-color: white;
   --primary-color: #c778dd;
+  --primary-color-hover: #f2c4ff;
   --background: #474747;
   --container-bg: #282c33;
   --hover-element: #4b4b4d;

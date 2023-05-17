@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import classes from './LinkTo.module.css';
 
-const LinkTo = (props) => {
-  return <Link to={props.to} className={classes.link}>{props.children}</Link>;
+const LinkTo = ({
+  to,
+  children,
+  className
+}) => {
+  const styles = `${classes.link} ${className}`;
+  return <Link to={to} className={styles}>{children}</Link>;
 };
 
 export default LinkTo;

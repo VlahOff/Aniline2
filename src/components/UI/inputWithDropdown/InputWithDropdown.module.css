@@ -60,8 +60,45 @@
   box-shadow: none;
 }
 
+.drop-down {
+  display: none;
+}
+
+.drop-down-shown {
+  position: absolute;
+  background-color: var(--container-bg);
+  left: 0;
+  top: 62px;
+  z-index: 10;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
 .error-message {
   margin-top: 8px;
   color: crimson;
   font-weight: 700;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hover-element);
 }

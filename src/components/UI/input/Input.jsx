@@ -1,22 +1,32 @@
 import classes from './Input.module.css';
 
-const Input = (props) => {
+const Input = ({
+  className,
+  type,
+  id,
+  label,
+  onChange,
+  onBlur,
+  value,
+  error,
+  errorMessage
+}) => {
   return (
-    <div className={`${classes['input-wrapper']} ${props.className}`}>
+    <div className={`${classes['input-wrapper']} ${className}`}>
       <input
-        type={props.type || 'text'}
-        name={props.id}
-        id={props.id}
-        placeholder={props.label}
+        type={type || 'text'}
+        name={id}
+        id={id}
+        placeholder={label}
         className={classes.input}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
-        value={props.value}
-        // autoComplete="off"
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+      // autoComplete="off"
       />
-      <label htmlFor={props.id} className={classes.label}>{props.label}</label>
-      {props.error === false &&
-        <div className={classes['error-message']}>{props.errorMessage}</div>
+      <label htmlFor={id} className={classes.label}>{label}</label>
+      {error === false &&
+        <div className={classes['error-message']}>{errorMessage}</div>
       }
     </div>
   );

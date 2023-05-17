@@ -1,22 +1,36 @@
 import classes from './InputWithDropdown.module.css';
 
-const InputWithDropdown = (props) => {
+const InputWithDropdown = ({
+  children,
+  className,
+  type,
+  id,
+  label,
+  onChange,
+  onBlur,
+  value,
+  error,
+  errorMessage,
+  isDropdownShown
+}) => {
   return (
-    <div className={`${classes['input-wrapper']} ${props.className}`}>
+    <div className={`${classes['input-wrapper']} ${className}`}>
       <input
-        type={props.type || 'text'}
-        name={props.id}
-        id={props.id}
-        placeholder={props.label}
+        type={type || 'text'}
+        name={id}
+        id={id}
+        placeholder={label}
         className={classes.input}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
-        value={props.value}
-        // autoComplete="off"
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
       />
-      <label htmlFor={props.id} className={classes.label}>{props.label}</label>
-      {props.error === false &&
-        <p className={classes['error-message']}>{props.errorMessage}</p>
+      <label htmlFor={id} className={classes.label}>{label}</label>
+      <div className={isDropdownShown ? classes['drop-down-shown'] : classes['drop-down']}>
+        {children}
+      </div>
+      {error === false &&
+        <p className={classes['error-message']}>{errorMessage}</p>
       }
     </div>
   );
