@@ -1,7 +1,14 @@
+import { debounce } from 'lodash';
 import * as cryptoService from '../services/cryptoService';
 import { converterActions } from './converter';
 import { store } from './store';
 import { uiActions } from './ui';
+
+const worker = new Worker('worker.js');
+
+const filterMap = debounce((input, map) => {
+  worker.postMessage({ input, map });
+}, 600);
 
 export const getCurrencyMaps = () => {
   return (dispatch) => {
@@ -29,14 +36,12 @@ export const getCurrencyMaps = () => {
 export const filterCryptoData = (input) => {
   return (dispatch) => {
     const cryptoMap = store.getState().converter.cryptoMap;
-    const result = cryptoMap
-      .filter(r => {
-        return r.name.toLowerCase().includes(input.toLowerCase())
-          || r.symbol.toLowerCase().includes(input.toLowerCase());
-      });
-
-    dispatch(converterActions.setCryptoDataResult(result));
+    filterMap(input, cryptoMap);
   };
+};
+
+worker.onmessage = (event) => {
+  store.dispatch(converterActions.setCryptoDataResult(event.data));
 };
 
 export const filterFiatData = (input) => {
