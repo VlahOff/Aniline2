@@ -8,6 +8,7 @@ const Input = ({
   onChange,
   onBlur,
   value,
+  disabled,
   error,
   errorMessage
 }) => {
@@ -22,7 +23,8 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
-      // autoComplete="off"
+        disabled={disabled}
+        autoComplete="off"
       />
       <label htmlFor={id} className={classes.label}>{label}</label>
       {error === false &&

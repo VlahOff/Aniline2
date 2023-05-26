@@ -21,7 +21,7 @@ const CoinDataTable = ({ coinData }) => {
             <th className={classes['tenth-col']}>Total Supply</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={classes.tbody}>
           {coinData.map((coin, index) => {
             return (
               <tr className="table-row" key={coin.id}>

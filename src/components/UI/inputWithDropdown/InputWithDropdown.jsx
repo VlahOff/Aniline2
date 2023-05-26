@@ -24,6 +24,7 @@ const InputWithDropdown = ({
         onChange={onChange}
         onBlur={onBlur}
         value={value}
+        autoComplete="off"
       />
       <label htmlFor={id} className={classes.label}>{label}</label>
       <div className={isDropdownShown ? classes['drop-down-shown'] : classes['drop-down']}>
