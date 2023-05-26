@@ -1,6 +1,6 @@
 import { fetchApi } from '../utils/fetchApi';
 
-const BASE_URL = 'http://localhost:3232/crypto';
+const BASE_URL = import.meta.env.VITE_CRYPTO_BACKEND;
 
 export const fetchTopThree = async () => {
   return fetchApi.get(`${BASE_URL}/topThree`);

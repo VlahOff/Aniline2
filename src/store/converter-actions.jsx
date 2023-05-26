@@ -7,7 +7,7 @@ import { uiActions } from './ui';
 const worker = new Worker('worker.js');
 
 const filterMap = debounce((input, map) => {
-  worker.postMessage({ input, map });
+  worker.postMessage({ input, map, message: 'converter' });
 }, 600);
 
 export const getCurrencyMaps = () => {

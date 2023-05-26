@@ -1,0 +1,30 @@
+.portfolio {
+  margin: 180px auto;
+  width: 80%;
+  min-width: 500px;
+  max-width: 1600px;
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.title,
+.sub-title {
+  font-weight: 300;
+}
+
+.right-part-heder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.add-btn-icon {
+  color: var(--text-color);
+}

@@ -1,0 +1,40 @@
+.input-container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.inputs-wrapper {
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.item {
+  text-align: center;
+  word-break: break-word;
+  padding: 0.5rem;
+  border-bottom: 1px black solid;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: rgb(104, 104, 104);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-container button {
+  flex-grow: 1;
+}
