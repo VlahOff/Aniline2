@@ -1,0 +1,43 @@
+.modal {
+  background-color: var(--container-bg);
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-container button {
+  flex-grow: 1;
+}
+
+.cancel-btn {
+  background-color: #6d6d6d;
+  color: white;
+  flex: 1 0 30%;
+}
+
+.cancel-btn:hover {
+  background-color: #8f8f8f;
+}
+
+.edit-btn {
+  flex: 1 0 30%;
+}
+
+.delete-btn {
+  background-color: #ff3b3b;
+}
+
+.delete-btn:hover {
+  background-color: #ff6767;
+}

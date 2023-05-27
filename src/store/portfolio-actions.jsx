@@ -25,6 +25,7 @@ export const initializePortfolioState = () => {
 
         dispatch(portfolioActions.setAllCoinsList(res[0]));
         dispatch(portfolioActions.setTransactions(res[1]));
+        dispatch(portfolioActions.calculateTransactionsValue());
       })
       .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
@@ -44,14 +45,14 @@ worker.onmessage = (event) => {
 
 export const submitTransaction = (formData) => {
   return (dispatch) => {
-    const data = {
+    const transaction = {
       coinId: formData.coinId,
       coinPrice: formData.coinPrice,
       quantity: formData.quantity
     };
 
     dispatch(uiActions.startLoading());
-    portfolioService.addUserTransaction(data)
+    portfolioService.addUserTransaction(transaction)
       .then(res => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
@@ -59,7 +60,52 @@ export const submitTransaction = (formData) => {
         }
 
         dispatch(portfolioActions.setTransactions(res));
+        dispatch(portfolioActions.calculateTransactionsValue());
         dispatch(portfolioActions.toggleAddModal());
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const submitEditedTransaction = (formData, transactionId) => {
+  return (dispatch) => {
+    const transaction = {
+      coinId: formData.coinId,
+      coinPrice: formData.coinPrice,
+      quantity: formData.quantity
+    };
+
+    dispatch(uiActions.startLoading());
+    portfolioService.editUserTransaction(transaction, transactionId)
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(portfolioActions.setTransactions(res));
+        dispatch(portfolioActions.calculateTransactionsValue());
+        dispatch(portfolioActions.toggleEditModal());
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const deleteTransaction = (transactionId) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    portfolioService.deleteUserTransaction(transactionId)
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(portfolioActions.removeTransaction(transactionId));
+        dispatch(portfolioActions.calculateTransactionsValue());
+        dispatch(portfolioActions.toggleEditModal());
       })
       .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));

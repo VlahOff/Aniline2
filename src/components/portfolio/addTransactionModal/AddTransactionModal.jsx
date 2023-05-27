@@ -32,7 +32,7 @@ const AddTransactionModal = ({
     }));
     dispatch(portfolioActions.clearFilteredAllCoins());
   };
-  
+
   const onCoinInputHandler = (event) => {
     setValues(state => ({
       ...state,
@@ -40,15 +40,15 @@ const AddTransactionModal = ({
     }));
     dispatch(filterAllCoinsList(event.target.value));
   };
-  
+
   const onCoinBlurHandler = (event) => {
     blurHandler(event, () => event.target.value.trim().length > 0);
   };
-  
+
   const onNumberInputBlurHandler = (event) => {
     blurHandler(event, () => event.target.value > 0);
   };
-  
+
   const onCloseHandler = () => {
     dispatch(portfolioActions.toggleAddModal());
     dispatch(portfolioActions.clearFilteredAllCoins());
@@ -62,7 +62,7 @@ const AddTransactionModal = ({
   };
 
   return (
-    <Modal onClose={onCloseHandler}>
+    <Modal onClose={onCloseHandler} className={classes.modal}>
       <form onSubmit={onSubmitHandler}>
         <h1 className={classes.title}>Add Transaction</h1>
         <div className={classes['input-container']}>
@@ -114,8 +114,17 @@ const AddTransactionModal = ({
           />
         </div>
         <div className={classes['btn-container']}>
-          <Button onClick={onCloseHandler}>Cancel</Button>
-          <Button type={'submit'}>Submit</Button>
+          <Button
+            onClick={onCloseHandler}
+            className={classes['cancel-btn']}
+          >
+            Cancel</Button>
+          <Button
+            type={'submit'}
+            disabled={!isFormValid}
+          >
+            Submit
+          </Button>
         </div>
       </form>
     </Modal>

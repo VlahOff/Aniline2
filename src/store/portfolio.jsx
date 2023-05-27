@@ -8,7 +8,6 @@ const initialState = {
   selectedTransaction: {},
   isAddModalShown: false,
   isEditModalShown: false,
-  isDeleteModalShown: false
 };
 
 const portfolioSlice = createSlice({
@@ -25,22 +24,27 @@ const portfolioSlice = createSlice({
       state.filteredAllCoinsList = [];
     },
     setTransactions(state, action) {
-      const transactions = action.payload;
-
-      state.transactions = transactions;
-      state.transactionsTotalValue = transactions
+      state.transactions = action.payload;
+    },
+    calculateTransactionsValue(state) {
+      state.transactionsTotalValue = state.transactions
         .reduce((accumulator, current) => {
-          return accumulator + current.current_price;
+          return accumulator + current.value;
         }, 0);
+    },
+    removeTransaction(state, action) {
+      state.transactions = state.transactions
+        .filter(t => t.transactionId !== action.payload);
+    },
+    setSelectedTransaction(state, action) {
+      state.selectedTransaction = action.payload;
+      state.isEditModalShown = !state.isEditModalShown;
     },
     toggleAddModal(state) {
       state.isAddModalShown = !state.isAddModalShown;
     },
     toggleEditModal(state) {
       state.isEditModalShown = !state.isEditModalShown;
-    },
-    toggleDeleteModal(state) {
-      state.isDeleteModalShown = !state.isDeleteModalShown;
     }
   }
 });

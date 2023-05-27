@@ -1,12 +1,14 @@
+import { useDispatch } from 'react-redux';
 import { percentParser } from '../../../utils/percentParser';
 import { usdPriceParser } from '../../../utils/priceParser';
-import Button from '../../UI/button/Button';
 import classes from './PortfolioTable.module.css';
+import { portfolioActions } from '../../../store/portfolio';
 
 const PortfolioTable = ({ transactions }) => {
-  const onTransactionSelect = (event, transactionId) => {
-    console.log(event.target.tagName);
-    console.log(event);
+  const dispatch = useDispatch();
+
+  const onTransactionSelect = (transaction) => {
+    dispatch(portfolioActions.setSelectedTransaction(transaction));
   };
 
   return (
@@ -28,7 +30,7 @@ const PortfolioTable = ({ transactions }) => {
               <tr
                 key={t.transactionId}
                 className={classes.tr}
-                onClick={(e) => onTransactionSelect(e, t.transactionId)}
+                onClick={() => onTransactionSelect(t)}
               >
                 <td className={`${classes['first-col']} ${classes['sticky-col']}`}>
                   <img src={t.image} alt="coin logo" />

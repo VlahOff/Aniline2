@@ -1,14 +1,11 @@
+.modal {
+  background-color: var(--container-bg);
+}
+
 .input-container {
   display: flex;
   gap: 1rem;
   flex-direction: column;
-}
-
-.inputs-wrapper {
-  display: flex;
-  gap: 5rem;
-  align-items: center;
-  margin-bottom: 2rem;
 }
 
 .item {
@@ -37,4 +34,13 @@
 
 .btn-container button {
   flex-grow: 1;
+}
+
+.cancel-btn {
+  background-color: #6d6d6d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #8f8f8f;
 }

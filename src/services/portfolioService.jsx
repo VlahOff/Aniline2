@@ -11,6 +11,14 @@ export const fetchUserTransactions = async () => {
   return fetchApi.get(`${BASE_PORTFOLIO_URL}/getTransactions`);
 };
 
-export const addUserTransaction = async (data) => {
-  return fetchApi.post(`${BASE_PORTFOLIO_URL}/addTransaction`, { data });
+export const addUserTransaction = async (transaction) => {
+  return fetchApi.post(`${BASE_PORTFOLIO_URL}/addTransaction`, { transaction });
+};
+
+export const editUserTransaction = async (transaction, transactionId) => {
+  return fetchApi.put(`${BASE_PORTFOLIO_URL}/editTransaction`, { transaction, transactionId });
+};
+
+export const deleteUserTransaction = async (transactionId) => {
+  return fetchApi.delete(`${BASE_PORTFOLIO_URL}/removeTransaction?transactionId=${transactionId}`);
 };
