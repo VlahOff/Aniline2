@@ -3,6 +3,7 @@
   --primary-color: #1986e6;
   --primary-color-hover: #4ca4f0;
   --background: #EFEBF6;
+  --container-bg-transparent: rgba(160, 162, 167, 0.25);
   --container-bg: #a0a2a7;
   --hover-element: #cecece;
 }
@@ -12,6 +13,7 @@
   --primary-color: #c778dd;
   --primary-color-hover: #f2c4ff;
   --background: #474747;
+  --container-bg-transparent: rgba(40, 44, 51, 0.25);
   --container-bg: #282c33;
   --hover-element: #4b4b4d;
 }

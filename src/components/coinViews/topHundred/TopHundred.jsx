@@ -21,6 +21,7 @@ const TopHundred = () => {
       <GlobalData className={classes['global-data']} />
       <Card>
         <h1 className={classes.title}>Top Hundred</h1>
+        <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <CoinDataTable coinData={topHundred} />
       </Card>
     </section>

@@ -35,7 +35,7 @@ form {
 }
 
 .item:hover {
-  background-color: rgb(104, 104, 104);
+  background-color: var(--hover-element);
 }
 
 .item:last-child {
@@ -50,4 +50,10 @@ form {
   text-align: center;
   color: var(--text-color);
   font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.powered-by {
+  text-align: right;
+  color: var(--text-color);
 }

@@ -3,7 +3,7 @@
   width: 80%;
   min-width: 500px;
   max-width: 1600px;
-  background-color: var(--container-bg);
+  background-color: var(--container-bg-transparent);
   color: var(--text-color);
   border-radius: 10px;
 }
@@ -17,6 +17,16 @@
 .title,
 .sub-title {
   font-weight: 300;
+}
+
+.value {
+  font-weight: 600;
+}
+
+.powered-by {
+  text-align: right;
+  margin-bottom: 0.4rem;
+  color: var(--text-color);
 }
 
 .right-part-heder {

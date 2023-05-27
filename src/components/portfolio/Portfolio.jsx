@@ -39,7 +39,7 @@ const Portfolio = () => {
         <header className={classes.header}>
           <div className={classes['left-part-header']}>
             <h3 className={classes['sub-title']}>Total portfolio value: </h3>
-            <p>{usdPriceParser(transactionsTotalValue)}</p>
+            <p className={classes.value}>{usdPriceParser(transactionsTotalValue)}</p>
           </div>
           <div className={classes['right-part-heder']}>
             <h1 className={classes.title}>My Assets</h1>
@@ -48,6 +48,7 @@ const Portfolio = () => {
             </Button>
           </div>
         </header>
+        <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <main>
           <PortfolioTable transactions={transactions} />
         </main>

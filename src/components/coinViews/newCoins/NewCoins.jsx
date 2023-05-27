@@ -21,6 +21,7 @@ const NewCoins = () => {
       <GlobalData className={classes['global-data']} />
       <Card>
         <h1 className={classes.title}>New Coins</h1>
+        <p className={classes['powered-by']}>Powered by CoinMarketCap</p>
         <CoinDataTable coinData={newCoins} />
       </Card>
     </section>

@@ -14,3 +14,9 @@
   color: var(--text-color);
   margin-bottom: 1rem;
 }
+
+.powered-by {
+  color: var(--text-color);
+  text-align: right;
+  margin-bottom: 0.4rem;
+}

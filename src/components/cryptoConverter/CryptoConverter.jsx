@@ -177,6 +177,7 @@ const CryptoConverter = () => {
           {result?.amount} {result?.name} ({result?.symbol}) = {priceParser(result?.quote[selectedToInput]?.price)} {toObject?.name} ({toObject?.symbol})
         </p>
       }
+      <p className={classes['powered-by']}>Powered by CoinMarketCap</p>
     </Card>
   );
 };

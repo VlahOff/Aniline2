@@ -9,8 +9,6 @@
 
 .card {
   padding: 24px;
-  background-color: var(--container-bg);
-  border-radius: 0.5rem;
   width: 300px;
 }
 
@@ -23,14 +21,10 @@ hr {
   margin: 1rem 0;
 }
 
-.top-row-cap {
+.bottom-row {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-}
-
-.top-row {
-  text-align: center;
+  align-items: center;
 }
 
 @media (max-width: 800px) {
@@ -42,8 +36,7 @@ hr {
     padding: 18px;
   }
 
-  .top-row,
-  .top-row-cap>p {
+  .bottom-row>p {
     font-size: 16px;
   }
 }

@@ -5,6 +5,7 @@ const initialState = {
   filteredAllCoinsList: [],
   transactions: [],
   transactionsTotalValue: 0,
+  selectedTransaction: {},
   isAddModalShown: false,
   isEditModalShown: false,
   isDeleteModalShown: false

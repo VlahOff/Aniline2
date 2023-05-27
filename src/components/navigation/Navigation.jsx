@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { onLogout } from '../../store/auth-actions';
 import { toggleTheme } from '../../store/ui-actions';
 import ButtonLink from '../UI/buttonLink/ButtonLink';
 import LinkTo from '../UI/linkTo/LinkTo';
 
-import darkLogo from '../../assets/logo-dark.png';
+import darkLogo from '../../assets/logo-black.png';
 import lightLogo from '../../assets/logo-white.png';
 import classes from './Navigation.module.css';
 
@@ -25,13 +26,13 @@ const Navigation = () => {
   return (
     <>
       <nav className={classes.nav}>
-        <div className={classes['logo-wrapper']}>
+        <Link to={'/'} className={classes['logo-wrapper']}>
           <img
             src={theme === 'light' ? darkLogo : lightLogo}
             alt="site logo"
             className={classes.logo}
           />
-        </div>
+        </Link>
         <ul className={classes.links}>
           <li>
             <LinkTo to='/'>Home</LinkTo>

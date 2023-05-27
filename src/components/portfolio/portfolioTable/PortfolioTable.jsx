@@ -1,8 +1,14 @@
 import { percentParser } from '../../../utils/percentParser';
 import { usdPriceParser } from '../../../utils/priceParser';
+import Button from '../../UI/button/Button';
 import classes from './PortfolioTable.module.css';
 
 const PortfolioTable = ({ transactions }) => {
+  const onTransactionSelect = (event, transactionId) => {
+    console.log(event.target.tagName);
+    console.log(event);
+  };
+
   return (
     <div className={classes['table-container']}>
       <table className={classes.table}>
@@ -14,13 +20,16 @@ const PortfolioTable = ({ transactions }) => {
             <td className={classes['fourth-col']}><p>Current Price (USD)</p></td>
             <td className={classes['fifth-col']}><p>24h Change (%)</p></td>
             <td className={classes['sixth-col']}><p>PNL</p></td>
-            <td className={classes['seventh-col']}><p></p></td>
           </tr>
         </thead>
         <tbody className={classes.tbody}>
           {transactions && transactions.map(t => {
             return (
-              <tr className={classes.tr} key={t.transactionId}>
+              <tr
+                key={t.transactionId}
+                className={classes.tr}
+                onClick={(e) => onTransactionSelect(e, t.transactionId)}
+              >
                 <td className={`${classes['first-col']} ${classes['sticky-col']}`}>
                   <img src={t.image} alt="coin logo" />
                   <div className="asset-name">
@@ -45,11 +54,6 @@ const PortfolioTable = ({ transactions }) => {
                 <td className={classes['sixth-col']}>
                   <p>{usdPriceParser(t.pnlValue)}</p>
                   <p>{percentParser(t.pnlPercent)}</p>
-                </td>
-                <td className={classes['seventh-col']}>
-                  <div className={classes.cross}>
-                    <i className="fa-solid fa-xmark"></i>
-                  </div>
                 </td>
               </tr>
             );
