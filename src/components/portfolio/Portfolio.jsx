@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { portfolioActions } from '../../store/portfolio';
+import { initializePortfolioState } from '../../store/portfolio-actions';
+import { usdPriceParser } from '../../utils/priceParser';
 import Button from '../UI/button/Button';
 import Card from '../UI/card/Card';
-import classes from './Portfolio.module.css';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { initializePortfolioState } from '../../store/portfolio-actions';
-import PortfolioTable from './portfolioTable/PortfolioTable';
 import AddTransactionModal from './addTransactionModal/AddTransactionModal';
 import EditTransactionModal from './editTransactionModal/EditTransactionModal';
-import { portfolioActions } from '../../store/portfolio';
-import { usdPriceParser } from '../../utils/priceParser';
+import PortfolioTable from './portfolioTable/PortfolioTable';
+
+import classes from './Portfolio.module.css';
 
 const Portfolio = () => {
   const dispatch = useDispatch();

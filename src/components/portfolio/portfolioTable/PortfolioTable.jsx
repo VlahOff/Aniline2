@@ -1,8 +1,10 @@
 import { useDispatch } from 'react-redux';
+
+import { portfolioActions } from '../../../store/portfolio';
 import { percentParser } from '../../../utils/percentParser';
 import { usdPriceParser } from '../../../utils/priceParser';
+
 import classes from './PortfolioTable.module.css';
-import { portfolioActions } from '../../../store/portfolio';
 
 const PortfolioTable = ({ transactions }) => {
   const dispatch = useDispatch();

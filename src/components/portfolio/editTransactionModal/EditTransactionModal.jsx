@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '../../UI/modal/Modal';
-import classes from './EditTransactionModal.module.css';
+
+import { useForm } from '../../../hooks/useForm';
 import { portfolioActions } from '../../../store/portfolio';
+import { deleteTransaction, submitEditedTransaction } from '../../../store/portfolio-actions';
 import Button from '../../UI/button/Button';
 import Input from '../../UI/input/Input';
-import { useForm } from '../../../hooks/useForm';
-import { deleteTransaction, submitEditedTransaction } from '../../../store/portfolio-actions';
+import Modal from '../../UI/modal/Modal';
+
+import classes from './EditTransactionModal.module.css';
 
 const EditTransactionModal = () => {
   const dispatch = useDispatch();
