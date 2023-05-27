@@ -6,6 +6,8 @@
   --container-bg-transparent: rgba(160, 162, 167, 0.25);
   --container-bg: #a0a2a7;
   --hover-element: #cecece;
+  --danger-element: #ff3b3b;
+  --danger-element-hover: #ff6767;
 }
 
 [data-theme='dark'] {

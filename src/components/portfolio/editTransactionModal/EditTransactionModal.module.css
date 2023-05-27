@@ -35,9 +35,9 @@
 }
 
 .delete-btn {
-  background-color: #ff3b3b;
+  background-color: var(--danger-element);
 }
 
 .delete-btn:hover {
-  background-color: #ff6767;
+  background-color: var(--danger-element-hover);
 }
