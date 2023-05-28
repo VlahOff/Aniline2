@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { onLogout } from '../../store/auth-actions';
 import { toggleTheme } from '../../store/ui-actions';
@@ -12,11 +12,12 @@ import classes from './Navigation.module.css';
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const theme = useSelector(state => state.ui.theme);
   const user = useSelector(state => state.auth.user);
 
   const logoutHandler = () => {
-    dispatch(onLogout());
+    dispatch(onLogout(navigate));
   };
 
   const toggleThemeHandler = () => {
