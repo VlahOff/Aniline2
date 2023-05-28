@@ -1,0 +1,40 @@
+.card {
+  margin: 120px auto;
+  width: 480px;
+  color: var(--text-color);
+}
+
+.user-img{
+  width: 80px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
+
+.username {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.email {
+  text-align: center;
+}
+
+.actions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 5rem;
+  background-color: var(--container-bg);
+}
+
+.actions-wrapper button:nth-child(3) {
+  background-color: var(--danger-element);
+}
+
+.actions-wrapper button:nth-child(3):hover {
+  background-color: var(--danger-element-hover);
+}

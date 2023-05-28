@@ -20,9 +20,7 @@ export const onRegister = (formData, navigate) => {
         localStorage.setItem('userData', JSON.stringify(res));
         navigate('/');
       })
-      .catch(err => {
-        dispatch(uiActions.setErrorMessage(err));
-      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -44,14 +42,12 @@ export const onLogin = (formData, navigate) => {
         localStorage.setItem('userData', JSON.stringify(res));
         navigate('/');
       })
-      .catch(err => {
-        dispatch(uiActions.setErrorMessage(err));
-      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
 
-export const onLogout = () => {
+export const onLogout = (navigate) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
     authService.logout()
@@ -63,10 +59,9 @@ export const onLogout = () => {
 
         dispatch(authActions.setUser(null));
         localStorage.removeItem('userData');
+        navigate('/');
       })
-      .catch(err => {
-        dispatch(uiActions.setErrorMessage(err));
-      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -78,5 +73,61 @@ export const isUserLoggedIn = () => {
     if (userData) {
       dispatch(authActions.setUser(userData));
     }
+  };
+};
+
+export const onUsernameChange = (formData) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    authService.changeUsername(formData.newUsername, formData.password)
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(authActions.setUser(res));
+        localStorage.setItem('userData', JSON.stringify(res));
+        dispatch(authActions.toggleChangeUsernameModal());
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const onPasswordChange = (formData) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    authService.changePassword(formData.oldPassword, formData.newPassword)
+      .then(res => {
+        if (res.message && res.message !== 'Done') {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(authActions.toggleChangePasswordModal());
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const onAccountDeletion = (password, navigate) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    authService.deleteAccount(password)
+      .then(res => {
+        if (res.message && res.message !== 'Done') {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(authActions.toggleDeleteAccountModal());
+        navigate('/');
+        localStorage.removeItem('userData');
+        dispatch(authActions.setUser(null));
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
   };
 };

@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: null
+  user: null,
+  isChangeUsernameModalOpen: false,
+  isChangePasswordModalOpen: false,
+  isDeleteAccountModalOpen: false
 };
 
 const authSlice = createSlice({
@@ -10,6 +13,15 @@ const authSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
+    },
+    toggleChangeUsernameModal(state) {
+      state.isChangeUsernameModalOpen = !state.isChangeUsernameModalOpen;
+    },
+    toggleChangePasswordModal(state) {
+      state.isChangePasswordModalOpen = !state.isChangePasswordModalOpen;
+    },
+    toggleDeleteAccountModal(state) {
+      state.isDeleteAccountModalOpen = !state.isDeleteAccountModalOpen;
     }
   }
 });

@@ -13,3 +13,15 @@ export const login = async (data) => {
 export const logout = async () => {
   return fetchApi.get(`${BASE_URL}/logout`);
 };
+
+export const changeUsername = async (newUsername, password) => {
+  return fetchApi.post(`${BASE_URL}/changeUsername`, { newUsername, password });
+};
+
+export const changePassword = async (oldPassword, newPassword) => {
+  return fetchApi.post(`${BASE_URL}/changePassword`, { oldPassword, newPassword });
+};
+
+export const deleteAccount = async (password) => {
+  return fetchApi.post(`${BASE_URL}/deleteAccount`, { password });
+};
