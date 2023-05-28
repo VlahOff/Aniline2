@@ -6,6 +6,7 @@ import { onRegister } from '../../../store/auth-actions';
 import { validateEmail } from '../../../utils/emailValidation';
 import { validatePassword } from '../../../utils/passwordValidation';
 import { validateUsername } from '../../../utils/usernameValidation';
+import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMessage';
 import Button from '../../UI/button/Button';
 import Card from '../../UI/card/Card';
 import Input from '../../UI/input/Input';
@@ -99,18 +100,6 @@ const Register = () => {
         >Register</Button>
       </form>
     </Card>
-  );
-};
-
-const PasswordErrorMessage = () => {
-  return (
-    <div>
-      <p>Password must contain</p>
-      <p>one uppercase</p>
-      <p>one lowercase</p>
-      <p>one number</p>
-      <p>and must be at least 8 characters long.</p>
-    </div>
   );
 };
 
