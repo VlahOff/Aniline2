@@ -15,13 +15,11 @@ import classes from './Portfolio.module.css';
 const Portfolio = () => {
   const dispatch = useDispatch();
   const {
-    allCoinsList,
     filteredAllCoinsList,
     transactions,
     transactionsTotalValue,
     isAddModalShown,
     isEditModalShown,
-    isDeleteModalShown
   } = useSelector(state => state.portfolio);
 
   useEffect(() => {
@@ -51,7 +49,8 @@ const Portfolio = () => {
         </header>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <main>
-          <PortfolioTable transactions={transactions} />
+          {transactions.length > 0 && <PortfolioTable transactions={transactions} />}
+          {transactions.length === 0 && <p className={classes['info-message']}>No transactions added yet.</p>}
         </main>
       </Card>
     </>
