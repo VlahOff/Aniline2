@@ -2,6 +2,7 @@ import classes from './Button.module.css';
 
 const Button = ({
   className,
+  id,
   type,
   onClick,
   disabled,
@@ -9,6 +10,7 @@ const Button = ({
 }) => {
   return <button
     className={`${className} ${classes.btn}`}
+    id={id}
     type={type || 'button'}
     onClick={onClick}
     disabled={disabled}

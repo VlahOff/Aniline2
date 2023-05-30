@@ -111,7 +111,7 @@ const CoinDetails = () => {
               </div>
             </div>
           </div>
-          <CoinChart className={classes['chart-container']} />
+          <CoinChart coinId={id} className={classes['chart-container']} />
         </main>
       </Card>
     </div>
