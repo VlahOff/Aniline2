@@ -4,7 +4,9 @@ const initialState = {
   topThree: [],
   topHundred: [],
   newCoins: [],
-  globalData: {}
+  globalData: {},
+  coinDetails: {},
+  coinDetailsOHLC: []
 };
 
 const cryptoSlice = createSlice({
@@ -22,6 +24,12 @@ const cryptoSlice = createSlice({
     },
     setGlobalData(state, action) {
       state.globalData = action.payload;
+    },
+    setCoinDetails(state, action) {
+      state.coinDetails = action.payload;
+    },
+    setCoinDetailsOHLC(state, action) {
+      state.coinDetailsOHLC = action.payload;
     }
   }
 });

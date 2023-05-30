@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { percentParser } from '../../utils/percentParser';
 import { priceParser } from '../../utils/priceParser';
 import Button from '../UI/button/Button';
@@ -11,8 +13,14 @@ const CryptoCard = ({
   current_price,
   price_change_percentage_24h_in_currency,
   price_change_percentage_7d_in_currency,
-  image
+  image,
+  id
 }) => {
+  const navigate = useNavigate();
+  const onCoinSelect = () => {
+    navigate(`/coin-details/${id}`);
+  };
+
   return (
     <Card className={classes.card}>
       <header className={classes.header}>
@@ -25,7 +33,7 @@ const CryptoCard = ({
         <p>7d: {percentParser(price_change_percentage_7d_in_currency)}</p>
       </main>
       <footer className={classes.footer}>
-        <Button>Details</Button>
+        <Button onClick={onCoinSelect}>Details</Button>
       </footer>
     </Card>
   );

@@ -8,6 +8,7 @@ import { getTheme } from './store/ui-actions';
 import RootLayout from './RootLayout';
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
+import CoinDetails from './components/coinDetails/CoinDetails';
 import NewCoins from './components/coinViews/newCoins/NewCoins';
 import TopHundred from './components/coinViews/topHundred/TopHundred';
 import CryptoConverter from './components/cryptoConverter/CryptoConverter';
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/new-coins',
         element: <NewCoins />
+      },
+      {
+        path: '/coin-details/:id',
+        element: <CoinDetails />
       },
       {
         path: '/crypto-converter',

@@ -29,3 +29,11 @@ export const fetchFiatMap = async () => {
 export const convertCurrency = async (amount, from, to) => {
   return fetchApi.get(`${BASE_URL}/convert?amount=${amount}&from=${from}&to=${to}`);
 };
+
+export const fetchCoinDetails = async (id) => {
+  return fetchApi.get(`${BASE_URL}/getCoinDetails?coinId=${id}`);
+};
+
+export const fetchCoinOHLC = async (id, days) => {
+  return fetchApi.get(`${BASE_URL}/getCoinOHLC?id=${id}&days=${days || 1}`);
+};

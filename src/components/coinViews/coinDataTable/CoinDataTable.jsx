@@ -1,9 +1,17 @@
-import { percentParser } from '../../../utils/percentParser';
+import { useNavigate } from 'react-router-dom';
+
 import { priceParser } from '../../../utils/priceParser';
+import PercentTicker from '../../shared/percentTicker/PercentTicker';
 
 import classes from './CoinDataTable.module.css';
 
 const CoinDataTable = ({ coinData }) => {
+  const navigate = useNavigate();
+
+  const onCoinSelectHandler = (id) => {
+    navigate(`/coin-details/${id}`);
+  };
+
   return (
     <div className={classes['table-container']}>
       <table className={classes.table}>
@@ -24,7 +32,11 @@ const CoinDataTable = ({ coinData }) => {
         <tbody className={classes.tbody}>
           {coinData.map((coin, index) => {
             return (
-              <tr className="table-row" key={coin.id}>
+              <tr
+                key={coin.id}
+                className="table-row"
+                onClick={() => onCoinSelectHandler(coin.id)}
+              >
                 <td className={`${classes['sticky-col']} ${classes['first-col']}`}>
                   <p>{index + 1}</p>
                 </td>
@@ -41,13 +53,13 @@ const CoinDataTable = ({ coinData }) => {
                   <p>{priceParser(coin.current_price)}</p>
                 </td>
                 <td className={classes['sixth-col']}>
-                  <p>{percentParser(coin.price_change_percentage_1h_in_currency)}</p>
+                  <PercentTicker percent={coin.price_change_percentage_1h_in_currency} />
                 </td>
                 <td className={classes['seventh-col']}>
-                  <p>{percentParser(coin.price_change_percentage_24h_in_currency)}</p>
+                  <PercentTicker percent={coin.price_change_percentage_24h_in_currency} />
                 </td>
                 <td className={classes['eighth-col']}>
-                  <p>{percentParser(coin.price_change_percentage_7d_in_currency)}</p>
+                  <PercentTicker percent={coin.price_change_percentage_7d_in_currency} />
                 </td>
                 <td className={classes['ninth-col']}>
                   <p>{priceParser(coin.market_cap)}</p>

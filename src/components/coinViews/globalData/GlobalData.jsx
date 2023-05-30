@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { getGlobalData } from '../../../store/crypto-actions';
 import { percentParser } from '../../../utils/percentParser';
 import { usdPriceParser } from '../../../utils/priceParser';
 import Card from '../../UI/card/Card';
@@ -9,12 +7,7 @@ import Card from '../../UI/card/Card';
 import classes from './GlobalData.module.css';
 
 const GlobalData = (props) => {
-  const dispatch = useDispatch();
   const globalData = useSelector(state => state.crypto.globalData);
-
-  useEffect(() => {
-    dispatch(getGlobalData());
-  });
 
   return (
     <section className={`${classes['global-data-container']} ${props.className}`}>
