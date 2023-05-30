@@ -5,6 +5,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { isUserLoggedIn } from './store/auth-actions';
 import { getTheme } from './store/ui-actions';
 
+import ProtectedRouteIsAuth from './ProtectedRouteIsAuth';
+import ProtectedRouteIsUser from './ProtectedRouteIsUser';
 import RootLayout from './RootLayout';
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
@@ -27,11 +29,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />
+        element: (
+          <ProtectedRouteIsUser>
+            <Login />
+          </ProtectedRouteIsUser>
+        )
       },
       {
         path: '/register',
-        element: <Register />
+        element: (
+          <ProtectedRouteIsUser>
+            <Register />
+          </ProtectedRouteIsUser>
+        )
       },
       {
         path: '/top-hundred',
@@ -51,11 +61,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/portfolio',
-        element: <Portfolio />
+        element: (
+          <ProtectedRouteIsAuth>
+            <Portfolio />
+          </ProtectedRouteIsAuth>
+        )
       },
       {
         path: '/profile',
-        element: <Profile />
+        element: (
+          <ProtectedRouteIsAuth>
+            <Profile />
+          </ProtectedRouteIsAuth>
+        )
       }
     ]
   },
