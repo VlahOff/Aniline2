@@ -1,11 +1,9 @@
 .portfolio {
   margin: 180px auto;
   width: 80%;
-  min-width: 500px;
   max-width: 1600px;
   background-color: var(--container-bg-transparent);
   color: var(--text-color);
-  border-radius: 10px;
 }
 
 .header {
@@ -42,4 +40,26 @@
 .info-message {
   text-align: center;
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 720px) {
+  .portfolio {
+    margin: 60px auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .portfolio {
+    padding: 18px;
+  }
+
+  .header {
+    gap: 1rem;
+  }
+
+  .title,
+  .sub-title {
+    font-size: 18px;
+  }
 }

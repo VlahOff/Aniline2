@@ -44,3 +44,22 @@
 .cancel-btn:hover {
   background-color: #8f8f8f;
 }
+
+@media screen and (max-width: 720px) {
+  .modal {
+    width: 90%;
+    padding: 14px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+  }
+
+  .cancel-btn {
+    order: 1;
+  }
+}

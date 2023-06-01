@@ -1,5 +1,5 @@
 .card {
-  width: 500px;
+  max-width: 500px;
   margin: 120px auto;
 }
 
@@ -15,4 +15,15 @@
 
 .btn {
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 540px) {
+  .card {
+    margin: 100px 24px;
+  }
+
+  .form {
+    padding: 0;
+    padding-top: 24px;
+  }
 }

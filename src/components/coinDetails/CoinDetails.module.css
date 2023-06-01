@@ -44,7 +44,7 @@
 
 .bar {
   position: relative;
-  width: 300px;
+  max-width: 300px;
   height: 8px;
   background-color: #6e6e6e;
   border-radius: 8px;
@@ -134,32 +134,24 @@
   margin: 24px 0;
 }
 
-/* 
+
 @media (max-width: 1200px) {
-  .details-page {
-    margin: 80px 0;
-    width: 100%;
-    border-radius: 0;
+  .wrapper {
+    padding: 40px 0;
   }
 
-  header {
+  .details-page {
+    width: 90%;
+    padding: 0;
+  }
+
+  .header {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 24px;
     margin: 24px;
-  }
-
-  .coin-info .cell p {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  
-  p.timestamp {
-    font-size: 14px;
-    font-weight: 300;
   }
 
   .left-header-part {
@@ -169,4 +161,27 @@
   .right-header-part {
     order: -1;
   }
-} */
+
+  .coin-name {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 1.3rem;
+    font-weight: 500px;
+  }
+  
+  .percent-ticker {
+    font-size: 1.1rem;
+  }
+
+  .cell p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .main {
+    margin: 24px;
+  }
+}

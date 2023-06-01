@@ -3,7 +3,6 @@
   overflow: auto;
   white-space: nowrap;
   border-radius: 8px;
-  padding: 0.5rem;
   background-color: var(--container-bg);
 }
 
@@ -121,4 +120,12 @@
   min-width: 180px;
   max-width: 180px;
   text-align: left;
+}
+
+@media screen and (max-width: 680px) {
+  .third-col {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+  }
 }

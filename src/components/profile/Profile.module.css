@@ -1,6 +1,6 @@
 .card {
   margin: 120px auto;
-  width: 480px;
+  max-width: 480px;
   color: var(--text-color);
 }
 
@@ -37,4 +37,10 @@
 
 .actions-wrapper button:nth-child(3):hover {
   background-color: var(--danger-element-hover);
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    padding: 14px;
+  }
 }

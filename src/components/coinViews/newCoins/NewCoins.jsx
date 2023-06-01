@@ -19,7 +19,7 @@ const NewCoins = () => {
   return (
     <section className={classes.container}>
       <GlobalData className={classes['global-data']} />
-      <Card>
+      <Card className={classes.card}>
         <h1 className={classes.title}>New Coins</h1>
         <p className={classes['powered-by']}>Powered by CoinMarketCap</p>
         <CoinDataTable coinData={newCoins} />

@@ -24,7 +24,9 @@ const CryptoCard = ({
   return (
     <Card className={classes.card}>
       <header className={classes.header}>
-        <h2 className={classes.name}>{name}</h2>
+        <div className={`${classes.ribbon} ${classes['ribbon-top-left']}`}>
+          <span>{name}</span>
+        </div>
         <img src={image} alt={`${symbol} logo`} className={classes['coin-logo']} />
       </header>
       <main className={classes.main}>

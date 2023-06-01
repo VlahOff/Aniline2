@@ -19,7 +19,7 @@ const TopHundred = () => {
   return (
     <section className={classes.container}>
       <GlobalData className={classes['global-data']} />
-      <Card>
+      <Card className={classes.card}>
         <h1 className={classes.title}>Top Hundred</h1>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <CoinDataTable coinData={topHundred} />

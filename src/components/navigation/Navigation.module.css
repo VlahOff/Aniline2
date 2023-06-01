@@ -25,3 +25,43 @@
 .theme-indicator {
   color: var(--text-color);
 }
+
+.menu-btn {
+  display: none;
+}
+
+@media screen and (max-width: 1280px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 64px;
+    right: 0;
+    height: calc(100vh - 64px);
+    background-color: var(--background);
+  }
+
+  .links-open {
+    display: flex;
+  }
+
+  .links-close {
+    display: none;
+  }
+
+  .links::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
