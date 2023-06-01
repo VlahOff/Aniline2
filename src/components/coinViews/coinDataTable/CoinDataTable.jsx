@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { priceParser } from '../../../utils/priceParser';
+import { usdPriceParser } from '../../../utils/priceParser';
 import PercentTicker from '../../shared/percentTicker/PercentTicker';
 
 import classes from './CoinDataTable.module.css';
@@ -50,7 +50,7 @@ const CoinDataTable = ({ coinData }) => {
                   <p>{coin.symbol.toUpperCase()}</p>
                 </td>
                 <td className={classes['fifth-col']}>
-                  <p>{priceParser(coin.current_price)}</p>
+                  <p>{usdPriceParser(coin.current_price)}</p>
                 </td>
                 <td className={classes['sixth-col']}>
                   <PercentTicker percent={coin.price_change_percentage_1h_in_currency} />
@@ -62,10 +62,10 @@ const CoinDataTable = ({ coinData }) => {
                   <PercentTicker percent={coin.price_change_percentage_7d_in_currency} />
                 </td>
                 <td className={classes['ninth-col']}>
-                  <p>{priceParser(coin.market_cap)}</p>
+                  <p>{usdPriceParser(coin.market_cap)}</p>
                 </td>
                 <td className={classes['tenth-col']}>
-                  <p>{priceParser(coin.total_supply)}</p>
+                  <p>{usdPriceParser(coin.total_supply)}</p>
                 </td>
               </tr>
             );
