@@ -19,12 +19,12 @@ export const getTopThree = () => {
   };
 };
 
-export const getTopHundred = () => {
+export const getTopHundred = (page) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
     Promise.all([
       cryptoService.fetchGlobalData(),
-      cryptoService.fetchTopHundred()
+      cryptoService.fetchTopHundred(page)
     ])
       .then(res => {
         if (res[0].message || res[1].message) {
@@ -34,6 +34,23 @@ export const getTopHundred = () => {
 
         dispatch(cryptoActions.setGlobalData(res[0]));
         dispatch(cryptoActions.setTopHundred(res[1]));
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const getNextPageOnTopHundred = (page) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService.fetchTopHundred(page)
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(cryptoActions.appendTopHundred(res));
       })
       .catch(err => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));

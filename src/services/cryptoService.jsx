@@ -6,8 +6,8 @@ export const fetchTopThree = async () => {
   return fetchApi.get(`${BASE_URL}/topThree`);
 };
 
-export const fetchTopHundred = async () => {
-  return fetchApi.get(`${BASE_URL}/topHundred`);
+export const fetchTopHundred = async (page = 1) => {
+  return fetchApi.get(`${BASE_URL}/topHundred?page=${page}`);
 };
 
 export const fetchNewCoins = async () => {

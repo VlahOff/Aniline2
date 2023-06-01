@@ -8,6 +8,7 @@ import { getTheme } from './store/ui-actions';
 import ProtectedRouteIsAuth from './ProtectedRouteIsAuth';
 import ProtectedRouteIsUser from './ProtectedRouteIsUser';
 import RootLayout from './RootLayout';
+import PageNotFound from './components/404page/PageNotFound';
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
 import CoinDetails from './components/coinDetails/CoinDetails';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <PageNotFound />,
     children: [
       {
         index: true,

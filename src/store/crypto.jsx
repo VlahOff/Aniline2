@@ -19,6 +19,9 @@ const cryptoSlice = createSlice({
     setTopHundred(state, action) {
       state.topHundred = action.payload;
     },
+    appendTopHundred(state, action) {
+      state.topHundred = state.topHundred.concat(action.payload);
+    },
     setNewCoins(state, action) {
       state.newCoins = action.payload;
     },
