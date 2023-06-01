@@ -127,7 +127,7 @@
   font-size: 12px;
   font-weight: 300;
   font-style: italic;
-  color: rgb(177, 177, 177);
+  color: var(--text-color);
 }
 
 .chart-container {
