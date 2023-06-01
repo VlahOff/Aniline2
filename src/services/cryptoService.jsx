@@ -10,8 +10,8 @@ export const fetchTopHundred = async (page = 1) => {
   return fetchApi.get(`${BASE_URL}/topHundred?page=${page}`);
 };
 
-export const fetchNewCoins = async () => {
-  return fetchApi.get(`${BASE_URL}/newCoins`);
+export const fetchNewCoins = async (page = 1) => {
+  return fetchApi.get(`${BASE_URL}/newCoins?page=${page}`);
 };
 
 export const fetchGlobalData = async () => {

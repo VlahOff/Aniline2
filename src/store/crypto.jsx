@@ -25,6 +25,9 @@ const cryptoSlice = createSlice({
     setNewCoins(state, action) {
       state.newCoins = action.payload;
     },
+    appendNewCoins(state, action) {
+      state.newCoins = state.newCoins.concat(action.payload);
+    },
     setGlobalData(state, action) {
       state.globalData = action.payload;
     },

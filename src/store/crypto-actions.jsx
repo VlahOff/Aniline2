@@ -78,6 +78,23 @@ export const getNewCoins = () => {
   };
 };
 
+export const getNextPageOnNewCoins = (page) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService.fetchNewCoins(page)
+      .then(res => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(cryptoActions.appendNewCoins(res));
+      })
+      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
 export const getCoinDetails = (id, days) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
