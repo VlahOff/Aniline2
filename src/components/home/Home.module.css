@@ -1,10 +1,15 @@
-.container {
+.wrapper {
+  height: calc(100vh - 72px);
+}
+
+.home {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   gap: 5rem;
   padding: 5rem;
+  height: 100%;
 }
 
 .logo {
@@ -25,8 +30,14 @@
   gap: 2rem;
 }
 
+@media screen and (max-width: 900px) {
+  .wrapper {
+    height: auto;
+  }
+}
+
 @media screen and (max-width: 638px) {
-  .container {
+  .home {
     padding: 2rem;
   }
 

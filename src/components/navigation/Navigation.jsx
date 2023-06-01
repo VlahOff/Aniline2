@@ -8,8 +8,8 @@ import { toggleTheme } from '../../store/ui-actions';
 import ButtonLink from '../UI/buttonLink/ButtonLink';
 import LinkTo from '../UI/linkTo/LinkTo';
 
-import darkLogo from '../../assets/logo-black.png';
-import lightLogo from '../../assets/logo-white.png';
+import darkLogo from '../../assets/logo-no-background-black.svg';
+import lightLogo from '../../assets/logo-no-background-white.svg';
 import classes from './Navigation.module.css';
 
 const Navigation = () => {
