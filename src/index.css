@@ -71,3 +71,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
+#root {
+  overflow-x: hidden
+}
