@@ -13,3 +13,7 @@
 .btn {
   padding: 2px 8px;
 }
+
+.btn-active {
+  background-color: var(--primary-color-hover);
+}
