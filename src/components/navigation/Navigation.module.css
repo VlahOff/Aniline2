@@ -1,14 +1,17 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--background);
   padding: 0.5rem 1rem;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 10;
+  height: 72px;
 }
 
 .logo-wrapper {
@@ -41,21 +44,25 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 64px;
+    top: 72px;
     right: -220px;
     width: 220px;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 72px);
     transition: 500ms;
     background-color: var(--container-bg-transparent);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(6.5px);
     -webkit-backdrop-filter: blur(6.5px);
     border-radius: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
-
+  
   .links-open {
     transform: translate(-220px, 0);
     transition: 500ms;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+
+  .links-close {
+    box-shadow: none;
   }
 }
