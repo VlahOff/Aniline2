@@ -22,7 +22,7 @@
 
 .infinite-scroll-element {
   position: absolute;
-  bottom: 700px;
+  bottom: 1000px;
 }
 
 @media screen and (max-width: 680px) {

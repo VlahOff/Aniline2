@@ -15,7 +15,7 @@ const TopHundred = () => {
 
   const infiniteScrollElement = useRef(null);
   const isInView = useIsInViewport(infiniteScrollElement);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(getTopHundred());
