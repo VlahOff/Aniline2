@@ -20,6 +20,11 @@
   margin-bottom: 0.4rem;
 }
 
+.infinite-scroll-element {
+  position: absolute;
+  bottom: 700px;
+}
+
 @media screen and (max-width: 680px) {
   .container,
   .card {

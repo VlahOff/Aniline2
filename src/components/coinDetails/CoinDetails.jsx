@@ -11,20 +11,20 @@ import CoinChart from './coinChart/CoinChart';
 
 import classes from './CoinDetails.module.css';
 
+const timeParser = (date) => {
+  return new Date(date).toLocaleString('en-UK', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
+
 const CoinDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const coin = useSelector(state => state.crypto.coinDetails);
-
-  const timeParser = (date) => {
-    return new Date(date).toLocaleString('en-UK', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
 
   useEffect(() => {
     dispatch(getCoinDetails(id));

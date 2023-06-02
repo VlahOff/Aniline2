@@ -37,7 +37,10 @@ const NewCoins = () => {
         <h1 className={classes.title}>New Coins</h1>
         <p className={classes['powered-by']}>Powered by CoinMarketCap</p>
         <CoinDataTable coinData={newCoins} />
-        <div ref={infiniteScrollElement}></div>
+        <div
+          ref={infiniteScrollElement}
+          className={classes['infinite-scroll-element']}
+        ></div>
       </Card>
     </section>
   );

@@ -37,7 +37,10 @@ const TopHundred = () => {
         <h1 className={classes.title}>Top Hundred</h1>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <CoinDataTable coinData={topHundred} />
-        <div ref={infiniteScrollElement}></div>
+        <div
+          ref={infiniteScrollElement}
+          className={classes['infinite-scroll-element']}
+        ></div>
       </Card>
     </section>
   );
