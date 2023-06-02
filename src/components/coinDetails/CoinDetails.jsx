@@ -72,14 +72,14 @@ const CoinDetails = () => {
         <main className={classes.main}>
           <div className={classes['coin-info']}>
             <div className={classes.cell}>
-              <h5>Market Cap</h5>
+              <h5 className={classes['cell-title']}>Market Cap</h5>
               <div>
                 <p>{usdPriceParser(coin?.market_cap)}</p>
                 <p>{percentParser(coin?.market_cap_change_percentage_24h)}</p>
               </div>
             </div>
             <div className={classes.cell}>
-              <h5>Circulating Supply</h5>
+              <h5 className={classes['cell-title']}>Circulating Supply</h5>
               <div>
                 <p>
                   {coin?.circulating_supply} {coin?.symbol?.toUpperCase()}
@@ -88,11 +88,11 @@ const CoinDetails = () => {
               </div>
             </div>
             <div className={classes.cell}>
-              <h5>Volume</h5>
+              <h5 className={classes['cell-title']}>Volume</h5>
               <p>{usdPriceParser(coin?.total_volume)}</p>
             </div>
             <div className={classes.cell}>
-              <h5>All Time High</h5>
+              <h5 className={classes['cell-title']}>All Time High</h5>
               <div>
                 <p>{usdPriceParser(coin?.ath)}</p>
                 <p>{percentParser(coin?.ath_change_percentage)}</p>
@@ -102,7 +102,7 @@ const CoinDetails = () => {
               </div>
             </div>
             <div className={classes.cell}>
-              <h5>All Time Low</h5>
+              <h5 className={classes['cell-title']}>All Time Low</h5>
               <div>
                 <p>{usdPriceParser(coin?.atl)}</p>
                 <p>{percentParser(coin?.atl_change_percentage)}</p>

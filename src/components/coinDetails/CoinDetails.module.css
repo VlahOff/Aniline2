@@ -39,7 +39,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  flex: 1 1 100%
 }
 
 .bar {
@@ -69,6 +69,7 @@
 .bar-titles {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   width: 100%;
   margin-top: 18px;
 }
@@ -116,9 +117,13 @@
   box-shadow: 6px 4px 31px 19px rgba(0, 0, 0, 0.15);
 }
 
+.cell-title {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
 .cell p {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
   line-height: 1.4;
 }
 
@@ -170,7 +175,7 @@
     font-size: 1.3rem;
     font-weight: 500px;
   }
-  
+
   .percent-ticker {
     font-size: 1.1rem;
   }
