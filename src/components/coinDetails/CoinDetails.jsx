@@ -28,6 +28,7 @@ const CoinDetails = () => {
 
   useEffect(() => {
     dispatch(getCoinDetails(id));
+    document.body.scrollTop;
   }, []);
 
   return (
