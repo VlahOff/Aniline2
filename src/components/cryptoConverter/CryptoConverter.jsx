@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useForm } from '../../hooks/useForm';
 import { converterActions } from '../../store/converter';
 import { filterCryptoData, filterFiatData, getConvertResult, getCurrencyMaps } from '../../store/converter-actions';
 import { priceParser } from '../../utils/priceParser';
@@ -22,90 +23,74 @@ const CryptoConverter = () => {
     selectedToInput
   } = useSelector(state => state.converter);
 
-  const [isFormValid, setIsFormValid] = useState(null);
-  const [fromValue, setFromValue] = useState('');
-  const [fromValueValid, setFromValueValid] = useState(null);
-  const [toValue, setToValue] = useState('');
-  const [toValueValid, setToValueValid] = useState(null);
-  const [amount, setAmount] = useState('');
-  const [amountValid, setAmountValid] = useState(null);
+  const { formValues, isFormValid, changeHandler, blurHandler, setValues, resetValues } = useForm({
+    fromValue: '',
+    fromValueValid: null,
+    toValue: '',
+    toValueValid: null,
+    amount: '',
+    amountValid: null
+  });
 
   useEffect(() => {
     dispatch(getCurrencyMaps());
   }, []);
 
-  useEffect(() => {
-    setIsFormValid(fromValueValid, toValueValid, amountValid);
-  }, [fromValueValid, toValueValid, amountValid]);
-
   const onInputFromHandler = (event) => {
-    event.target.value === '' ? setFromValueValid(false) : setFromValueValid(true);
+    setValues(s => ({ ...s, fromValue: event.target.value }));
 
-    setFromValue(event.target.value);
-    if (fromCryptoToFiat) {
-      dispatch(filterCryptoData(fromValue));
-      return;
-    }
-    dispatch(filterFiatData(fromValue));
+    fromCryptoToFiat ?
+      dispatch(filterCryptoData(formValues.fromValue))
+      :
+      dispatch(filterFiatData(formValues.fromValue));
   };
 
   const onInputToHandler = (event) => {
-    event.target.value === '' ? setToValueValid(false) : setToValueValid(true);
+    setValues(s => ({ ...s, toValue: event.target.value }));
 
-    setToValue(event.target.value);
-    if (!fromCryptoToFiat) {
-      dispatch(filterCryptoData(toValue));
-      return;
-    }
-    dispatch(filterFiatData(toValue));
+    fromCryptoToFiat ?
+      dispatch(filterFiatData(formValues.toValue))
+      :
+      dispatch(filterCryptoData(formValues.toValue));
   };
 
-  const onAmountInputHandler = (event) => {
-    if (event.target.value <= 0) {
-      setAmountValid(false);
-      return;
-    }
+  const onBlurFromToHandler = (event) => {
+    blurHandler(event, (value) => value.trim().length > 0);
+  };
 
-    setAmountValid(true);
-    setAmount(event.target.value);
+  const onBlurAmountHandler = (event) => {
+    blurHandler(event, (value) => value > 0);
   };
 
   const onConvertSubmitHandler = (event) => {
     event.preventDefault();
-    if (!isFormValid) {
-      return;
-    }
-    dispatch(getConvertResult(amount));
+    isFormValid && dispatch(getConvertResult(formValues.amount));
   };
 
   const selectFrom = (item) => {
-    setFromValue(item.name);
+    setValues(s => ({ ...s, fromValue: item.name }));
     dispatch(converterActions.setSelectedFromInput(item.id));
 
-    if (fromCryptoToFiat) {
-      dispatch(converterActions.clearCryptoResults());
-      return;
-    }
-    dispatch(converterActions.clearFiatResults());
+    fromCryptoToFiat ?
+      dispatch(converterActions.clearCryptoResults())
+      :
+      dispatch(converterActions.clearFiatResults());
   };
 
   const selectTo = (item) => {
-    setToValue(item.name);
+    setValues(s => ({ ...s, toValue: item.name }));
     dispatch(converterActions.setSelectedToInput(item.id));
 
-    if (!fromCryptoToFiat) {
+    fromCryptoToFiat ?
+      dispatch(converterActions.clearFiatResults())
+      :
       dispatch(converterActions.clearCryptoResults());
-      return;
-    }
-    dispatch(converterActions.clearFiatResults());
   };
 
   const toggleFromTo = () => {
     dispatch(converterActions.toggleFromCryptoToFiat());
     dispatch(converterActions.setConvertResult(null));
-    setFromValue('');
-    setToValue('');
-    setAmount('');
+    resetValues();
   };
 
   return (
@@ -115,10 +100,11 @@ const CryptoConverter = () => {
         <div className={classes['inputs-wrapper']}>
           <InputWithDropdown
             label='From'
-            id='from'
+            id='fromValue'
             onChange={onInputFromHandler}
-            value={fromValue}
-            error={fromValueValid}
+            onBlur={onBlurFromToHandler}
+            value={formValues.fromValue}
+            error={formValues.fromValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
           >
@@ -137,10 +123,11 @@ const CryptoConverter = () => {
           <Button onClick={toggleFromTo}><i className="fa-solid fa-repeat"></i></Button>
           <InputWithDropdown
             label='To'
-            id='to'
+            id='toValue'
             onChange={onInputToHandler}
-            value={toValue}
-            error={toValueValid}
+            onBlur={onBlurFromToHandler}
+            value={formValues.toValue}
+            error={formValues.toValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
           >
@@ -159,11 +146,12 @@ const CryptoConverter = () => {
         </div>
         <Input
           label={'Amount'}
-          id={amount}
+          id={'amount'}
           type={'number'}
-          onChange={onAmountInputHandler}
-          value={amount}
-          error={amountValid}
+          onChange={changeHandler}
+          onBlur={onBlurAmountHandler}
+          value={formValues.amount}
+          error={formValues.amountValid}
           errorMessage={'Please provide a value greater than 0.'}
         />
         <Button
