@@ -2,7 +2,10 @@ import { useDispatch } from 'react-redux';
 
 import { useForm } from '../../../hooks/useForm';
 import { portfolioActions } from '../../../store/portfolio';
-import { filterAllCoinsList, submitTransaction } from '../../../store/portfolio-actions';
+import {
+  filterAllCoinsList,
+  submitTransaction,
+} from '../../../store/portfolio-actions';
 import Button from '../../UI/button/Button';
 import Input from '../../UI/input/Input';
 import InputWithDropdown from '../../UI/inputWithDropdown/InputWithDropdown';
@@ -10,33 +13,32 @@ import Modal from '../../UI/modal/Modal';
 
 import classes from './AddTransactionModal.module.css';
 
-const AddTransactionModal = ({
-  allCoinsList
-}) => {
+const AddTransactionModal = ({ allCoinsList }) => {
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler, setValues } = useForm({
-    coinName: '',
-    coinId: '',
-    coinIdValid: null,
-    coinPrice: '',
-    coinPriceValid: null,
-    quantity: '',
-    quantityValid: null,
-  });
+  const { formValues, isFormValid, changeHandler, blurHandler, setValues } =
+    useForm({
+      coinName: '',
+      coinId: '',
+      coinIdValid: null,
+      coinPrice: '',
+      coinPriceValid: null,
+      quantity: '',
+      quantityValid: null,
+    });
 
   const onCoinSelectHandler = (coin) => {
-    setValues(state => ({
+    setValues((state) => ({
       ...state,
       coinName: coin.name,
-      coinId: coin.id
+      coinId: coin.id,
     }));
     dispatch(portfolioActions.clearFilteredAllCoins());
   };
 
   const onCoinInputHandler = (event) => {
-    setValues(state => ({
+    setValues((state) => ({
       ...state,
-      coinName: event.target.value
+      coinName: event.target.value,
     }));
     dispatch(filterAllCoinsList(event.target.value));
   };
@@ -61,6 +63,10 @@ const AddTransactionModal = ({
     }
   };
 
+  const onDropdownFocusLost = (event) => {
+    dispatch(portfolioActions.clearFilteredAllCoins());
+  };
+
   return (
     <Modal onClose={onCloseHandler} className={classes.modal}>
       <form onSubmit={onSubmitHandler}>
@@ -75,16 +81,20 @@ const AddTransactionModal = ({
             onChange={onCoinInputHandler}
             onBlur={onCoinBlurHandler}
             isDropdownShown={true}
+            onMouseLeave={onDropdownFocusLost}
           >
-            {allCoinsList && allCoinsList.map(c => {
-              return <p
-                key={c.id}
-                className={classes.item}
-                onClick={() => onCoinSelectHandler(c)}
-              >
-                {c.name}
-              </p>;
-            })}
+            {allCoinsList &&
+              allCoinsList.map((c) => {
+                return (
+                  <p
+                    key={c.id}
+                    className={classes.item}
+                    onClick={() => onCoinSelectHandler(c)}
+                  >
+                    {c.name}
+                  </p>
+                );
+              })}
           </InputWithDropdown>
           <Input
             label={'Price per coin'}
@@ -114,15 +124,10 @@ const AddTransactionModal = ({
           />
         </div>
         <div className={classes['btn-container']}>
-          <Button
-            onClick={onCloseHandler}
-            className={classes['cancel-btn']}
-          >
-            Cancel</Button>
-          <Button
-            type={'submit'}
-            disabled={!isFormValid}
-          >
+          <Button onClick={onCloseHandler} className={classes['cancel-btn']}>
+            Cancel
+          </Button>
+          <Button type={'submit'} disabled={!isFormValid}>
             Submit
           </Button>
         </div>

@@ -93,6 +93,11 @@ const CryptoConverter = () => {
     resetValues();
   };
 
+  const onDropdownFocusLost = (event) => {
+    dispatch(converterActions.clearCryptoResults());
+    dispatch(converterActions.clearFiatResults());
+  };
+
   return (
     <Card className={classes.converter}>
       <form onSubmit={onConvertSubmitHandler}>
@@ -107,6 +112,7 @@ const CryptoConverter = () => {
             error={formValues.fromValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
+            onMouseLeave={onDropdownFocusLost}
           >
             {(fromCryptoToFiat ? cryptoMapResult : fiatMapResult)
               .map(item => {
@@ -130,6 +136,7 @@ const CryptoConverter = () => {
             error={formValues.toValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
+            onMouseLeave={onDropdownFocusLost}
           >
             {(fromCryptoToFiat ? fiatMapResult : cryptoMapResult)
               .map(item => {
