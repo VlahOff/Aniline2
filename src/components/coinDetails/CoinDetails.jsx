@@ -17,14 +17,15 @@ const timeParser = (date) => {
     month: 'long',
     year: 'numeric',
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   });
 };
 
 const CoinDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const coin = useSelector(state => state.crypto.coinDetails);
+  const coin = useSelector((state) => state.crypto.coinDetails);
+  const coinDetailsOHLC = useSelector((state) => state.crypto.coinDetailsOHLC);
 
   useEffect(() => {
     dispatch(getCoinDetails(id));
@@ -35,11 +36,16 @@ const CoinDetails = () => {
     <div className={classes.wrapper}>
       <Card className={classes['details-page']}>
         <header className={classes.header}>
-
           <div className={classes['left-header-part']}>
-            <img className={classes['coin-logo']} src={coin?.image?.small} alt="Coin logo" />
+            <img
+              className={classes['coin-logo']}
+              src={coin?.image?.small}
+              alt="Coin logo"
+            />
             <h1 className={classes['coin-name']}>{coin?.name}</h1>
-            <strong className={classes.symbol}>{coin?.symbol?.toUpperCase()}</strong>
+            <strong className={classes.symbol}>
+              {coin?.symbol?.toUpperCase()}
+            </strong>
           </div>
 
           <div className={classes['center-header-part']}>
@@ -60,13 +66,14 @@ const CoinDetails = () => {
           </div>
 
           <div className={classes['right-header-part']}>
-            <p className={classes.price}>{usdPriceParser(coin?.current_price)}</p>
+            <p className={classes.price}>
+              {usdPriceParser(coin?.current_price)}
+            </p>
             <PercentTicker
               percent={coin?.price_change_percentage_24h}
               className={classes['percent-ticker']}
             />
           </div>
-
         </header>
 
         <main className={classes.main}>
@@ -97,7 +104,9 @@ const CoinDetails = () => {
                 <p>{usdPriceParser(coin?.ath)}</p>
                 <p>{percentParser(coin?.ath_change_percentage)}</p>
                 <time>
-                  <p className={classes.timestamp}>{timeParser(coin?.ath_date)}</p>
+                  <p className={classes.timestamp}>
+                    {timeParser(coin?.ath_date)}
+                  </p>
                 </time>
               </div>
             </div>
@@ -107,12 +116,18 @@ const CoinDetails = () => {
                 <p>{usdPriceParser(coin?.atl)}</p>
                 <p>{percentParser(coin?.atl_change_percentage)}</p>
                 <time>
-                  <p className={classes.timestamp}>{timeParser(coin?.atl_date)}</p>
+                  <p className={classes.timestamp}>
+                    {timeParser(coin?.atl_date)}
+                  </p>
                 </time>
               </div>
             </div>
           </div>
-          <CoinChart coinId={id} className={classes['chart-container']} />
+          <CoinChart
+            coinId={id}
+            coinDetailsOHLC={coinDetailsOHLC}
+            className={classes['chart-container']}
+          />
         </main>
       </Card>
     </div>
