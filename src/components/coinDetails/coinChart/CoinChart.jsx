@@ -15,8 +15,16 @@ const CoinChart = ({ coinId, coinDetailsOHLC, className }) => {
   const chartContainerRef = useRef();
 
   useEffect(() => {
-    const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+    const priceFormat = () => {
+      const price = data[0]?.low;
+      const indexOfDecimal = price?.toString().indexOf('.');
+      let value;
+
+      indexOfDecimal
+        ? (value = price?.toString().slice(indexOfDecimal).length - 1)
+        : (value = 2);
+
+      return value > 16 ? 16 : value;
     };
 
     const chart = createChart(chartContainerRef.current, {
@@ -29,31 +37,45 @@ const CoinChart = ({ coinId, coinDetailsOHLC, className }) => {
         vertLines: { color: '#444' },
         horzLines: { color: '#444' },
       },
+      crosshair: {
+        mode: 0,
+      },
       kineticScroll: {
         mouse: true,
         touch: true,
       },
       timeScale: {
         timeVisible: true,
+        secondsVisible: false,
+      },
+      rightPriceScale: {
+        mode: 1,
+      },
+      watermark: {
+        visible: true,
+        text: 'ANILINE',
+        color: '#7c7c7c48',
+        fontFamily: 'Poppins',
+        fontSize: '86',
       },
     });
     chart.timeScale().fitContent();
 
     const newSeries = chart.addCandlestickSeries({
-      upColor: '#26a69a',
-      downColor: '#ef5350',
+      priceFormat: {
+        type: priceFormat() > 3 ? 'volume' : 'price',
+        precision: priceFormat(),
+        minMove: 0.01,
+      },
+      upColor: theme === 'light' ? '#004925' : '#26a69a',
+      downColor: theme === 'light' ? '#AB0000' : '#ef5350',
       borderVisible: false,
-      wickUpColor: '#26a69a',
-      wickDownColor: '#ef5350',
+      wickUpColor: theme === 'light' ? '#004925' : '#26a69a',
+      wickDownColor: theme === 'light' ? '#AB0000' : '#ef5350',
     });
     newSeries.setData(data);
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      chart.remove();
-    };
+    return () => chart.remove();
   }, [theme, data]);
 
   const [activePeriod, setActivePeriod] = useState(1);
