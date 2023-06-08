@@ -6,7 +6,8 @@ const initialState = {
   newCoins: [],
   globalData: {},
   coinDetails: {},
-  coinDetailsOHLC: []
+  coinDetailsOHLC: [],
+  searchResults: [],
 };
 
 const cryptoSlice = createSlice({
@@ -36,8 +37,11 @@ const cryptoSlice = createSlice({
     },
     setCoinDetailsOHLC(state, action) {
       state.coinDetailsOHLC = action.payload;
-    }
-  }
+    },
+    setSearchResults(state, action) {
+      state.searchResults = action.payload;
+    },
+  },
 });
 
 export const cryptoActions = cryptoSlice.actions;

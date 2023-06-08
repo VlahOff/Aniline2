@@ -5,8 +5,9 @@ import { uiActions } from './ui';
 export const getTopThree = () => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    cryptoService.fetchTopThree()
-      .then(res => {
+    cryptoService
+      .fetchTopThree()
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -14,7 +15,7 @@ export const getTopThree = () => {
 
         dispatch(cryptoActions.setTopThree(res));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -24,9 +25,9 @@ export const getTopHundred = (page) => {
     dispatch(uiActions.startLoading());
     Promise.all([
       cryptoService.fetchGlobalData(),
-      cryptoService.fetchTopHundred(page)
+      cryptoService.fetchTopHundred(page),
     ])
-      .then(res => {
+      .then((res) => {
         if (res[0].message || res[1].message) {
           dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
           return;
@@ -35,7 +36,7 @@ export const getTopHundred = (page) => {
         dispatch(cryptoActions.setGlobalData(res[0]));
         dispatch(cryptoActions.setTopHundred(res[1]));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -43,8 +44,9 @@ export const getTopHundred = (page) => {
 export const getNextPageOnTopHundred = (page) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    cryptoService.fetchTopHundred(page)
-      .then(res => {
+    cryptoService
+      .fetchTopHundred(page)
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -52,7 +54,7 @@ export const getNextPageOnTopHundred = (page) => {
 
         dispatch(cryptoActions.appendTopHundred(res));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -62,9 +64,9 @@ export const getNewCoins = () => {
     dispatch(uiActions.startLoading());
     Promise.all([
       cryptoService.fetchGlobalData(),
-      cryptoService.fetchNewCoins()
+      cryptoService.fetchNewCoins(),
     ])
-      .then(res => {
+      .then((res) => {
         if (res[0].message || res[1].message) {
           dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
           return;
@@ -73,7 +75,7 @@ export const getNewCoins = () => {
         dispatch(cryptoActions.setGlobalData(res[0]));
         dispatch(cryptoActions.setNewCoins(res[1]));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -81,8 +83,9 @@ export const getNewCoins = () => {
 export const getNextPageOnNewCoins = (page) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    cryptoService.fetchNewCoins(page)
-      .then(res => {
+    cryptoService
+      .fetchNewCoins(page)
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -90,7 +93,7 @@ export const getNextPageOnNewCoins = (page) => {
 
         dispatch(cryptoActions.appendNewCoins(res));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -100,9 +103,9 @@ export const getCoinDetails = (id, days) => {
     dispatch(uiActions.startLoading());
     Promise.all([
       cryptoService.fetchCoinDetails(id),
-      cryptoService.fetchCoinOHLC(id, days)
+      cryptoService.fetchCoinOHLC(id, days),
     ])
-      .then(res => {
+      .then((res) => {
         if (res[0].message || res[1].message) {
           dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
           return;
@@ -111,7 +114,25 @@ export const getCoinDetails = (id, days) => {
         dispatch(cryptoActions.setCoinDetails(res[0]));
         dispatch(cryptoActions.setCoinDetailsOHLC(res[1].coinOHLC));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const getSearchResults = (query) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    cryptoService
+      .fetchSearchResults(query)
+      .then((res) => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(cryptoActions.setSearchResults(res));
+      })
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
