@@ -54,6 +54,7 @@ const uiSlice = createSlice({
       state.isErrorShown = true;
     },
     hideErrorNotification(state) {
+      state.errorMessage = '';
       state.isErrorShown = false;
     },
     startLoading(state) {
@@ -61,8 +62,8 @@ const uiSlice = createSlice({
     },
     stopLoading(state) {
       state.isLoading = false;
-    }
-  }
+    },
+  },
 });
 
 export const uiActions = uiSlice.actions;
