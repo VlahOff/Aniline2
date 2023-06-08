@@ -51,7 +51,9 @@
 
 @media screen and (max-width: 580px) {
   .portfolio {
+    margin-top: 38px;
     padding: 18px;
+    width: 100%;
   }
 
   .header {

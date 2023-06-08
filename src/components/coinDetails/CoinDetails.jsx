@@ -29,7 +29,7 @@ const CoinDetails = () => {
 
   useEffect(() => {
     dispatch(getCoinDetails(id));
-    document.body.scrollTop;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
@@ -129,6 +129,7 @@ const CoinDetails = () => {
             className={classes['chart-container']}
           />
         </main>
+        <p className={classes['powered-by']}>Powered by CoinGecko</p>
       </Card>
     </div>
   );

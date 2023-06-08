@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 
-import RouterOutlet from './RouterOutlet';
 import ErrorNotification from './components/UI/errorNotification/ErrorNotification';
 import LoadingSpinner from './components/UI/loadingSpinner/LoadingSpinner';
 import Navigation from './components/navigation/Navigation';
@@ -12,8 +12,8 @@ import classes from './App.module.css';
 
 function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(state => state.ui.isLoading);
-  const theme = useSelector(state => state.ui.theme);
+  const isLoading = useSelector((state) => state.ui.isLoading);
+  const theme = useSelector((state) => state.ui.theme);
 
   useEffect(() => {
     dispatch(isUserLoggedIn());
@@ -26,7 +26,7 @@ function App() {
       {isLoading && <LoadingSpinner />}
       <Navigation />
       <main className={classes.main}>
-        <RouterOutlet />
+        <Outlet />
       </main>
     </div>
   );

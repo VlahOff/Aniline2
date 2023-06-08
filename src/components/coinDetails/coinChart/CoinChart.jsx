@@ -48,9 +48,6 @@ const CoinChart = ({ coinId, coinDetailsOHLC, className }) => {
         timeVisible: true,
         secondsVisible: false,
       },
-      rightPriceScale: {
-        mode: 1,
-      },
       watermark: {
         visible: true,
         text: 'ANILINE',

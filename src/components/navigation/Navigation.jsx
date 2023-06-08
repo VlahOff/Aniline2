@@ -15,8 +15,8 @@ import classes from './Navigation.module.css';
 const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const theme = useSelector(state => state.ui.theme);
-  const user = useSelector(state => state.auth.user);
+  const theme = useSelector((state) => state.ui.theme);
+  const user = useSelector((state) => state.auth.user);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +29,7 @@ const Navigation = () => {
   };
 
   const onLinkSelect = () => {
-    setIsOpen(s => !s);
+    setIsOpen((s) => !s);
   };
 
   return (
@@ -48,30 +48,57 @@ const Navigation = () => {
         ${isOpen ? classes['links-open'] : classes['links-close']}`}
           onClick={onLinkSelect}
         >
-          <li><LinkTo to='/'>Home</LinkTo></li>
-          <li><LinkTo to='/top-hundred'>Top 100</LinkTo></li>
-          <li><LinkTo to='/new-coins'>New Coins</LinkTo></li>
-          <li><LinkTo to='/crypto-converter'>Crypto Converter</LinkTo></li>
-          {!user &&
+          <li>
+            <LinkTo to="/search">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </LinkTo>
+          </li>
+          <li>
+            <LinkTo to="/">Home</LinkTo>
+          </li>
+          <li>
+            <LinkTo to="/top-hundred">Top 100</LinkTo>
+          </li>
+          <li>
+            <LinkTo to="/new-coins">New Coins</LinkTo>
+          </li>
+          <li>
+            <LinkTo to="/crypto-converter">Crypto Converter</LinkTo>
+          </li>
+          {!user && (
             <>
-              <li><LinkTo to='/login'>Login</LinkTo></li>
-              <li><LinkTo to='/register'>Register</LinkTo></li>
+              <li>
+                <LinkTo to="/login">Login</LinkTo>
+              </li>
+              <li>
+                <LinkTo to="/register">Register</LinkTo>
+              </li>
             </>
-          }
-          {user &&
+          )}
+          {user && (
             <>
-              <li><LinkTo to='/portfolio'>Portfolio</LinkTo></li>
-              <li><LinkTo to='/profile'>Profile</LinkTo></li>
-              <li><ButtonLink onClick={logoutHandler}>Logout</ButtonLink></li>
+              <li>
+                <LinkTo to="/portfolio">Portfolio</LinkTo>
+              </li>
+              <li>
+                <LinkTo to="/profile">Profile</LinkTo>
+              </li>
+              <li>
+                <ButtonLink onClick={logoutHandler}>Logout</ButtonLink>
+              </li>
             </>
-          }
+          )}
           <li>
             <ButtonLink onClick={toggleThemeHandler}>
-              {theme === 'light' ?
-                <i className={`fa-regular fa-sun ${classes['theme-indicator']}`}></i>
-                :
-                <i className={`fa-regular fa-moon ${classes['theme-indicator']}`}></i>
-              }
+              {theme === 'light' ? (
+                <i
+                  className={`fa-regular fa-sun ${classes['theme-indicator']}`}
+                ></i>
+              ) : (
+                <i
+                  className={`fa-regular fa-moon ${classes['theme-indicator']}`}
+                ></i>
+              )}
             </ButtonLink>
           </li>
         </ul>

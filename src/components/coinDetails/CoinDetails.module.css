@@ -139,6 +139,10 @@
   margin-top: 24px;
 }
 
+.powered-by {
+  text-align: right;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     padding: 40px 0;
