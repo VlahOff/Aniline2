@@ -22,12 +22,15 @@ Whether you're a seasoned investor or just getting started in the world of crypt
 - React
 - Redux
 - React Router
-- ApexCharts.js
+- Lightweight Charts
 
 ## Back-end
 - NodeJS
 - Express
 - MongoDB
+- JWT
+- CoinGecko API
+- CoinMarketCap API
 
 # Features
 - **Top 100 coins** (with infinite scrolling)
@@ -39,6 +42,7 @@ Whether you're a seasoned investor or just getting started in the world of crypt
   - **Add assets to your portfolio**
   - **Edit already existing assets**
   - **Delete assets**
+- **Search**
 - **Light/Dark theme** (auto detection for device theme)
 - **Responsive design**
 
