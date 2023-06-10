@@ -45,6 +45,9 @@ const AddTransactionModal = ({ allCoinsList }) => {
 
   const onCoinBlurHandler = (event) => {
     blurHandler(event, () => event.target.value.trim().length > 0);
+    setTimeout(() => {
+      dispatch(portfolioActions.clearFilteredAllCoins());
+    }, 500);
   };
 
   const onNumberInputBlurHandler = (event) => {
@@ -63,10 +66,6 @@ const AddTransactionModal = ({ allCoinsList }) => {
     }
   };
 
-  const onDropdownFocusLost = (event) => {
-    dispatch(portfolioActions.clearFilteredAllCoins());
-  };
-
   return (
     <Modal onClose={onCloseHandler} className={classes.modal}>
       <form onSubmit={onSubmitHandler}>
@@ -80,8 +79,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
             errorMessage={'Enter a coin name.'}
             onChange={onCoinInputHandler}
             onBlur={onCoinBlurHandler}
-            isDropdownShown={true}
-            onMouseLeave={onDropdownFocusLost}
+            isDropdownShown={allCoinsList}
           >
             {allCoinsList &&
               allCoinsList.map((c) => {
@@ -91,7 +89,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
                     className={classes.item}
                     onClick={() => onCoinSelectHandler(c)}
                   >
-                    {c.name}
+                    {c.name} - {c.symbol.toUpperCase()}
                   </p>
                 );
               })}

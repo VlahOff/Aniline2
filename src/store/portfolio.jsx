@@ -4,7 +4,9 @@ const initialState = {
   allCoinsList: [],
   filteredAllCoinsList: [],
   transactions: [],
-  transactionsTotalValue: 0,
+  transactionsBalance: 0,
+  transactionProfitLoss: 0,
+  transactionProfitLossPercent: 0,
   selectedTransaction: {},
   isAddModalShown: false,
   isEditModalShown: false,
@@ -27,14 +29,24 @@ const portfolioSlice = createSlice({
       state.transactions = action.payload;
     },
     calculateTransactionsValue(state) {
-      state.transactionsTotalValue = state.transactions
-        .reduce((accumulator, current) => {
+      state.transactionsBalance = state.transactions.reduce(
+        (accumulator, current) => {
           return accumulator + current.value;
-        }, 0);
+        },
+        0
+      );
+
+      state.transactionProfitLoss = state.transactions.reduce(
+        (accumulator, current) => {
+          return accumulator + current.pnlValue;
+        },
+        0
+      );
     },
     removeTransaction(state, action) {
-      state.transactions = state.transactions
-        .filter(t => t.transactionId !== action.payload);
+      state.transactions = state.transactions.filter(
+        (t) => t.transactionId !== action.payload
+      );
     },
     setSelectedTransaction(state, action) {
       state.selectedTransaction = action.payload;
@@ -45,8 +57,8 @@ const portfolioSlice = createSlice({
     },
     toggleEditModal(state) {
       state.isEditModalShown = !state.isEditModalShown;
-    }
-  }
+    },
+  },
 });
 
 export const portfolioActions = portfolioSlice.actions;

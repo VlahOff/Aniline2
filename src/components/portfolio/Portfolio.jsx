@@ -17,10 +17,11 @@ const Portfolio = () => {
   const {
     filteredAllCoinsList,
     transactions,
-    transactionsTotalValue,
+    transactionsBalance,
+    transactionProfitLoss,
     isAddModalShown,
     isEditModalShown,
-  } = useSelector(state => state.portfolio);
+  } = useSelector((state) => state.portfolio);
 
   useEffect(() => {
     dispatch(initializePortfolioState());
@@ -32,25 +33,41 @@ const Portfolio = () => {
 
   return (
     <>
-      {isAddModalShown && <AddTransactionModal allCoinsList={filteredAllCoinsList} />}
+      {isAddModalShown && (
+        <AddTransactionModal allCoinsList={filteredAllCoinsList} />
+      )}
       {isEditModalShown && <EditTransactionModal />}
       <Card className={classes.portfolio}>
         <header className={classes.header}>
           <div className={classes['left-part-header']}>
-            <h3 className={classes['sub-title']}>Total portfolio value: </h3>
-            <p className={classes.value}>{usdPriceParser(transactionsTotalValue)}</p>
+            <h3 className={classes['sub-title']}>Total balance: </h3>
+            <p className={classes.value}>
+              {usdPriceParser(transactionsBalance)}
+            </p>
+            <h3 className={classes['sub-title']}>Total Profit Loss</h3>
+            <p className={classes.value}>
+              {usdPriceParser(transactionProfitLoss)}
+            </p>
           </div>
           <div className={classes['right-part-heder']}>
             <h1 className={classes.title}>My Assets</h1>
             <Button onClick={openAddTransactionModal}>
-              <i className={`fa-solid fa-1x fa-plus ${classes['add-btn-icon']}`}></i>
+              <i
+                className={`fa-solid fa-1x fa-plus ${classes['add-btn-icon']}`}
+              ></i>
             </Button>
           </div>
         </header>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <main>
-          {transactions.length > 0 && <PortfolioTable transactions={transactions} />}
-          {transactions.length === 0 && <p className={classes['info-message']}>No transactions added yet.</p>}
+          {transactions.length > 0 && (
+            <PortfolioTable transactions={transactions} />
+          )}
+          {transactions.length === 0 && (
+            <p className={classes['info-message']}>
+              No transactions added yet.
+            </p>
+          )}
         </main>
       </Card>
     </>

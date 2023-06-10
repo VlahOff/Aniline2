@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from '../../hooks/useForm';
 import { converterActions } from '../../store/converter';
-import { filterCryptoData, filterFiatData, getConvertResult, getCurrencyMaps } from '../../store/converter-actions';
+import {
+  filterCryptoData,
+  filterFiatData,
+  getConvertResult,
+  getCurrencyMaps,
+} from '../../store/converter-actions';
 import { priceParser } from '../../utils/priceParser';
 import Button from '../UI/button/Button';
 import Card from '../UI/card/Card';
@@ -20,16 +25,23 @@ const CryptoConverter = () => {
     result,
     fromCryptoToFiat,
     toObject,
-    selectedToInput
-  } = useSelector(state => state.converter);
+    selectedToInput,
+  } = useSelector((state) => state.converter);
 
-  const { formValues, isFormValid, changeHandler, blurHandler, setValues, resetValues } = useForm({
+  const {
+    formValues,
+    isFormValid,
+    changeHandler,
+    blurHandler,
+    setValues,
+    resetValues,
+  } = useForm({
     fromValue: '',
     fromValueValid: null,
     toValue: '',
     toValueValid: null,
     amount: '',
-    amountValid: null
+    amountValid: null,
   });
 
   useEffect(() => {
@@ -37,25 +49,39 @@ const CryptoConverter = () => {
   }, []);
 
   const onInputFromHandler = (event) => {
-    setValues(s => ({ ...s, fromValue: event.target.value }));
+    setValues((s) => ({ ...s, fromValue: event.target.value }));
 
-    fromCryptoToFiat ?
-      dispatch(filterCryptoData(formValues.fromValue))
-      :
-      dispatch(filterFiatData(formValues.fromValue));
+    fromCryptoToFiat
+      ? dispatch(filterCryptoData(formValues.fromValue))
+      : dispatch(filterFiatData(formValues.fromValue));
+  };
+
+  const onBlurFromHandler = (event) => {
+    blurHandler(event, (value) => value.trim().length > 0);
+
+    setTimeout(() => {
+      fromCryptoToFiat
+        ? dispatch(converterActions.clearCryptoResults())
+        : dispatch(converterActions.clearFiatResults());
+    }, 500);
   };
 
   const onInputToHandler = (event) => {
-    setValues(s => ({ ...s, toValue: event.target.value }));
+    setValues((s) => ({ ...s, toValue: event.target.value }));
 
-    fromCryptoToFiat ?
-      dispatch(filterFiatData(formValues.toValue))
-      :
-      dispatch(filterCryptoData(formValues.toValue));
+    fromCryptoToFiat
+      ? dispatch(filterFiatData(formValues.toValue))
+      : dispatch(filterCryptoData(formValues.toValue));
   };
 
-  const onBlurFromToHandler = (event) => {
+  const onBlurToHandler = (event) => {
     blurHandler(event, (value) => value.trim().length > 0);
+
+    setTimeout(() => {
+      !fromCryptoToFiat
+        ? dispatch(converterActions.clearCryptoResults())
+        : dispatch(converterActions.clearFiatResults());
+    }, 500);
   };
 
   const onBlurAmountHandler = (event) => {
@@ -68,23 +94,21 @@ const CryptoConverter = () => {
   };
 
   const selectFrom = (item) => {
-    setValues(s => ({ ...s, fromValue: item.name }));
+    setValues((s) => ({ ...s, fromValue: item.name }));
     dispatch(converterActions.setSelectedFromInput(item.id));
 
-    fromCryptoToFiat ?
-      dispatch(converterActions.clearCryptoResults())
-      :
-      dispatch(converterActions.clearFiatResults());
+    fromCryptoToFiat
+      ? dispatch(converterActions.clearCryptoResults())
+      : dispatch(converterActions.clearFiatResults());
   };
 
   const selectTo = (item) => {
-    setValues(s => ({ ...s, toValue: item.name }));
+    setValues((s) => ({ ...s, toValue: item.name }));
     dispatch(converterActions.setSelectedToInput(item.id));
 
-    fromCryptoToFiat ?
-      dispatch(converterActions.clearFiatResults())
-      :
-      dispatch(converterActions.clearCryptoResults());
+    fromCryptoToFiat
+      ? dispatch(converterActions.clearFiatResults())
+      : dispatch(converterActions.clearCryptoResults());
   };
 
   const toggleFromTo = () => {
@@ -93,62 +117,61 @@ const CryptoConverter = () => {
     resetValues();
   };
 
-  const onDropdownFocusLost = (event) => {
-    dispatch(converterActions.clearCryptoResults());
-    dispatch(converterActions.clearFiatResults());
-  };
-
   return (
     <Card className={classes.converter}>
       <form onSubmit={onConvertSubmitHandler}>
         <h1 className={classes.title}>Cryptocurrency Converter</h1>
         <div className={classes['inputs-wrapper']}>
           <InputWithDropdown
-            label='From'
-            id='fromValue'
+            label="From"
+            id="fromValue"
             onChange={onInputFromHandler}
-            onBlur={onBlurFromToHandler}
+            onBlur={onBlurFromHandler}
             value={formValues.fromValue}
             error={formValues.fromValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
-            onMouseLeave={onDropdownFocusLost}
           >
-            {(fromCryptoToFiat ? cryptoMapResult : fiatMapResult)
-              .map(item => {
-                return <p
-                  className={classes.item}
-                  key={item.id}
-                  onClick={() => selectFrom(item)}
-                >
-                  {item.name} - {item.symbol}
-                </p>;
-              })
-            }
+            {(fromCryptoToFiat ? cryptoMapResult : fiatMapResult).map(
+              (item) => {
+                return (
+                  <p
+                    className={classes.item}
+                    key={item.id}
+                    onClick={() => selectFrom(item)}
+                  >
+                    {item.name} - {item.symbol}
+                  </p>
+                );
+              }
+            )}
           </InputWithDropdown>
-          <Button onClick={toggleFromTo}><i className="fa-solid fa-repeat"></i></Button>
+          <Button onClick={toggleFromTo}>
+            <i className="fa-solid fa-repeat"></i>
+          </Button>
           <InputWithDropdown
-            label='To'
-            id='toValue'
+            label="To"
+            id="toValue"
             onChange={onInputToHandler}
-            onBlur={onBlurFromToHandler}
+            onBlur={onBlurToHandler}
             value={formValues.toValue}
             error={formValues.toValueValid}
             errorMessage={'Please select a currency.'}
             isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
-            onMouseLeave={onDropdownFocusLost}
           >
-            {(fromCryptoToFiat ? fiatMapResult : cryptoMapResult)
-              .map(item => {
-                return <p
-                  className={classes.item}
-                  key={item.id}
-                  onClick={() => selectTo(item)}
-                >
-                  {item.name} - {item.symbol}
-                </p>;
-              })
-            }
+            {(fromCryptoToFiat ? fiatMapResult : cryptoMapResult).map(
+              (item) => {
+                return (
+                  <p
+                    className={classes.item}
+                    key={item.id}
+                    onClick={() => selectTo(item)}
+                  >
+                    {item.name} - {item.symbol}
+                  </p>
+                );
+              }
+            )}
           </InputWithDropdown>
         </div>
         <Input
@@ -162,16 +185,20 @@ const CryptoConverter = () => {
           errorMessage={'Please provide a value greater than 0.'}
         />
         <Button
-          type='submit'
+          type="submit"
           disabled={!isFormValid}
           className={classes['submit-btn']}
-        >Convert</Button>
+        >
+          Convert
+        </Button>
       </form>
-      {result &&
+      {result && (
         <p className={classes.result}>
-          {result?.amount} {result?.name} ({result?.symbol}) = {priceParser(result?.quote[selectedToInput]?.price)} {toObject?.name} ({toObject?.symbol})
+          {result?.amount} {result?.name} ({result?.symbol}) ={' '}
+          {priceParser(result?.quote[selectedToInput]?.price)} {toObject?.name}{' '}
+          ({toObject?.symbol})
         </p>
-      }
+      )}
       <p className={classes['powered-by']}>Powered by CoinMarketCap</p>
     </Card>
   );

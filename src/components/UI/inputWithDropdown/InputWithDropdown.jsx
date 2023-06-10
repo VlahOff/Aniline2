@@ -12,7 +12,6 @@ const InputWithDropdown = ({
   error,
   errorMessage,
   isDropdownShown,
-  onMouseLeave,
 }) => {
   return (
     <div className={`${classes['input-wrapper']} ${className}`}>
@@ -36,7 +35,6 @@ const InputWithDropdown = ({
             ? classes['drop-down-shown']
             : classes['drop-down']
         }
-        onMouseLeave={onMouseLeave}
       >
         {children}
       </div>
