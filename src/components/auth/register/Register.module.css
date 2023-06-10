@@ -1,6 +1,7 @@
 .card {
   max-width: 500px;
   margin: 120px auto;
+  margin-bottom: 0;
 }
 
 .title {
@@ -17,11 +18,13 @@
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 1000px) {
   .card {
-    margin: 100px 24px;
+    margin-top: 38px;
   }
+}
 
+@media screen and (max-width: 540px) {
   .form {
     padding: 0;
     padding-top: 24px;

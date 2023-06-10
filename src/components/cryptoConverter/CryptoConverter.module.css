@@ -1,5 +1,5 @@
 .converter {
-  margin: 120px auto;
+  margin: 120px auto 0 auto;
   max-width: 800px;
 }
 
@@ -57,9 +57,14 @@ form {
   color: var(--text-color);
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1000px) {
   .converter {
     margin-top: 38px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .converter {
     padding: 0;
   }
 

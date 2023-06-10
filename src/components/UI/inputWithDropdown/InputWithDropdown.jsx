@@ -12,7 +12,7 @@ const InputWithDropdown = ({
   error,
   errorMessage,
   isDropdownShown,
-  onMouseLeave
+  onMouseLeave,
 }) => {
   return (
     <div className={`${classes['input-wrapper']} ${className}`}>
@@ -27,16 +27,22 @@ const InputWithDropdown = ({
         value={value}
         autoComplete="off"
       />
-      <label htmlFor={id} className={classes.label}>{label}</label>
+      <label htmlFor={id} className={classes.label}>
+        {label}
+      </label>
       <div
-        className={isDropdownShown ? classes['drop-down-shown'] : classes['drop-down']}
+        className={
+          isDropdownShown?.length
+            ? classes['drop-down-shown']
+            : classes['drop-down']
+        }
         onMouseLeave={onMouseLeave}
       >
         {children}
       </div>
-      {error === false &&
+      {error === false && (
         <p className={classes['error-message']}>{errorMessage}</p>
-      }
+      )}
     </div>
   );
 };

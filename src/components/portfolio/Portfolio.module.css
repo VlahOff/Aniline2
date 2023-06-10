@@ -1,5 +1,5 @@
 .portfolio {
-  margin: 180px auto;
+  margin: 180px auto 0 auto;
   width: 80%;
   max-width: 1600px;
   background-color: var(--container-bg-transparent);
@@ -42,9 +42,14 @@
   font-size: 1.2rem;
 }
 
+@media screen and (max-width: 1000px) {
+  .portfolio {
+    margin-top: 38px;
+  }
+}
+
 @media screen and (max-width: 720px) {
   .portfolio {
-    margin: 60px auto;
     width: 90%;
   }
 }

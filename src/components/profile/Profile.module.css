@@ -1,5 +1,5 @@
 .card {
-  margin: 120px auto;
+  margin: 120px auto 0 auto;
   max-width: 480px;
   color: var(--text-color);
 }
@@ -37,6 +37,12 @@
 
 .actions-wrapper button:nth-child(3):hover {
   background-color: var(--danger-element-hover);
+}
+
+@media screen and (max-width: 1000px) {
+  .card {
+    margin-top: 38px;
+  }
 }
 
 @media screen and (max-width: 480px) {
