@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useIsInViewport from '../../../hooks/useIsInViewport';
-import { getNextPageOnTopHundred, getTopHundred } from '../../../store/crypto-actions';
+import {
+  getNextPageOnTopHundred,
+  getTopHundred,
+} from '../../../store/crypto-actions';
 import Card from '../../UI/card/Card';
 import CoinDataTable from '../coinDataTable/CoinDataTable';
 import GlobalData from '../globalData/GlobalData';
@@ -11,11 +14,12 @@ import classes from './TopHundred.module.css';
 
 const TopHundred = () => {
   const dispatch = useDispatch();
-  const topHundred = useSelector(state => state.crypto.topHundred);
+  const topHundred = useSelector((state) => state.crypto.topHundred);
 
   const infiniteScrollElement = useRef(null);
   const isInView = useIsInViewport(infiniteScrollElement);
   const [page, setPage] = useState(1);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     dispatch(getTopHundred());
@@ -23,10 +27,11 @@ const TopHundred = () => {
 
   useEffect(() => {
     if (isInView && page !== 0) {
+      setCounter((s) => s + 1);
       dispatch(getNextPageOnTopHundred(page + 1));
     }
     if (isInView) {
-      setPage(s => s + 1);
+      setPage((s) => s + 1);
     }
   }, [isInView]);
 
@@ -35,6 +40,7 @@ const TopHundred = () => {
       <GlobalData className={classes['global-data']} />
       <Card className={classes.card}>
         <h1 className={classes.title}>Top Hundred</h1>
+        <h2>Counter: {counter}</h2>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <CoinDataTable coinData={topHundred} />
         <div

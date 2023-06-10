@@ -23,9 +23,13 @@
 .infinite-scroll-element {
   position: absolute;
   bottom: 1000px;
+  height: 50px;
+  width: 50px;
+  background-color: red;
 }
 
 @media screen and (max-width: 680px) {
+
   .container,
   .card {
     width: 100%;
