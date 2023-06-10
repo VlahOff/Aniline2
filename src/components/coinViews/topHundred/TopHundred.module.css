@@ -8,6 +8,10 @@
   margin: 2rem 0;
 }
 
+.card {
+  position: relative;
+}
+
 .title {
   text-align: center;
   color: var(--text-color);
@@ -22,10 +26,8 @@
 
 .infinite-scroll-element {
   position: absolute;
+  z-index: 10;
   bottom: 1000px;
-  height: 50px;
-  width: 50px;
-  background-color: red;
 }
 
 @media screen and (max-width: 680px) {

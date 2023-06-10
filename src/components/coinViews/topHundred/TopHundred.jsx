@@ -19,7 +19,6 @@ const TopHundred = () => {
   const infiniteScrollElement = useRef(null);
   const isInView = useIsInViewport(infiniteScrollElement);
   const [page, setPage] = useState(1);
-  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     dispatch(getTopHundred());
@@ -27,7 +26,6 @@ const TopHundred = () => {
 
   useEffect(() => {
     if (isInView && page !== 0) {
-      setCounter((s) => s + 1);
       dispatch(getNextPageOnTopHundred(page + 1));
     }
     if (isInView) {
@@ -40,7 +38,6 @@ const TopHundred = () => {
       <GlobalData className={classes['global-data']} />
       <Card className={classes.card}>
         <h1 className={classes.title}>Top Hundred</h1>
-        <h2>Counter: {counter}</h2>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <CoinDataTable coinData={topHundred} />
         <div
