@@ -38,25 +38,24 @@ const Portfolio = () => {
       )}
       {isEditModalShown && <EditTransactionModal />}
       <Card className={classes.portfolio}>
+        <h1 className={classes.title}>My Assets</h1>
         <header className={classes.header}>
-          <div className={classes['left-part-header']}>
-            <h3 className={classes['sub-title']}>Total balance: </h3>
-            <p className={classes.value}>
-              {usdPriceParser(transactionsBalance)}
-            </p>
-            <h3 className={classes['sub-title']}>Total Profit Loss</h3>
-            <p className={classes.value}>
-              {usdPriceParser(transactionProfitLoss)}
-            </p>
+          <div className={classes['transactions-info-wrapper']}>
+            <div className={classes['info-box']}>
+              <h3>Total balance</h3>
+              <p>{usdPriceParser(transactionsBalance)}</p>
+            </div>
+            <div className={classes['info-box']}>
+              <h3>Total Profit Loss</h3>
+              <p>{usdPriceParser(transactionProfitLoss)}</p>
+            </div>
           </div>
-          <div className={classes['right-part-heder']}>
-            <h1 className={classes.title}>My Assets</h1>
-            <Button onClick={openAddTransactionModal}>
-              <i
-                className={`fa-solid fa-1x fa-plus ${classes['add-btn-icon']}`}
-              ></i>
-            </Button>
-          </div>
+          <Button
+            className={classes['add-btn']}
+            onClick={openAddTransactionModal}
+          >
+            Add transaction
+          </Button>
         </header>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
         <main>
@@ -64,7 +63,7 @@ const Portfolio = () => {
             <PortfolioTable transactions={transactions} />
           )}
           {transactions.length === 0 && (
-            <p className={classes['info-message']}>
+            <p className={classes['no-transactions-message']}>
               No transactions added yet.
             </p>
           )}
