@@ -19,9 +19,20 @@ export const changeUsername = async (newUsername, password) => {
 };
 
 export const changePassword = async (oldPassword, newPassword) => {
-  return fetchApi.post(`${BASE_URL}/changePassword`, { oldPassword, newPassword });
+  return fetchApi.post(`${BASE_URL}/changePassword`, {
+    oldPassword,
+    newPassword,
+  });
 };
 
 export const deleteAccount = async (password) => {
   return fetchApi.post(`${BASE_URL}/deleteAccount`, { password });
+};
+
+export const forgotPassword = async (email) => {
+  return fetchApi.post(`${BASE_URL}/forgotPassword`, { email });
+};
+
+export const resetPassword = async (password, userId) => {
+  return fetchApi.post(`${BASE_URL}/resetPassword`, { password, userId });
 };

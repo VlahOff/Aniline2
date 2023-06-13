@@ -3,6 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const parseError = (error) => {
   let message = '';
   switch (error) {
+    case 'EMAIL_SENT':
+      message = 'Email was sent.';
+      break;
+    case 'TICKET_EXPIRED':
+      message = 'Reset password ticket has expired.';
+      break;
     case 'EMAIL_TAKEN':
       message = 'This email is taken.';
       break;

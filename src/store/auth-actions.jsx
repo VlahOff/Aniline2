@@ -5,12 +5,13 @@ import { uiActions } from './ui';
 export const onRegister = (formData, navigate) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.register({
-      email: formData.email,
-      username: formData.username,
-      password: formData.password
-    })
-      .then(res => {
+    authService
+      .register({
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+      })
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -20,7 +21,7 @@ export const onRegister = (formData, navigate) => {
         localStorage.setItem('userData', JSON.stringify(res));
         navigate('/');
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -28,11 +29,12 @@ export const onRegister = (formData, navigate) => {
 export const onLogin = (formData, navigate) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.login({
-      email: formData.email,
-      password: formData.password
-    })
-      .then(res => {
+    authService
+      .login({
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -42,7 +44,7 @@ export const onLogin = (formData, navigate) => {
         localStorage.setItem('userData', JSON.stringify(res));
         navigate('/');
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -50,8 +52,9 @@ export const onLogin = (formData, navigate) => {
 export const onLogout = (navigate) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.logout()
-      .then(res => {
+    authService
+      .logout()
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -61,7 +64,7 @@ export const onLogout = (navigate) => {
         localStorage.removeItem('userData');
         navigate('/');
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -79,8 +82,9 @@ export const isUserLoggedIn = () => {
 export const onUsernameChange = (formData) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.changeUsername(formData.newUsername, formData.password)
-      .then(res => {
+    authService
+      .changeUsername(formData.newUsername, formData.password)
+      .then((res) => {
         if (res.message) {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -90,7 +94,7 @@ export const onUsernameChange = (formData) => {
         localStorage.setItem('userData', JSON.stringify(res));
         dispatch(authActions.toggleChangeUsernameModal());
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -98,8 +102,9 @@ export const onUsernameChange = (formData) => {
 export const onPasswordChange = (formData) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.changePassword(formData.oldPassword, formData.newPassword)
-      .then(res => {
+    authService
+      .changePassword(formData.oldPassword, formData.newPassword)
+      .then((res) => {
         if (res.message && res.message !== 'Done') {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -107,7 +112,7 @@ export const onPasswordChange = (formData) => {
 
         dispatch(authActions.toggleChangePasswordModal());
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };
@@ -115,8 +120,9 @@ export const onPasswordChange = (formData) => {
 export const onAccountDeletion = (password, navigate) => {
   return (dispatch) => {
     dispatch(uiActions.startLoading());
-    authService.deleteAccount(password)
-      .then(res => {
+    authService
+      .deleteAccount(password)
+      .then((res) => {
         if (res.message && res.message !== 'Done') {
           dispatch(uiActions.setErrorMessage(res.message));
           return;
@@ -127,7 +133,46 @@ export const onAccountDeletion = (password, navigate) => {
         localStorage.removeItem('userData');
         dispatch(authActions.setUser(null));
       })
-      .catch(err => dispatch(uiActions.setErrorMessage(err)))
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const onForgotPassword = (email, navigate) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    authService
+      .forgotPassword(email)
+      .then((res) => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(uiActions.setErrorMessage(res.success));
+        navigate('/');
+      })
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
+      .finally(() => dispatch(uiActions.stopLoading()));
+  };
+};
+
+export const onPasswordReset = (password, userId, navigate) => {
+  return (dispatch) => {
+    dispatch(uiActions.startLoading());
+    authService
+      .resetPassword(password, userId)
+      .then((res) => {
+        if (res.message) {
+          dispatch(uiActions.setErrorMessage(res.message));
+          return;
+        }
+
+        dispatch(authActions.setUser(res));
+        localStorage.setItem('userData', JSON.stringify(res));
+        navigate('/');
+      })
+      .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
   };
 };

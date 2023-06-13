@@ -9,6 +9,7 @@ import ProtectedRouteIsUser from './ProtectedRouteIsUser';
 import PageNotFound from './components/404page/PageNotFound';
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
+import ResetPassword from './components/auth/resetPassword/ResetPassword.jsx';
 import CoinDetails from './components/coinDetails/CoinDetails';
 import NewCoins from './components/coinViews/newCoins/NewCoins';
 import TopHundred from './components/coinViews/topHundred/TopHundred';
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             <Register />
           </ProtectedRouteIsUser>
         ),
+      },
+      {
+        path: '/reset-password/:userId',
+        element: <ResetPassword />,
       },
       {
         path: '/top-hundred',

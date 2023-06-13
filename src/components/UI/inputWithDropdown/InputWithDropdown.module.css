@@ -81,7 +81,15 @@
 }
 
 .error-message {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background-color: var(--background);
+  border-radius: 8px;
+  padding: 6px 8px;
   margin-top: 8px;
-  color: crimson;
+  color: var(--danger-element);
   font-weight: 700;
 }
