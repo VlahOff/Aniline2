@@ -12,14 +12,13 @@ export const onRegister = (formData, navigate) => {
         password: formData.password,
       })
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
-        dispatch(authActions.setUser(res));
-        localStorage.setItem('userData', JSON.stringify(res));
-        navigate('/');
+        dispatch(uiActions.setErrorMessage(res.message));
+        navigate('/login');
       })
       .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
@@ -35,8 +34,8 @@ export const onLogin = (formData, navigate) => {
         password: formData.password,
       })
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
@@ -55,8 +54,8 @@ export const onLogout = (navigate) => {
     authService
       .logout()
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
@@ -85,8 +84,8 @@ export const onUsernameChange = (formData) => {
     authService
       .changeUsername(formData.newUsername, formData.password)
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
@@ -105,11 +104,12 @@ export const onPasswordChange = (formData) => {
     authService
       .changePassword(formData.oldPassword, formData.newPassword)
       .then((res) => {
-        if (res.message && res.message !== 'Done') {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
+        dispatch(uiActions.setErrorMessage(res.message));
         dispatch(authActions.toggleChangePasswordModal());
       })
       .catch((err) => dispatch(uiActions.setErrorMessage(err)))
@@ -123,15 +123,16 @@ export const onAccountDeletion = (password, navigate) => {
     authService
       .deleteAccount(password)
       .then((res) => {
-        if (res.message && res.message !== 'Done') {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
-
-        dispatch(authActions.toggleDeleteAccountModal());
-        navigate('/');
+        
         localStorage.removeItem('userData');
         dispatch(authActions.setUser(null));
+        dispatch(uiActions.setErrorMessage(res.message));
+        dispatch(authActions.toggleDeleteAccountModal());
+        navigate('/');
       })
       .catch((err) => dispatch(uiActions.setErrorMessage(err)))
       .finally(() => dispatch(uiActions.stopLoading()));
@@ -144,12 +145,12 @@ export const onForgotPassword = (email, navigate) => {
     authService
       .forgotPassword(email)
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
-
-        dispatch(uiActions.setErrorMessage(res.success));
+        
+        dispatch(uiActions.setErrorMessage(res.message));
         navigate('/');
       })
       .catch((err) => dispatch(uiActions.setErrorMessage(err)))
@@ -163,8 +164,8 @@ export const onPasswordReset = (password, userId, navigate) => {
     authService
       .resetPassword(password, userId)
       .then((res) => {
-        if (res.message) {
-          dispatch(uiActions.setErrorMessage(res.message));
+        if (res.errorMessage) {
+          dispatch(uiActions.setErrorMessage(res.errorMessage));
           return;
         }
 
