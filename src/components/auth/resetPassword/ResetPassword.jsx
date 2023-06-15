@@ -7,6 +7,7 @@ import { validatePassword } from '../../../utils/passwordValidation';
 import Button from '../../UI/button/Button';
 import Card from '../../UI/card/Card';
 import Input from '../../UI/input/Input';
+import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMessage';
 
 import classes from './ResetPassword.module.css';
 
@@ -14,14 +15,26 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userId } = useParams();
-  
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+
+  const {
+    formValues,
+    isFormValid,
+    changeHandler,
+    blurHandler,
+    doPasswordMatch,
+  } = useForm({
     password: '',
     passwordValid: null,
+    rePass: '',
+    rePassValid: null,
   });
 
   const passwordBlurHandler = (event) => {
     blurHandler(event, validatePassword);
+  };
+
+  const rePassBlurHandler = (event) => {
+    doPasswordMatch(event);
   };
 
   const formSubmitHandler = (event) => {
@@ -42,7 +55,17 @@ const ResetPassword = () => {
           onBlur={passwordBlurHandler}
           value={formValues.password}
           error={formValues.passwordValid}
-          errorMessage={'Invalid password.'}
+          errorMessage={<PasswordErrorMessage />}
+        />
+        <Input
+          label="Repeat Password"
+          id="rePass"
+          type="password"
+          onChange={changeHandler}
+          onBlur={rePassBlurHandler}
+          value={formValues.rePass}
+          error={formValues.rePassValid}
+          errorMessage={'Passwords don`t match.'}
         />
         <Button className={classes.btn} disabled={!isFormValid} type={'submit'}>
           Submit
