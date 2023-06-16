@@ -9,12 +9,12 @@ import portfolioSlice from './portfolio';
 const inDevMode = import.meta.env.DEV;
 
 export const store = configureStore({
-  reducer: {
-    ui: uiSlice.reducer,
-    auth: authSlice.reducer,
-    crypto: cryptoSlice.reducer,
-    converter: converterSlice.reducer,
-    portfolio: portfolioSlice.reducer,
-  },
-  devTools: inDevMode,
+	reducer: {
+		ui: uiSlice.reducer,
+		auth: authSlice.reducer,
+		crypto: cryptoSlice.reducer,
+		converter: converterSlice.reducer,
+		portfolio: portfolioSlice.reducer,
+	},
+	devTools: inDevMode,
 });

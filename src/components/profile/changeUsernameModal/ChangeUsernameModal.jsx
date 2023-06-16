@@ -13,62 +13,68 @@ import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMes
 import classes from './ChangeUsernameModal.module.css';
 
 const ChangeUsernameModal = () => {
-  const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler } = useForm({
-    newUsername: '',
-    newUsernameValid: null,
-    password: '',
-    passwordValid: null,
-  });
+	const dispatch = useDispatch();
+	const { formValues, isFormValid, changeHandler } = useForm({
+		newUsername: '',
+		newUsernameValid: null,
+		password: '',
+		passwordValid: null,
+	});
 
-  const onCloseModalHandler = () => {
-    dispatch(authActions.toggleChangeUsernameModal());
-  };
+	const onCloseModalHandler = () => {
+		dispatch(authActions.toggleChangeUsernameModal());
+	};
 
-  const onFormSubmitHandler = (event) => {
-    event.preventDefault();
-    if (isFormValid) {
-      dispatch(onUsernameChange(formValues));
-    }
-  };
+	const onFormSubmitHandler = event => {
+		event.preventDefault();
+		if (isFormValid) {
+			dispatch(onUsernameChange(formValues));
+		}
+	};
 
-  return (
-    <Modal onClose={onCloseModalHandler} className={classes.modal}>
-      <form onSubmit={onFormSubmitHandler}>
-        <h1 className={classes.title}>Change Username</h1>
-        <div className={classes['input-container']}>
-          <Input
-            label={'New Username'}
-            id={'newUsername'}
-            value={formValues.newUsername}
-            onChange={(e) => changeHandler(e, validateUsername)}
-            error={formValues.newUsernameValid}
-            errorMessage={'Username must be between 3 and 30 characters long.'}
-          />
-          <Input
-            label={'Password'}
-            id={'password'}
-            value={formValues.password}
-            onChange={(e) => changeHandler(e, validatePassword)}
-            error={formValues.passwordValid}
-            errorMessage={<PasswordErrorMessage />}
-            type={'password'}
-          />
-        </div>
-        <div className={classes['btn-container']}>
-          <Button
-            onClick={onCloseModalHandler}
-            className={classes['cancel-btn']}
-          >
-            Cancel
-          </Button>
-          <Button type={'submit'} disabled={!isFormValid}>
-            Change Username
-          </Button>
-        </div>
-      </form>
-    </Modal>
-  );
+	return (
+		<Modal
+			onClose={onCloseModalHandler}
+			className={classes.modal}
+		>
+			<form onSubmit={onFormSubmitHandler}>
+				<h1 className={classes.title}>Change Username</h1>
+				<div className={classes['input-container']}>
+					<Input
+						label={'New Username'}
+						id={'newUsername'}
+						value={formValues.newUsername}
+						onChange={e => changeHandler(e, validateUsername)}
+						error={formValues.newUsernameValid}
+						errorMessage={'Username must be between 3 and 30 characters long.'}
+					/>
+					<Input
+						label={'Password'}
+						id={'password'}
+						value={formValues.password}
+						onChange={e => changeHandler(e, validatePassword)}
+						error={formValues.passwordValid}
+						errorMessage={<PasswordErrorMessage />}
+						type={'password'}
+					/>
+				</div>
+				<div className={classes['btn-container']}>
+					<Button
+						onClick={onCloseModalHandler}
+						className={classes['cancel-btn']}
+					>
+						Cancel
+					</Button>
+					<Button
+						type={'submit'}
+						disabled={!isFormValid}
+					>
+						Change Username
+					</Button>
+				</div>
+			</form>
+		</Modal>
+	);
 };
 
 export default ChangeUsernameModal;

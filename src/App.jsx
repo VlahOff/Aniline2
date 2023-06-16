@@ -11,25 +11,28 @@ import { getTheme } from './store/ui-actions';
 import classes from './App.module.css';
 
 function App() {
-  const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.ui.isLoading);
-  const theme = useSelector((state) => state.ui.theme);
+	const dispatch = useDispatch();
+	const isLoading = useSelector(state => state.ui.isLoading);
+	const theme = useSelector(state => state.ui.theme);
 
-  useEffect(() => {
-    dispatch(isUserLoggedIn());
-    dispatch(getTheme());
-  }, []);
+	useEffect(() => {
+		dispatch(isUserLoggedIn());
+		dispatch(getTheme());
+	}, []);
 
-  return (
-    <div data-theme={theme} className={classes.app}>
-      <ErrorNotification />
-      {isLoading && <LoadingSpinner />}
-      <Navigation />
-      <main className={classes.main}>
-        <Outlet />
-      </main>
-    </div>
-  );
+	return (
+		<div
+			data-theme={theme}
+			className={classes.app}
+		>
+			<ErrorNotification />
+			{isLoading && <LoadingSpinner />}
+			<Navigation />
+			<main className={classes.main}>
+				<Outlet />
+			</main>
+		</div>
+	);
 }
 
 export default App;
