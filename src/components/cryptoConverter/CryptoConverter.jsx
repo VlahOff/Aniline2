@@ -113,7 +113,7 @@ const CryptoConverter = () => {
         <h1 className={classes.title}>Cryptocurrency Converter</h1>
         <div className={classes['inputs-wrapper']}>
           <InputWithDropdown
-            label="From"
+            label={`From ${fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
             id="fromValue"
             onChange={onInputFromHandler}
             onBlur={onBlurFromHandler}
@@ -140,7 +140,7 @@ const CryptoConverter = () => {
             <i className="fa-solid fa-repeat"></i>
           </Button>
           <InputWithDropdown
-            label="To"
+            label={`To ${!fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
             id="toValue"
             onChange={onInputToHandler}
             onBlur={onBlurToHandler}
