@@ -7,41 +7,31 @@ export const useForm = (initialValues) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       const isValidValues = Object.entries(values)
-        .filter(v => v[0].includes('Valid'))
-        .map(v => v[1])
-        .every(v => v === true);
+        .filter((v) => v[0].includes('Valid'))
+        .map((v) => v[1])
+        .every((v) => v === true);
 
       setIsFormValid(isValidValues);
-    }, 100);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [values]);
 
-  const changeHandler = (event) => {
+  const changeHandler = (event, validator) => {
+    const id = event.target.id;
+    const value = event.target.value.trim();
+
     setValues((state) => {
       return {
         ...state,
-        [event.target.id]: event.target.value,
+        [id]: value,
+        [id + 'Valid']: validator(value),
       };
     });
   };
 
-  const blurHandler = (event, validator) => {
-    setValues((state) => {
-      return {
-        ...state,
-        [event.target.id + 'Valid']: validator(event.target.value),
-      };
-    });
-  };
-
-  const doPasswordMatch = (event) => {
-    setValues((state) => {
-      return {
-        ...state,
-        [event.target.id + 'Valid']: values?.password === values[event.target.id],
-      };
-    });
+  const doPasswordMatch = (value) => {
+    return values?.password === value;
   };
 
   const resetValues = () => {
@@ -52,9 +42,8 @@ export const useForm = (initialValues) => {
     formValues: values,
     isFormValid,
     changeHandler,
-    blurHandler,
     doPasswordMatch,
     resetValues,
-    setValues
+    setValues,
   };
 };

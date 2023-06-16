@@ -15,14 +15,10 @@ import classes from './DeleteAccountModal.module.css';
 const DeleteAccountModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+  const { formValues, isFormValid, changeHandler } = useForm({
     password: '',
-    passwordValid: null
+    passwordValid: null,
   });
-
-  const passwordBlurHandler = (event) => {
-    blurHandler(event, validatePassword);
-  };
 
   const onCloseModalHandler = () => {
     dispatch(authActions.toggleDeleteAccountModal());
@@ -43,8 +39,7 @@ const DeleteAccountModal = () => {
           label={'Password'}
           id={'password'}
           value={formValues.password}
-          onChange={changeHandler}
-          onBlur={passwordBlurHandler}
+          onChange={(e) => changeHandler(e, validatePassword)}
           error={formValues.passwordValid}
           errorMessage={<PasswordErrorMessage />}
           type={'password'}
@@ -53,11 +48,12 @@ const DeleteAccountModal = () => {
           <Button
             onClick={onCloseModalHandler}
             className={classes['cancel-btn']}
-          >Cancel</Button>
-          <Button
-            type={'submit'}
-            disabled={!isFormValid}
-          >Delete</Button>
+          >
+            Cancel
+          </Button>
+          <Button type={'submit'} disabled={!isFormValid}>
+            Delete
+          </Button>
         </div>
       </form>
     </Modal>

@@ -13,18 +13,14 @@ import classes from './ChangePasswordModal.module.css';
 
 const ChangePasswordModal = () => {
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler, doPasswordMatch } = useForm({
+  const { formValues, isFormValid, changeHandler, doPasswordMatch } = useForm({
     oldPassword: '',
     oldPasswordValid: null,
     newPassword: '',
     newPasswordValid: null,
     newPasswordRepeat: '',
-    newPasswordRepeatValid: null
+    newPasswordRepeatValid: null,
   });
-
-  const passwordBlurHandler = (event) => {
-    blurHandler(event, validatePassword);
-  };
 
   const onCloseModalHandler = () => {
     dispatch(authActions.toggleChangePasswordModal());
@@ -46,8 +42,7 @@ const ChangePasswordModal = () => {
             label={'Old password'}
             id={'oldPassword'}
             value={formValues.oldPassword}
-            onChange={changeHandler}
-            onBlur={passwordBlurHandler}
+            onChange={(e) => changeHandler(e, validatePassword)}
             error={formValues.oldPasswordValid}
             errorMessage={<PasswordErrorMessage />}
             type={'password'}
@@ -56,8 +51,7 @@ const ChangePasswordModal = () => {
             label={'New password'}
             id={'newPassword'}
             value={formValues.newPassword}
-            onChange={changeHandler}
-            onBlur={passwordBlurHandler}
+            onChange={(e) => changeHandler(e, validatePassword)}
             error={formValues.newPasswordValid}
             errorMessage={<PasswordErrorMessage />}
             type={'password'}
@@ -66,8 +60,7 @@ const ChangePasswordModal = () => {
             label={'Repeat new password'}
             id={'newPasswordRepeat'}
             value={formValues.newPasswordRepeat}
-            onChange={changeHandler}
-            onBlur={passwordBlurHandler}
+            onChange={(e) => changeHandler(e, doPasswordMatch)}
             error={formValues.newPasswordRepeatValid}
             errorMessage={<PasswordErrorMessage />}
             type={'password'}
@@ -77,11 +70,12 @@ const ChangePasswordModal = () => {
           <Button
             onClick={onCloseModalHandler}
             className={classes['cancel-btn']}
-          >Cancel</Button>
-          <Button
-            type={'submit'}
-            disabled={!isFormValid}
-          >Change password</Button>
+          >
+            Cancel
+          </Button>
+          <Button type={'submit'} disabled={!isFormValid}>
+            Change password
+          </Button>
         </div>
       </form>
     </Modal>

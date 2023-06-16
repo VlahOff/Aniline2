@@ -17,6 +17,10 @@ import InputWithDropdown from '../UI/inputWithDropdown/InputWithDropdown';
 
 import classes from './CryptoConverter.module.css';
 
+const isAmountValid = (value) => {
+  return Number(value) > 0;
+};
+
 const CryptoConverter = () => {
   const dispatch = useDispatch();
   const {
@@ -28,37 +32,29 @@ const CryptoConverter = () => {
     selectedToInput,
   } = useSelector((state) => state.converter);
 
-  const {
-    formValues,
-    isFormValid,
-    changeHandler,
-    blurHandler,
-    setValues,
-    resetValues,
-  } = useForm({
-    fromValue: '',
-    fromValueValid: null,
-    toValue: '',
-    toValueValid: null,
-    amount: '',
-    amountValid: null,
-  });
+  const { formValues, isFormValid, changeHandler, setValues, resetValues } =
+    useForm({
+      fromValue: '',
+      fromValueValid: null,
+      toValue: '',
+      toValueValid: null,
+      amount: '',
+      amountValid: null,
+    });
 
   useEffect(() => {
     dispatch(getCurrencyMaps());
   }, []);
 
   const onInputFromHandler = (event) => {
-    setValues((s) => ({ ...s, fromValue: event.target.value }));
+    changeHandler(event, (v) => v.trim().length > 0);
 
     fromCryptoToFiat
       ? dispatch(filterCryptoData(formValues.fromValue))
       : dispatch(filterFiatData(formValues.fromValue));
   };
 
-  const onBlurFromHandler = (event) => {
-    blurHandler(event, (value) => value.trim().length > 0);
-
+  const onBlurFromHandler = () => {
     setTimeout(() => {
       fromCryptoToFiat
         ? dispatch(converterActions.clearCryptoResults())
@@ -67,25 +63,19 @@ const CryptoConverter = () => {
   };
 
   const onInputToHandler = (event) => {
-    setValues((s) => ({ ...s, toValue: event.target.value }));
+    changeHandler(event, (v) => v.trim().length > 0);
 
     fromCryptoToFiat
       ? dispatch(filterFiatData(formValues.toValue))
       : dispatch(filterCryptoData(formValues.toValue));
   };
 
-  const onBlurToHandler = (event) => {
-    blurHandler(event, (value) => value.trim().length > 0);
-
+  const onBlurToHandler = () => {
     setTimeout(() => {
       !fromCryptoToFiat
         ? dispatch(converterActions.clearCryptoResults())
         : dispatch(converterActions.clearFiatResults());
     }, 500);
-  };
-
-  const onBlurAmountHandler = (event) => {
-    blurHandler(event, (value) => value > 0);
   };
 
   const onConvertSubmitHandler = (event) => {
@@ -178,8 +168,7 @@ const CryptoConverter = () => {
           label={'Amount'}
           id={'amount'}
           type={'number'}
-          onChange={changeHandler}
-          onBlur={onBlurAmountHandler}
+          onChange={(e) => changeHandler(e, isAmountValid)}
           value={formValues.amount}
           error={formValues.amountValid}
           errorMessage={'Please provide a value greater than 0.'}

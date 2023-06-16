@@ -16,26 +16,12 @@ const ResetPassword = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
 
-  const {
-    formValues,
-    isFormValid,
-    changeHandler,
-    blurHandler,
-    doPasswordMatch,
-  } = useForm({
+  const { formValues, isFormValid, changeHandler, doPasswordMatch } = useForm({
     password: '',
     passwordValid: null,
     rePass: '',
     rePassValid: null,
   });
-
-  const passwordBlurHandler = (event) => {
-    blurHandler(event, validatePassword);
-  };
-
-  const rePassBlurHandler = (event) => {
-    doPasswordMatch(event);
-  };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -51,8 +37,7 @@ const ResetPassword = () => {
           label="Password"
           id="password"
           type="password"
-          onChange={changeHandler}
-          onBlur={passwordBlurHandler}
+          onChange={(e) => changeHandler(e, validatePassword)}
           value={formValues.password}
           error={formValues.passwordValid}
           errorMessage={<PasswordErrorMessage />}
@@ -61,8 +46,7 @@ const ResetPassword = () => {
           label="Repeat Password"
           id="rePass"
           type="password"
-          onChange={changeHandler}
-          onBlur={rePassBlurHandler}
+          onChange={(e) => changeHandler(e, doPasswordMatch)}
           value={formValues.rePass}
           error={formValues.rePassValid}
           errorMessage={'Passwords don`t match.'}

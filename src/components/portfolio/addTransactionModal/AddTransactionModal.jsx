@@ -13,18 +13,21 @@ import Modal from '../../UI/modal/Modal';
 
 import classes from './AddTransactionModal.module.css';
 
+const isNumberPositive = (value) => {
+  return Number(value) > 0;
+};
+
 const AddTransactionModal = ({ allCoinsList }) => {
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler, setValues } =
-    useForm({
-      coinName: '',
-      coinId: '',
-      coinIdValid: null,
-      coinPrice: '',
-      coinPriceValid: null,
-      quantity: '',
-      quantityValid: null,
-    });
+  const { formValues, isFormValid, changeHandler, setValues } = useForm({
+    coinId: '',
+    coinName: '',
+    coinNameValid: null,
+    coinPrice: '',
+    coinPriceValid: null,
+    quantity: '',
+    quantityValid: null,
+  });
 
   const onCoinSelectHandler = (coin) => {
     setValues((state) => ({
@@ -39,19 +42,15 @@ const AddTransactionModal = ({ allCoinsList }) => {
     setValues((state) => ({
       ...state,
       coinName: event.target.value,
+      coinNameValid: event.target.value.trim().length > 0,
     }));
     dispatch(filterAllCoinsList(event.target.value));
   };
 
-  const onCoinBlurHandler = (event) => {
-    blurHandler(event, () => event.target.value.trim().length > 0);
+  const onCoinBlurHandler = () => {
     setTimeout(() => {
       dispatch(portfolioActions.clearFilteredAllCoins());
     }, 500);
-  };
-
-  const onNumberInputBlurHandler = (event) => {
-    blurHandler(event, () => event.target.value > 0);
   };
 
   const onCloseHandler = () => {
@@ -61,9 +60,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (isFormValid) {
-      dispatch(submitTransaction(formValues));
-    }
+    isFormValid && dispatch(submitTransaction(formValues));
   };
 
   return (
@@ -100,8 +97,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
             value={formValues.coinPrice}
             error={formValues.coinPriceValid}
             errorMessage={'Enter value greater than 0'}
-            onChange={changeHandler}
-            onBlur={onNumberInputBlurHandler}
+            onChange={(e) => changeHandler(e, isNumberPositive)}
             type={'number'}
           />
           <Input
@@ -110,8 +106,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
             value={formValues.quantity}
             error={formValues.quantityValid}
             errorMessage={'Enter value greater than 0'}
-            onChange={changeHandler}
-            onBlur={onNumberInputBlurHandler}
+            onChange={(e) => changeHandler(e, isNumberPositive)}
             type={'number'}
           />
           <Input

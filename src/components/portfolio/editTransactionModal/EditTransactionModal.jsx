@@ -2,18 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useForm } from '../../../hooks/useForm';
 import { portfolioActions } from '../../../store/portfolio';
-import { deleteTransaction, submitEditedTransaction } from '../../../store/portfolio-actions';
+import {
+  deleteTransaction,
+  submitEditedTransaction,
+} from '../../../store/portfolio-actions';
 import Button from '../../UI/button/Button';
 import Input from '../../UI/input/Input';
 import Modal from '../../UI/modal/Modal';
 
 import classes from './EditTransactionModal.module.css';
 
+const isNumberPositive = (value) => {
+  return Number(value) > 0;
+};
+
 const EditTransactionModal = () => {
   const dispatch = useDispatch();
-  const selectedTransaction = useSelector(state => state.portfolio.selectedTransaction);
+  const selectedTransaction = useSelector(
+    (state) => state.portfolio.selectedTransaction
+  );
 
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+  const { formValues, isFormValid, changeHandler } = useForm({
     coinName: selectedTransaction?.name,
     coinId: selectedTransaction?.coinId,
     coinPrice: selectedTransaction?.boughtPrice,
@@ -22,19 +31,16 @@ const EditTransactionModal = () => {
     quantityValid: null,
   });
 
-  const onNumberInputBlurHandler = (event) => {
-    blurHandler(event, () => event.target.value > 0);
-  };
-
   const onCloseHandler = () => {
     dispatch(portfolioActions.toggleEditModal());
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (isFormValid) {
-      dispatch(submitEditedTransaction(formValues, selectedTransaction.transactionId));
-    }
+    isFormValid &&
+      dispatch(
+        submitEditedTransaction(formValues, selectedTransaction.transactionId)
+      );
   };
 
   const onDeleteTransactionHandler = () => {
@@ -59,8 +65,7 @@ const EditTransactionModal = () => {
             error={formValues.coinPriceValid}
             errorMessage={'Enter value greater than 0'}
             type={'number'}
-            onChange={changeHandler}
-            onBlur={onNumberInputBlurHandler}
+            onChange={(e) => changeHandler(e, isNumberPositive)}
           />
           <Input
             label={'Quantity'}
@@ -69,8 +74,7 @@ const EditTransactionModal = () => {
             error={formValues.quantityValid}
             errorMessage={'Enter value greater than 0'}
             type={'number'}
-            onChange={changeHandler}
-            onBlur={onNumberInputBlurHandler}
+            onChange={(e) => changeHandler(e, isNumberPositive)}
           />
           <Input
             label={'Total spent'}
@@ -80,10 +84,7 @@ const EditTransactionModal = () => {
           />
         </div>
         <div className={classes['btn-container']}>
-          <Button
-            className={classes['cancel-btn']}
-            onClick={onCloseHandler}
-          >
+          <Button className={classes['cancel-btn']} onClick={onCloseHandler}>
             Cancel
           </Button>
           <Button

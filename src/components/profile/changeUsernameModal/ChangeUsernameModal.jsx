@@ -14,20 +14,12 @@ import classes from './ChangeUsernameModal.module.css';
 
 const ChangeUsernameModal = () => {
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+  const { formValues, isFormValid, changeHandler } = useForm({
     newUsername: '',
     newUsernameValid: null,
     password: '',
-    passwordValid: null
+    passwordValid: null,
   });
-
-  const usernameBlurHandler = (event) => {
-    blurHandler(event, validateUsername);
-  };
-
-  const passwordBlurHandler = (event) => {
-    blurHandler(event, validatePassword);
-  };
 
   const onCloseModalHandler = () => {
     dispatch(authActions.toggleChangeUsernameModal());
@@ -43,14 +35,13 @@ const ChangeUsernameModal = () => {
   return (
     <Modal onClose={onCloseModalHandler} className={classes.modal}>
       <form onSubmit={onFormSubmitHandler}>
-        <h1 className={classes.title} >Change Username</h1>
+        <h1 className={classes.title}>Change Username</h1>
         <div className={classes['input-container']}>
           <Input
             label={'New Username'}
             id={'newUsername'}
             value={formValues.newUsername}
-            onChange={changeHandler}
-            onBlur={usernameBlurHandler}
+            onChange={(e) => changeHandler(e, validateUsername)}
             error={formValues.newUsernameValid}
             errorMessage={'Username must be between 3 and 30 characters long.'}
           />
@@ -58,8 +49,7 @@ const ChangeUsernameModal = () => {
             label={'Password'}
             id={'password'}
             value={formValues.password}
-            onChange={changeHandler}
-            onBlur={passwordBlurHandler}
+            onChange={(e) => changeHandler(e, validatePassword)}
             error={formValues.passwordValid}
             errorMessage={<PasswordErrorMessage />}
             type={'password'}
@@ -69,11 +59,12 @@ const ChangeUsernameModal = () => {
           <Button
             onClick={onCloseModalHandler}
             className={classes['cancel-btn']}
-          >Cancel</Button>
-          <Button
-            type={'submit'}
-            disabled={!isFormValid}
-          >Change Username</Button>
+          >
+            Cancel
+          </Button>
+          <Button type={'submit'} disabled={!isFormValid}>
+            Change Username
+          </Button>
         </div>
       </form>
     </Modal>

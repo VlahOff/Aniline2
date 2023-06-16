@@ -9,6 +9,7 @@ import { validatePassword } from '../../../utils/passwordValidation';
 import Button from '../../UI/button/Button';
 import Card from '../../UI/card/Card';
 import Input from '../../UI/input/Input';
+import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMessage';
 import ForgotPassword from './ForgotPassword';
 
 import classes from './Login.module.css';
@@ -16,7 +17,7 @@ import classes from './Login.module.css';
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+  const { formValues, isFormValid, changeHandler } = useForm({
     email: '',
     emailValid: null,
     password: '',
@@ -24,14 +25,6 @@ const Login = () => {
   });
 
   const [selectedPassReset, setSelectedPassReset] = useState(false);
-
-  const emailBlurHandler = (event) => {
-    blurHandler(event, validateEmail);
-  };
-
-  const passwordBlurHandler = (event) => {
-    blurHandler(event, validatePassword);
-  };
 
   const onFormSubmitHandler = (event) => {
     event.preventDefault();
@@ -54,8 +47,7 @@ const Login = () => {
               label="Email"
               id="email"
               type="email"
-              onChange={changeHandler}
-              onBlur={emailBlurHandler}
+              onChange={(e) => changeHandler(e, validateEmail)}
               value={formValues.email}
               error={formValues.emailValid}
               errorMessage={'Invalid e-mail.'}
@@ -64,11 +56,10 @@ const Login = () => {
               label="Password"
               id="password"
               type="password"
-              onChange={changeHandler}
-              onBlur={passwordBlurHandler}
+              onChange={(e) => changeHandler(e, validatePassword)}
               value={formValues.password}
               error={formValues.passwordValid}
-              errorMessage={'Invalid password.'}
+              errorMessage={<PasswordErrorMessage />}
             />
             <Button
               className={classes.btn}

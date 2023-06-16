@@ -13,14 +13,10 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { formValues, isFormValid, changeHandler, blurHandler } = useForm({
+  const { formValues, isFormValid, changeHandler } = useForm({
     email: '',
     emailValid: null,
   });
-
-  const emailBlurHandler = (event) => {
-    blurHandler(event, validateEmail);
-  };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -35,8 +31,7 @@ const ForgotPassword = () => {
           label="Email"
           id="email"
           type="email"
-          onChange={changeHandler}
-          onBlur={emailBlurHandler}
+          onChange={(e) => changeHandler(e, validateEmail)}
           value={formValues.email}
           error={formValues.emailValid}
           errorMessage={'Invalid e-mail.'}
