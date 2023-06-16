@@ -7,7 +7,7 @@ import Button from '../../UI/button/Button';
 
 import classes from './CoinChart.module.css';
 
-const CoinChart = ({ coinId, coinDetailsOHLC, className }) => {
+const CoinChart = ({ coinName, coinId, coinDetailsOHLC, className }) => {
   const dispatch = useDispatch();
   const data = JSON.parse(JSON.stringify(coinDetailsOHLC));
   const theme = useSelector((state) => state.ui.theme);
@@ -50,9 +50,9 @@ const CoinChart = ({ coinId, coinDetailsOHLC, className }) => {
       },
       watermark: {
         visible: true,
-        text: 'ANILINE',
+        text: coinName,
         color: '#7c7c7c48',
-        fontFamily: 'Poppins',
+        fontFamily: 'Arial',
         fontSize: '86',
       },
     });

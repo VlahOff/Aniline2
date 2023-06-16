@@ -135,10 +135,6 @@
   color: var(--text-color);
 }
 
-.chart-container {
-  margin-top: 24px;
-}
-
 .powered-by {
   text-align: right;
 }

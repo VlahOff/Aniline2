@@ -123,11 +123,7 @@ const CoinDetails = () => {
               </div>
             </div>
           </div>
-          <CoinChart
-            coinId={id}
-            coinDetailsOHLC={coinDetailsOHLC}
-            className={classes['chart-container']}
-          />
+          <CoinChart coinName={coin?.name} coinId={id} coinDetailsOHLC={coinDetailsOHLC} />
         </main>
         <p className={classes['powered-by']}>Powered by CoinGecko</p>
       </Card>
