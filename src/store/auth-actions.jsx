@@ -1,6 +1,6 @@
 import * as authService from '../services/authService';
 import { authActions } from './auth';
-import { uiActions } from './ui';
+import { NotificationTypes, uiActions } from './ui';
 
 export const onRegister = (formData, navigate) => {
 	return dispatch => {
@@ -13,14 +13,28 @@ export const onRegister = (formData, navigate) => {
 			})
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
-				dispatch(uiActions.setErrorMessage(res.message));
+				// dispatch(uiActions.setErrorMessage(res.message));
+				dispatch(authActions.setUser(res));
+				localStorage.setItem('userData', JSON.stringify(res));
 				navigate('/login');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -35,7 +49,12 @@ export const onLogin = (formData, navigate) => {
 			})
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -43,7 +62,14 @@ export const onLogin = (formData, navigate) => {
 				localStorage.setItem('userData', JSON.stringify(res));
 				navigate('/');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -55,15 +81,36 @@ export const onLogout = navigate => {
 			.logout()
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
+				}
+
+				if (res.message) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.message,
+							type: NotificationTypes.Normal,
+						})
+					);
 				}
 
 				dispatch(authActions.setUser(null));
 				localStorage.removeItem('userData');
 				navigate('/');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -85,7 +132,12 @@ export const onUsernameChange = formData => {
 			.changeUsername(formData.newUsername, formData.password)
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -93,7 +145,14 @@ export const onUsernameChange = formData => {
 				localStorage.setItem('userData', JSON.stringify(res));
 				dispatch(authActions.toggleChangeUsernameModal());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -105,14 +164,34 @@ export const onPasswordChange = formData => {
 			.changePassword(formData.oldPassword, formData.newPassword)
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
-				dispatch(uiActions.setErrorMessage(res.message));
+				if (res.message) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.message,
+							type: NotificationTypes.Normal,
+						})
+					);
+				}
+
 				dispatch(authActions.toggleChangePasswordModal());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -124,17 +203,37 @@ export const onAccountDeletion = (password, navigate) => {
 			.deleteAccount(password)
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
+				}
+
+				if (res.message) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.message,
+							type: NotificationTypes.Normal,
+						})
+					);
 				}
 
 				localStorage.removeItem('userData');
 				dispatch(authActions.setUser(null));
-				dispatch(uiActions.setErrorMessage(res.message));
 				dispatch(authActions.toggleDeleteAccountModal());
 				navigate('/');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -146,14 +245,34 @@ export const onForgotPassword = (email, navigate) => {
 			.forgotPassword(email)
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
-				dispatch(uiActions.setErrorMessage(res.message));
+				if (res.message) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.message,
+							type: NotificationTypes.Normal,
+						})
+					);
+				}
+
 				navigate('/');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -165,15 +284,36 @@ export const onPasswordReset = (password, userId, navigate) => {
 			.resetPassword(password, userId)
 			.then(res => {
 				if (res.errorMessage) {
-					dispatch(uiActions.setErrorMessage(res.errorMessage));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
+				}
+
+				if (res.message) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.message,
+							type: NotificationTypes.Normal,
+						})
+					);
 				}
 
 				dispatch(authActions.setUser(res));
 				localStorage.setItem('userData', JSON.stringify(res));
 				navigate('/');
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };

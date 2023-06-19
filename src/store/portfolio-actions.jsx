@@ -2,7 +2,7 @@ import { debounce } from 'lodash';
 import * as portfolioService from '../services/portfolioService';
 import { portfolioActions } from './portfolio';
 import { store } from './store';
-import { uiActions } from './ui';
+import { NotificationTypes, uiActions } from './ui';
 
 const worker = new Worker('worker.js');
 
@@ -19,7 +19,12 @@ export const initializePortfolioState = () => {
 		])
 			.then(res => {
 				if (res[0].message || res[1].message) {
-					dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res[0].message || res[1].message,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -27,7 +32,14 @@ export const initializePortfolioState = () => {
 				dispatch(portfolioActions.setTransactions(res[1]));
 				dispatch(portfolioActions.calculateTransactionsValue());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -55,8 +67,13 @@ export const submitTransaction = formData => {
 		portfolioService
 			.addUserTransaction(transaction)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -64,7 +81,14 @@ export const submitTransaction = formData => {
 				dispatch(portfolioActions.calculateTransactionsValue());
 				dispatch(portfolioActions.toggleAddModal());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -81,8 +105,13 @@ export const submitEditedTransaction = (formData, transactionId) => {
 		portfolioService
 			.editUserTransaction(transaction, transactionId)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -90,7 +119,14 @@ export const submitEditedTransaction = (formData, transactionId) => {
 				dispatch(portfolioActions.calculateTransactionsValue());
 				dispatch(portfolioActions.toggleEditModal());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -101,8 +137,13 @@ export const deleteTransaction = transactionId => {
 		portfolioService
 			.deleteUserTransaction(transactionId)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
@@ -110,7 +151,14 @@ export const deleteTransaction = transactionId => {
 				dispatch(portfolioActions.calculateTransactionsValue());
 				dispatch(portfolioActions.toggleEditModal());
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };

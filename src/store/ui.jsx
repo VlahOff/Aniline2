@@ -1,10 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { errorParser } from '../utils/errorParser';
 
+export const NotificationTypes = {
+	Normal: 'normal',
+	Error: 'error',
+};
+
 const initialState = {
 	theme: 'light',
-	errorMessage: '',
-	isErrorShown: false,
+	notificationMessage: '',
+	notificationType: '',
+	isNotificationShown: false,
 	isLoading: false,
 };
 
@@ -15,13 +21,15 @@ const uiSlice = createSlice({
 		setTheme(state, action) {
 			state.theme = action.payload;
 		},
-		setErrorMessage(state, action) {
-			state.errorMessage = errorParser(action.payload);
-			state.isErrorShown = true;
+		setNotificationMessage(state, action) {
+			state.notificationMessage = errorParser(action.payload.message);
+			state.isNotificationShown = true;
+			state.notificationType = action.payload.type;
 		},
-		hideErrorNotification(state) {
-			state.errorMessage = '';
-			state.isErrorShown = false;
+		hideNotification(state) {
+			state.notificationMessage = '';
+			state.isNotificationShown = false;
+			state.notificationType = '';
 		},
 		startLoading(state) {
 			state.isLoading = true;

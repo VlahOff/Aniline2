@@ -37,7 +37,7 @@ export const fetchCoinDetails = async id => {
 };
 
 export const fetchCoinOHLC = async (id, days) => {
-	return fetchApi.get(`${BASE_URL}/getCoinOHLC?id=${id}&days=${days || 1}`);
+	return fetchApi.get(`${BASE_URL}/getCoinOHLC?coinId=${id}&days=${days || 1}`);
 };
 
 export const fetchSearchResults = async query => {

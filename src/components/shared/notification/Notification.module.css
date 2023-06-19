@@ -1,11 +1,21 @@
 .banner {
-  background-color: #fb4934;
+  visibility: hidden;
   color: white;
   padding: 1.5rem;
   border-radius: 4px;
   position: absolute;
   z-index: 100;
   transition: all ease-in-out 300ms;
+}
+
+.normal {
+  visibility: visible;
+  background-color: #00a329;
+}
+
+.error {
+  visibility: visible;
+  background-color: #fb4934;
 }
 
 .show {

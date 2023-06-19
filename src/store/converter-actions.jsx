@@ -2,7 +2,7 @@ import { debounce } from 'lodash';
 import * as cryptoService from '../services/cryptoService';
 import { converterActions } from './converter';
 import { store } from './store';
-import { uiActions } from './ui';
+import { NotificationTypes, uiActions } from './ui';
 
 const worker = new Worker('worker.js');
 
@@ -16,16 +16,26 @@ export const getCurrencyMaps = () => {
 		Promise.all([cryptoService.fetchCryptoMap(), cryptoService.fetchFiatMap()])
 			.then(res => {
 				if (res[0].message || res[1].message) {
-					dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res[0].message || res[1].message,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(converterActions.setCryptoData(res[0]));
 				dispatch(converterActions.setFiatData(res[1]));
 			})
-			.catch(err => {
-				dispatch(uiActions.setErrorMessage(err));
-			})
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -64,16 +74,26 @@ export const getConvertResult = amount => {
 		cryptoService
 			.convertCurrency(amount, selectedFrom, selectedTo)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(converterActions.setConvertResult(res));
 			})
-			.catch(err => {
-				dispatch(uiActions.setErrorMessage(err));
-			})
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };

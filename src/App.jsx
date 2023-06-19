@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import ErrorNotification from './components/UI/errorNotification/ErrorNotification';
 import LoadingSpinner from './components/UI/loadingSpinner/LoadingSpinner';
+import Notification from './components/shared/notification/Notification';
 import Navigation from './components/navigation/Navigation';
 import { isUserLoggedIn } from './store/auth-actions';
 import { getTheme } from './store/ui-actions';
@@ -25,7 +25,7 @@ function App() {
 			data-theme={theme}
 			className={classes.app}
 		>
-			<ErrorNotification />
+			<Notification />
 			{isLoading && <LoadingSpinner />}
 			<Navigation />
 			<main className={classes.main}>

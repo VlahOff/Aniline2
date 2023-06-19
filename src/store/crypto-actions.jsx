@@ -1,6 +1,6 @@
 import * as cryptoService from '../services/cryptoService';
 import { cryptoActions } from './crypto';
-import { uiActions } from './ui';
+import { NotificationTypes, uiActions } from './ui';
 
 export const getTopThree = () => {
 	return dispatch => {
@@ -8,14 +8,26 @@ export const getTopThree = () => {
 		cryptoService
 			.fetchTopThree()
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.setTopThree(res));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -29,14 +41,26 @@ export const getTopHundred = page => {
 		])
 			.then(res => {
 				if (res[0].message || res[1].message) {
-					dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res[0].message || res[1].message,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.setGlobalData(res[0]));
 				dispatch(cryptoActions.setTopHundred(res[1]));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -47,14 +71,26 @@ export const getNextPageOnTopHundred = page => {
 		cryptoService
 			.fetchTopHundred(page)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.appendTopHundred(res));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -68,14 +104,26 @@ export const getNewCoins = () => {
 		])
 			.then(res => {
 				if (res[0].message || res[1].message) {
-					dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res[0].message || res[1].message,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.setGlobalData(res[0]));
 				dispatch(cryptoActions.setNewCoins(res[1]));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -86,14 +134,26 @@ export const getNextPageOnNewCoins = page => {
 		cryptoService
 			.fetchNewCoins(page)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.appendNewCoins(res));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -107,14 +167,26 @@ export const getCoinDetails = (id, days) => {
 		])
 			.then(res => {
 				if (res[0].message || res[1].message) {
-					dispatch(uiActions.setErrorMessage(res[0].message || res[1].message));
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res[0].message || res[1].message,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.setCoinDetails(res[0]));
 				dispatch(cryptoActions.setCoinDetailsOHLC(res[1].coinOHLC));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };
@@ -125,14 +197,26 @@ export const getSearchResults = query => {
 		cryptoService
 			.fetchSearchResults(query)
 			.then(res => {
-				if (res.message) {
-					dispatch(uiActions.setErrorMessage(res.message));
+				if (res.errorMessage) {
+					dispatch(
+						uiActions.setNotificationMessage({
+							message: res.errorMessage,
+							type: NotificationTypes.Error,
+						})
+					);
 					return;
 				}
 
 				dispatch(cryptoActions.setSearchResults(res));
 			})
-			.catch(err => dispatch(uiActions.setErrorMessage(err)))
+			.catch(err =>
+				dispatch(
+					uiActions.setNotificationMessage({
+						message: err,
+						type: NotificationTypes.Error,
+					})
+				)
+			)
 			.finally(() => dispatch(uiActions.stopLoading()));
 	};
 };

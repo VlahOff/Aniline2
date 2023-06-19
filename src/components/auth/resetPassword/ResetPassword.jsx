@@ -7,7 +7,7 @@ import { validatePassword } from '../../../utils/passwordValidation';
 import Button from '../../UI/button/Button';
 import Card from '../../UI/card/Card';
 import Input from '../../UI/input/Input';
-import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMessage';
+import PasswordErrorMessage from '../../shared/passwordErrorMessage/PasswordErrorMessage';
 
 import classes from './ResetPassword.module.css';
 

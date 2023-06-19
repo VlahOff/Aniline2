@@ -8,7 +8,7 @@ import { validateUsername } from '../../../utils/usernameValidation';
 import Button from '../../UI/button/Button';
 import Input from '../../UI/input/Input';
 import Modal from '../../UI/modal/Modal';
-import PasswordErrorMessage from '../../UI/passwordErrorMessage/PasswordErrorMessage';
+import PasswordErrorMessage from '../../shared/passwordErrorMessage/PasswordErrorMessage';
 
 import classes from './ChangeUsernameModal.module.css';
 
