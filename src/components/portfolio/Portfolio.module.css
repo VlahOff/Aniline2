@@ -69,15 +69,21 @@
 
   .header {
     flex-direction: column;
+    align-items: flex-end;
     gap: 1rem;
   }
 
   .transactions-info-wrapper {
-    justify-content: center;
     order: 0;
   }
 
   .add-btn {
     order: 1;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .info-box{
+    flex: 1 1 100%;
   }
 }

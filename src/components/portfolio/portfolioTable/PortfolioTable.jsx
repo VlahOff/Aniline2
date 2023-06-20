@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 
 import { portfolioActions } from '../../../store/portfolio';
-import { percentParser } from '../../../utils/percentParser';
 import { usdPriceParser } from '../../../utils/priceParser';
+import PercentTicker from '../../shared/percentTicker/PercentTicker';
 
 import classes from './PortfolioTable.module.css';
 
@@ -73,11 +73,17 @@ const PortfolioTable = ({ transactions }) => {
 										<p>{usdPriceParser(t.current_price)}</p>
 									</td>
 									<td className={classes['fifth-col']}>
-										<p>{percentParser(t.price_change_percentage_24h)}</p>
+										<PercentTicker
+											percent={t.price_change_percentage_24h}
+											className={classes.ticker}
+										/>
 									</td>
 									<td className={classes['sixth-col']}>
 										<p>{usdPriceParser(t.pnlValue)}</p>
-										<p>{percentParser(t.pnlPercent)}</p>
+										<PercentTicker
+											percent={t.pnlPercent}
+											className={classes.ticker}
+										/>
 									</td>
 								</tr>
 							);

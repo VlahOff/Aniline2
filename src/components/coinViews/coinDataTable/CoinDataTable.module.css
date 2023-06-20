@@ -37,7 +37,8 @@
 .tbody tr:hover,
 .tbody tr:hover .first-col,
 .tbody tr:hover .second-col,
-.tbody tr:hover .third-col {
+.tbody tr:hover .third-col,
+.tbody tr:hover .ticker {
   background-color: var(--hover-element);
   transition: background-color ease 600ms;
 }

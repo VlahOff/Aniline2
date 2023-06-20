@@ -65,16 +65,19 @@ const CoinDataTable = ({ coinData }) => {
 									</td>
 									<td className={classes['sixth-col']}>
 										<PercentTicker
+											className={classes.ticker}
 											percent={coin.price_change_percentage_1h_in_currency}
 										/>
 									</td>
 									<td className={classes['seventh-col']}>
 										<PercentTicker
+											className={classes.ticker}
 											percent={coin.price_change_percentage_24h_in_currency}
 										/>
 									</td>
 									<td className={classes['eighth-col']}>
 										<PercentTicker
+											className={classes.ticker}
 											percent={coin.price_change_percentage_7d_in_currency}
 										/>
 									</td>

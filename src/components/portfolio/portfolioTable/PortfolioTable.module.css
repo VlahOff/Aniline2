@@ -34,9 +34,14 @@
 }
 
 .tbody tr:hover,
-.tbody tr:hover .first-col {
+.tbody tr:hover .first-col,
+.tbody tr:hover .ticker {
   background-color: var(--hover-element);
   transition: background-color ease 600ms;
+}
+
+.ticker {
+  padding: 0;
 }
 
 .sticky-col {
@@ -93,9 +98,9 @@
 }
 
 .sixth-col {
-  width: 120px;
-  min-width: 120px;
-  max-width: 120px;
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
   text-align: left;
   display: flex;
   flex-direction: column;

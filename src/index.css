@@ -8,6 +8,8 @@
   --hover-element: #cecece;
   --danger-element: #ff3b3b;
   --danger-element-hover: #ff6767;
+  --element-positive-value: #006455;
+  --element-negative-value: #c20e20;
 }
 
 [data-theme='dark'] {
@@ -18,6 +20,8 @@
   --container-bg-transparent: rgba(40, 44, 51, 0.25);
   --container-bg: #282c33;
   --hover-element: #4b4b4d;
+  --element-positive-value: #009981;
+  --element-negative-value: #FD374A;
 }
 
 *,

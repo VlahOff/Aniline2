@@ -5,13 +5,13 @@
   color: var(--text-color);
   border-radius: 6px;
   padding: 4px 6px;
-  background-color: #282c33;
+  background-color: var(--container-bg);
 }
 
 .positive {
-  color: #00d800
+  color: var(--element-positive-value);
 }
 
 .negative {
-  color: #ff0000;
+  color: var(--element-negative-value);
 }

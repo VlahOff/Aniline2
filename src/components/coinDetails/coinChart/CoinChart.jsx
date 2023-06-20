@@ -64,11 +64,11 @@ const CoinChart = ({ coinName, coinId, coinDetailsOHLC, className }) => {
 				precision: priceFormat(),
 				minMove: 0.01,
 			},
-			upColor: theme === 'light' ? '#004925' : '#26a69a',
-			downColor: theme === 'light' ? '#AB0000' : '#ef5350',
+			upColor: theme === 'light' ? '#006455' : '#009981',
+			downColor: theme === 'light' ? '#c20e20' : '#FD374A',
 			borderVisible: false,
-			wickUpColor: theme === 'light' ? '#004925' : '#26a69a',
-			wickDownColor: theme === 'light' ? '#AB0000' : '#ef5350',
+			wickUpColor: theme === 'light' ? '#006455' : '#009981',
+			wickDownColor: theme === 'light' ? '#c20e20' : '#FD374A',
 		});
 		newSeries.setData(data);
 
