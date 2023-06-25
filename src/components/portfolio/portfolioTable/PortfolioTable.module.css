@@ -22,6 +22,10 @@
   gap: 10px;
 }
 
+.table tr:last-child {
+  border: none;
+}
+
 .table th,
 .table td {
   display: flex;

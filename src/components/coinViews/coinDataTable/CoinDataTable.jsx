@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { usdPriceParser } from '../../../utils/priceParser';
 import PercentTicker from '../../shared/percentTicker/PercentTicker';
@@ -7,6 +7,10 @@ import classes from './CoinDataTable.module.css';
 
 const CoinDataTable = ({ coinData }) => {
 	const navigate = useNavigate();
+
+	const onCoinSelect = id => {
+		navigate(`/coin-details/${id}`);
+	};
 
 	return (
 		<div className={classes['table-container']}>
@@ -34,61 +38,60 @@ const CoinDataTable = ({ coinData }) => {
 				<tbody className={classes.tbody}>
 					{coinData.map((coin, index) => {
 						return (
-							<Link
-								to={`/coin-details/${coin.id}`}
+							<tr
 								key={coin.id}
+								className="table-row"
+								onClick={() => onCoinSelect(coin.id)}
 							>
-								<tr className="table-row">
-									<td
-										className={`${classes['sticky-col']} ${classes['first-col']}`}
-									>
-										<p>{index + 1}</p>
-									</td>
-									<td
-										className={`${classes['sticky-col']} ${classes['second-col']}`}
-									>
-										<img
-											src={coin.image}
-											alt={`${coin.symbol} logo`}
-										/>
-									</td>
-									<td
-										className={`${classes['sticky-col']} ${classes['third-col']}`}
-									>
-										<p>{coin.name}</p>
-									</td>
-									<td className={classes['fourth-col']}>
-										<p>{coin.symbol.toUpperCase()}</p>
-									</td>
-									<td className={classes['fifth-col']}>
-										<p>{usdPriceParser(coin.current_price)}</p>
-									</td>
-									<td className={classes['sixth-col']}>
-										<PercentTicker
-											className={classes.ticker}
-											percent={coin.price_change_percentage_1h_in_currency}
-										/>
-									</td>
-									<td className={classes['seventh-col']}>
-										<PercentTicker
-											className={classes.ticker}
-											percent={coin.price_change_percentage_24h_in_currency}
-										/>
-									</td>
-									<td className={classes['eighth-col']}>
-										<PercentTicker
-											className={classes.ticker}
-											percent={coin.price_change_percentage_7d_in_currency}
-										/>
-									</td>
-									<td className={classes['ninth-col']}>
-										<p>{usdPriceParser(coin.market_cap)}</p>
-									</td>
-									<td className={classes['tenth-col']}>
-										<p>{usdPriceParser(coin.total_supply)}</p>
-									</td>
-								</tr>
-							</Link>
+								<td
+									className={`${classes['sticky-col']} ${classes['first-col']}`}
+								>
+									<p>{index + 1}</p>
+								</td>
+								<td
+									className={`${classes['sticky-col']} ${classes['second-col']}`}
+								>
+									<img
+										src={coin.image}
+										alt={`${coin.symbol} logo`}
+									/>
+								</td>
+								<td
+									className={`${classes['sticky-col']} ${classes['third-col']}`}
+								>
+									<p>{coin.name}</p>
+								</td>
+								<td className={classes['fourth-col']}>
+									<p>{coin.symbol.toUpperCase()}</p>
+								</td>
+								<td className={classes['fifth-col']}>
+									<p>{usdPriceParser(coin.current_price)}</p>
+								</td>
+								<td className={classes['sixth-col']}>
+									<PercentTicker
+										className={classes.ticker}
+										percent={coin.price_change_percentage_1h_in_currency}
+									/>
+								</td>
+								<td className={classes['seventh-col']}>
+									<PercentTicker
+										className={classes.ticker}
+										percent={coin.price_change_percentage_24h_in_currency}
+									/>
+								</td>
+								<td className={classes['eighth-col']}>
+									<PercentTicker
+										className={classes.ticker}
+										percent={coin.price_change_percentage_7d_in_currency}
+									/>
+								</td>
+								<td className={classes['ninth-col']}>
+									<p>{usdPriceParser(coin.market_cap)}</p>
+								</td>
+								<td className={classes['tenth-col']}>
+									<p>{usdPriceParser(coin.total_supply)}</p>
+								</td>
+							</tr>
 						);
 					})}
 				</tbody>
