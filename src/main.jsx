@@ -4,8 +4,8 @@ import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import App from './App.jsx';
-import ProtectedRouteIsAuth from './ProtectedRouteIsAuth';
 import ProtectedRouteFromAuth from './ProtectedRouteFromAuth.jsx';
+import ProtectedRouteIsAuth from './ProtectedRouteIsAuth.jsx';
 import PageNotFound from './components/404page/PageNotFound';
 import Login from './components/auth/login/Login';
 import Register from './components/auth/register/Register';
@@ -18,9 +18,12 @@ import Home from './components/home/Home';
 import Portfolio from './components/portfolio/Portfolio';
 import Profile from './components/profile/Profile';
 import Search from './components/search/Search.jsx';
+import { isUserLoggedIn } from './store/auth-actions.jsx';
 import { store } from './store/store.jsx';
 
 import './index.css';
+
+store.dispatch(isUserLoggedIn());
 
 const router = createBrowserRouter([
 	{
@@ -74,6 +77,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/portfolio',
+				action: () => {
+					store.dispatch(isUserLoggedIn());
+				},
 				element: (
 					<ProtectedRouteIsAuth>
 						<Portfolio />
