@@ -90,15 +90,6 @@ export const onLogout = navigate => {
 					return;
 				}
 
-				if (res.message) {
-					dispatch(
-						uiActions.setNotificationMessage({
-							message: res.message,
-							type: NotificationTypes.Normal,
-						})
-					);
-				}
-
 				dispatch(authActions.setUser(null));
 				localStorage.removeItem('userData');
 				navigate('/');

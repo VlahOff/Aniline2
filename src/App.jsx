@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import LoadingSpinner from './components/UI/loadingSpinner/LoadingSpinner';
-import Notification from './components/shared/notification/Notification';
 import Navigation from './components/navigation/Navigation';
-import { isUserLoggedIn } from './store/auth-actions';
+import Notification from './components/shared/notification/Notification';
 import { getTheme } from './store/ui-actions';
 
 import classes from './App.module.css';
@@ -16,7 +15,6 @@ function App() {
 	const theme = useSelector(state => state.ui.theme);
 
 	useEffect(() => {
-		dispatch(isUserLoggedIn());
 		dispatch(getTheme());
 	}, []);
 
