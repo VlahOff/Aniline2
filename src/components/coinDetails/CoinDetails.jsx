@@ -36,19 +36,29 @@ const CoinDetails = () => {
 		<div className={classes.wrapper}>
 			<Card className={classes['details-page']}>
 				<header className={classes.header}>
-					<div className={classes['left-header-part']}>
-						<img
-							className={classes['coin-logo']}
-							src={coin?.image?.small}
-							alt="Coin logo"
-						/>
-						<h1 className={classes['coin-name']}>{coin?.name}</h1>
-						<strong className={classes.symbol}>
-							{coin?.symbol?.toUpperCase()}
-						</strong>
+					<div className={classes['top-header-container']}>
+						<div className={classes['name-container']}>
+							<img
+								className={classes['coin-logo']}
+								src={coin?.image?.small}
+								alt="Coin logo"
+							/>
+							<h1 className={classes['coin-name']}>{coin?.name}</h1>
+							<strong className={classes.symbol}>
+								{coin?.symbol?.toUpperCase()}
+							</strong>
+						</div>
+						<div className={classes['price-container']}>
+							<p className={classes.price}>
+								{usdPriceParser(coin?.current_price)}
+							</p>
+							<PercentTicker
+								percent={coin?.price_change_percentage_24h}
+								className={classes['percent-ticker']}
+							/>
+						</div>
 					</div>
-
-					<div className={classes['center-header-part']}>
+					<div className={classes['bottom-header-container']}>
 						<div className={classes['bar-container']}>
 							<div className={classes.bar}>
 								<div
@@ -64,18 +74,7 @@ const CoinDetails = () => {
 							</div>
 						</div>
 					</div>
-
-					<div className={classes['right-header-part']}>
-						<p className={classes.price}>
-							{usdPriceParser(coin?.current_price)}
-						</p>
-						<PercentTicker
-							percent={coin?.price_change_percentage_24h}
-							className={classes['percent-ticker']}
-						/>
-					</div>
 				</header>
-
 				<main className={classes.main}>
 					<div className={classes['coin-info']}>
 						<div className={classes.cell}>
