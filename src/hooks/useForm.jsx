@@ -19,7 +19,7 @@ export const useForm = initialValues => {
 
 	const changeHandler = (event, validator) => {
 		const id = event.target.id;
-		const value = event.target.value.trim();
+		const value = event.target.value;
 
 		setValues(state => {
 			return {
