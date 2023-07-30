@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { cryptoActions } from '../../store/crypto';
 import { getCoinDetails } from '../../store/crypto-actions';
 import { percentParser } from '../../utils/percentParser';
 import { usdPriceParser } from '../../utils/priceParser';
@@ -29,7 +30,12 @@ const CoinDetails = () => {
 
 	useEffect(() => {
 		dispatch(getCoinDetails(id));
-		window.scrollTo({ top: 0, behavior: 'smooth' });
+		window.scrollTo({ top: 0, behavior: 'instant' });
+
+		return () => {
+			dispatch(cryptoActions.setCoinDetails({}));
+			dispatch(cryptoActions.setCoinDetailsOHLC([]));
+		};
 	}, []);
 
 	return (
