@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { percentParser } from '../../utils/percentParser';
-import { priceParser } from '../../utils/priceParser';
+import { usdPriceParser } from '../../utils/priceParser';
 import Button from '../UI/button/Button';
 import Card from '../UI/card/Card';
 
@@ -34,7 +34,7 @@ const CryptoCard = ({
 				/>
 			</header>
 			<main className={classes.main}>
-				<p>Price: {priceParser(current_price)}</p>
+				<p>Price: {usdPriceParser(current_price)}</p>
 				<p>24h: {percentParser(price_change_percentage_24h_in_currency)}</p>
 				<p>7d: {percentParser(price_change_percentage_7d_in_currency)}</p>
 			</main>
