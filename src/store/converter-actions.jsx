@@ -68,7 +68,7 @@ export const filterFiatData = input => {
 export const getConvertResult = amount => {
 	return dispatch => {
 		dispatch(uiActions.startLoading());
-		dispatch(findToCurrency());
+		dispatch(findToCurrencyResultObject());
 		const { selectedFromInput: selectedFrom, selectedToInput: selectedTo } =
 			store.getState().converter;
 		cryptoService
@@ -98,7 +98,7 @@ export const getConvertResult = amount => {
 	};
 };
 
-const findToCurrency = () => {
+const findToCurrencyResultObject = () => {
 	return dispatch => {
 		const {
 			fromCryptoToFiat,

@@ -41,16 +41,11 @@ const AddTransactionModal = ({ allCoinsList }) => {
 	const onCoinInputHandler = event => {
 		setValues(state => ({
 			...state,
+			coinId: '',
 			coinName: event.target.value,
 			coinNameValid: event.target.value.trim().length > 0,
 		}));
 		dispatch(filterAllCoinsList(event.target.value));
-	};
-
-	const onCoinBlurHandler = () => {
-		setTimeout(() => {
-			dispatch(portfolioActions.clearFilteredAllCoins());
-		}, 500);
 	};
 
 	const onCloseHandler = () => {
@@ -75,10 +70,9 @@ const AddTransactionModal = ({ allCoinsList }) => {
 						label={'Coin'}
 						id={'coinId'}
 						value={formValues.coinName}
-						error={formValues.coinIdValid}
-						errorMessage={'Enter a coin name.'}
+						error={formValues.coinNameValid}
+						errorMessage={'Please select a coin.'}
 						onChange={onCoinInputHandler}
-						onBlur={onCoinBlurHandler}
 						isDropdownShown={allCoinsList}
 					>
 						{allCoinsList &&

@@ -36,8 +36,10 @@ const CryptoConverter = () => {
 		useForm({
 			fromValue: '',
 			fromValueValid: null,
+			isFromSelectedValid: null,
 			toValue: '',
 			toValueValid: null,
+			isToSelectedValid: null,
 			amount: '',
 			amountValid: null,
 		});
@@ -47,35 +49,31 @@ const CryptoConverter = () => {
 	}, []);
 
 	const onInputFromHandler = event => {
-		changeHandler(event, v => v.trim().length > 0);
+		const input = event.target.value;
+		setValues(state => ({
+			...state,
+			fromValue: input,
+			fromValueValid: input.trim().length > 0,
+			isFromSelectedValid: false,
+		}));
 
 		fromCryptoToFiat
 			? dispatch(filterCryptoData(formValues.fromValue))
 			: dispatch(filterFiatData(formValues.fromValue));
 	};
 
-	const onBlurFromHandler = () => {
-		setTimeout(() => {
-			fromCryptoToFiat
-				? dispatch(converterActions.clearCryptoResults())
-				: dispatch(converterActions.clearFiatResults());
-		}, 500);
-	};
-
 	const onInputToHandler = event => {
-		changeHandler(event, v => v.trim().length > 0);
+		const input = event.target.value;
+		setValues(state => ({
+			...state,
+			toValue: input,
+			toValueValid: input.trim().length > 0,
+			isToSelectedValid: false,
+		}));
 
 		fromCryptoToFiat
 			? dispatch(filterFiatData(formValues.toValue))
 			: dispatch(filterCryptoData(formValues.toValue));
-	};
-
-	const onBlurToHandler = () => {
-		setTimeout(() => {
-			!fromCryptoToFiat
-				? dispatch(converterActions.clearCryptoResults())
-				: dispatch(converterActions.clearFiatResults());
-		}, 500);
 	};
 
 	const onConvertSubmitHandler = event => {
@@ -84,7 +82,7 @@ const CryptoConverter = () => {
 	};
 
 	const selectFrom = item => {
-		setValues(s => ({ ...s, fromValue: item.name }));
+		setValues(s => ({ ...s, fromValue: item.name, isFromSelectedValid: true }));
 		dispatch(converterActions.setSelectedFromInput(item.id));
 
 		fromCryptoToFiat
@@ -93,7 +91,7 @@ const CryptoConverter = () => {
 	};
 
 	const selectTo = item => {
-		setValues(s => ({ ...s, toValue: item.name }));
+		setValues(s => ({ ...s, toValue: item.name, isToSelectedValid: true }));
 		dispatch(converterActions.setSelectedToInput(item.id));
 
 		fromCryptoToFiat
@@ -116,9 +114,8 @@ const CryptoConverter = () => {
 						label={`From ${fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
 						id="fromValue"
 						onChange={onInputFromHandler}
-						onBlur={onBlurFromHandler}
 						value={formValues.fromValue}
-						error={formValues.fromValueValid}
+						error={formValues.fromValueValid && formValues.isFromSelectedValid}
 						errorMessage={'Please select a currency.'}
 						isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
 					>
@@ -141,9 +138,8 @@ const CryptoConverter = () => {
 						label={`To ${!fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
 						id="toValue"
 						onChange={onInputToHandler}
-						onBlur={onBlurToHandler}
 						value={formValues.toValue}
-						error={formValues.toValueValid}
+						error={formValues.toValueValid && formValues.isToSelectedValid}
 						errorMessage={'Please select a currency.'}
 						isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
 					>
