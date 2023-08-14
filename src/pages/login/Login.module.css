@@ -1,0 +1,46 @@
+.card {
+  max-width: 500px;
+  margin: 120px auto;
+  margin-bottom: 0;
+}
+
+.title {
+  color: var(--text-color);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 25px;
+}
+
+.btn {
+  margin-top: 1rem;
+}
+
+.pass-reset-btn {
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.pass-reset-btn:hover {
+  color: var(--primary-color-hover);
+}
+
+@media screen and (max-width: 1000px) {
+  .card {
+    margin-top: 38px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .form {
+    padding: 0;
+    padding-top: 24px;
+  }
+
+  .pass-reset-btn {
+    margin-top: 1rem;
+  }
+}

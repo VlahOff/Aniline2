@@ -5,8 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Twirl as Hamburger } from 'hamburger-react';
 import { onLogout } from '../../store/auth-actions';
 import { toggleTheme } from '../../store/ui-actions';
-import ButtonLink from '../UI/buttonLink/ButtonLink';
-import LinkTo from '../UI/linkTo/LinkTo';
+import ButtonLink from '../buttonLink/ButtonLink';
+import LinkTo from '../linkTo/LinkTo';
 
 import darkLogo from '../../assets/logo-no-background-black.svg';
 import lightLogo from '../../assets/logo-no-background-white.svg';

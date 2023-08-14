@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import LoadingSpinner from './components/UI/loadingSpinner/LoadingSpinner';
+import LoadingSpinner from './components/loadingSpinner/LoadingSpinner';
 import Navigation from './components/navigation/Navigation';
-import Notification from './components/shared/notification/Notification';
+import Notification from './components/notification/Notification';
 import { getTheme } from './store/ui-actions';
 
 import classes from './App.module.css';

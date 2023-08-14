@@ -152,7 +152,7 @@ export const onPasswordChange = formData => {
 	return dispatch => {
 		dispatch(uiActions.startLoading());
 		authService
-			.changePassword(formData.oldPassword, formData.newPassword)
+			.changePassword(formData.oldPassword, formData.password)
 			.then(res => {
 				if (res.errorMessage) {
 					dispatch(

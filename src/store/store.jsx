@@ -3,8 +3,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import authSlice from './auth';
 import converterSlice from './converter';
 import cryptoSlice from './crypto';
-import uiSlice from './ui';
 import portfolioSlice from './portfolio';
+import uiSlice from './ui';
 
 const inDevMode = import.meta.env.DEV;
 
