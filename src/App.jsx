@@ -25,7 +25,9 @@ function App() {
 		>
 			<Notification />
 			{isLoading && <LoadingSpinner />}
-			<Navigation />
+			<header>
+				<Navigation />
+			</header>
 			<main className={classes.main}>
 				<Outlet />
 			</main>
