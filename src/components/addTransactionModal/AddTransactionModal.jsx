@@ -34,6 +34,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
 			...state,
 			coinName: coin.name,
 			coinId: coin.id,
+			coinNameValid: true,
 		}));
 		dispatch(portfolioActions.clearFilteredAllCoins());
 	};

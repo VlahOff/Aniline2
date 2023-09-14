@@ -82,7 +82,12 @@ const CryptoConverter = () => {
 	};
 
 	const selectFrom = item => {
-		setValues(s => ({ ...s, fromValue: item.name, isFromSelectedValid: true }));
+		setValues(s => ({
+			...s,
+			fromValue: item.name,
+			fromValueValid: true,
+			isFromSelectedValid: true,
+		}));
 		dispatch(converterActions.setSelectedFromInput(item.id));
 
 		fromCryptoToFiat
@@ -91,7 +96,12 @@ const CryptoConverter = () => {
 	};
 
 	const selectTo = item => {
-		setValues(s => ({ ...s, toValue: item.name, isToSelectedValid: true }));
+		setValues(s => ({
+			...s,
+			toValue: item.name,
+			toValueValid: true,
+			isToSelectedValid: true,
+		}));
 		dispatch(converterActions.setSelectedToInput(item.id));
 
 		fromCryptoToFiat

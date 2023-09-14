@@ -38,6 +38,10 @@
   color: var(--text-color);
 }
 
+.tbody td {
+  overflow: hidden;
+}
+
 .tbody tr:hover,
 .tbody tr:hover .first-col,
 .tbody tr:hover .second-col,

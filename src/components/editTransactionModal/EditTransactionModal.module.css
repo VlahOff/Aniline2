@@ -2,6 +2,10 @@
   background-color: var(--container-bg);
 }
 
+.title {
+  color: var(--text-color);
+}
+
 .input-container {
   display: flex;
   gap: 1rem;
