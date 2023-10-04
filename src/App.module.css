@@ -1,6 +1,0 @@
-.app {
-  min-height: 100vh;
-  height: 100%;
-  background-image: url('../src/assets/background.svg');
-  background-color: var(--background);
-}
