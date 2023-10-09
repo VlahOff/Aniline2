@@ -1,0 +1,69 @@
+.modal {
+  background-color: var(--container-bg);
+}
+
+.title {
+  color: var(--text-color);
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.item {
+  text-align: center;
+  word-break: break-word;
+  padding: 0.5rem;
+  border-bottom: 1px black solid;
+  width: 100%;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: rgb(104, 104, 104);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-container button {
+  flex-grow: 1;
+}
+
+.cancel-btn {
+  background-color: #6d6d6d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #8f8f8f;
+}
+
+@media screen and (max-width: 720px) {
+  .modal {
+    width: 90%;
+    padding: 14px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .btn-container {
+    flex-direction: column;
+  }
+
+  .cancel-btn {
+    order: 1;
+  }
+}

@@ -1,0 +1,43 @@
+.container {
+  width: 90%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.global-data {
+  margin: 2rem 0;
+}
+
+.card {
+  position: relative;
+}
+
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.powered-by {
+  color: var(--text-color);
+  text-align: right;
+  margin-bottom: 0.4rem;
+}
+
+.infinite-scroll-element {
+  position: absolute;
+  z-index: 10;
+  bottom: 1000px;
+}
+
+@media screen and (max-width: 680px) {
+
+  .container,
+  .card {
+    width: 100%;
+  }
+
+  .card {
+    padding: 14px;
+  }
+}

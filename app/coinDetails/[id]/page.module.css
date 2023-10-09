@@ -1,0 +1,202 @@
+.wrapper {
+  padding: 60px 0;
+}
+
+.details-page {
+  margin: 0 auto;
+  max-width: 1600px;
+  width: 80%;
+  color: var(--text-color);
+  background-color: var(--container-bg-transparent);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.name-container,
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-logo {
+  width: 32px;
+  height: auto;
+}
+
+.symbol {
+  background-color: #6e6e6e;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 500px;
+}
+
+.bottom-header-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.bar-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.bar {
+  position: relative;
+  height: 8px;
+  background-color: #6e6e6e;
+  border-radius: 8px;
+}
+
+.bar .bar-progress {
+  background-color: #262626;
+  height: 8px;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: right;
+  padding-right: 5px;
+  margin-left: -3px;
+}
+
+.bar .bar-progress .arrow {
+  position: absolute;
+  color: white;
+}
+
+.bar-titles {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.percent-ticker {
+  font-size: 1.2rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 24px 46px;
+}
+
+.coin-info {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-top: #6e6e6e 1px solid;
+  border-bottom: #6e6e6e 1px solid;
+  padding: 24px 0;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 120px;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 6px 4px 31px 19px rgba(0, 0, 0, 0.15);
+}
+
+.cell-title {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.cell p {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.cell .timestamp {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-color);
+}
+
+.powered-by {
+  text-align: right;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    padding: 40px 0;
+  }
+
+  .details-page {
+    width: 90%;
+    padding: 0;
+  }
+
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin: 24px;
+  }
+
+  .top-header-container {
+    justify-content: center;
+  }
+
+  .coin-name {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 1.3rem;
+    font-weight: 500px;
+  }
+
+  .percent-ticker {
+    font-size: 1.1rem;
+  }
+
+  .cell p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .main {
+    margin: 24px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .details-page {
+    width: 100%;
+    padding: 0;
+  }
+}

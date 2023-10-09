@@ -1,6 +1,11 @@
-import './globals.css';
+import Navigation from '@/components/navigation/Navigation';
+import Providers from '@/redux/Providers';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Poppins } from 'next/font/google';
+import './globals.css';
 
+config.autoAddCss = false;
 const poppins = Poppins({
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 	subsets: ['latin'],
@@ -13,8 +18,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={poppins.className}>{children}</body>
-		</html>
+		<Providers>
+			<html lang="en">
+				<body className={poppins.className}>
+					<header>
+						<Navigation />
+					</header>
+					<main>{children}</main>
+				</body>
+			</html>
+		</Providers>
 	);
 }

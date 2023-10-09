@@ -1,0 +1,17 @@
+.percent {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-color);
+  border-radius: 6px;
+  padding: 4px 6px;
+  background-color: var(--container-bg);
+}
+
+.positive {
+  color: var(--element-positive-value);
+}
+
+.negative {
+  color: var(--element-negative-value);
+}
