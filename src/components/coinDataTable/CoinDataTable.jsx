@@ -62,7 +62,7 @@ const CoinDataTable = ({ coinData }) => {
 									<p>{coin.name}</p>
 								</td>
 								<td className={classes['fourth-col']}>
-									<p>{coin.symbol.toUpperCase()}</p>
+									<p>{coin?.symbol?.toUpperCase()}</p>
 								</td>
 								<td className={classes['fifth-col']}>
 									<p>{usdPriceParser(coin.current_price)}</p>

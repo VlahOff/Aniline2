@@ -56,7 +56,7 @@ const CoinDetails = () => {
 						</div>
 						<div className={classes['price-container']}>
 							<p className={classes.price}>
-								{usdPriceParser(coin?.current_price)}
+								{usdPriceParser(coin?.current_price?.toFixed(10))}
 							</p>
 							<PercentTicker
 								percent={coin?.price_change_percentage_24h}
