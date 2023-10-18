@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { uiActions } from '../../redux/ui';
 
-import classes from './Notification.module.css';
+import styles from './Notification.module.css';
 
 const Notification = () => {
 	const dispatch = useDispatch();
@@ -19,11 +19,11 @@ const Notification = () => {
 	return (
 		<>
 			<div
-				className={`${classes.banner} ${classes[notificationType]} ${
-					isNotificationShown ? classes.show : classes.close
+				className={`${styles.banner} ${styles[notificationType]} ${
+					isNotificationShown ? styles.show : styles.close
 				}`}
 			>
-				<p className={classes.message}>{notificationMessage}</p>
+				<p className={styles.message}>{notificationMessage}</p>
 			</div>
 		</>
 	);

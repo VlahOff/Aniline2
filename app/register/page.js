@@ -1,17 +1,23 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import styles from './page.module.css';
-import { useForm } from '@/hooks/useForm';
+
+import Button from '@/components/button/Button';
 import Card from '@/components/card/Card';
 import Input from '@/components/input/Input';
-import { validateEmail } from '@/utils/emailValidation';
-import { validateUsername } from '@/utils/usernameValidation';
-import { validatePassword } from '@/utils/passwordValidation';
 import PasswordErrorMessage from '@/components/passwordErrorMessage/PasswordErrorMessage';
-import Button from '@/components/button/Button';
+import { useForm } from '@/hooks/useForm';
+import { onRegister } from '@/redux/actions/authActions';
+import { validateEmail } from '@/utils/emailValidation';
+import { validatePassword } from '@/utils/passwordValidation';
+import { validateUsername } from '@/utils/usernameValidation';
+
+import styles from './page.module.css';
 
 const Register = () => {
+	const router = useRouter();
 	const dispatch = useDispatch();
+
 	const { formValues, isFormValid, changeHandler, doPasswordMatch } = useForm({
 		email: '',
 		emailValid: null,
@@ -25,7 +31,7 @@ const Register = () => {
 
 	const onFormSubmitHandler = event => {
 		event.preventDefault();
-		// isFormValid && dispatch(onRegister(formValues, navigate));
+		isFormValid && dispatch(onRegister(formValues, router));
 	};
 
 	return (

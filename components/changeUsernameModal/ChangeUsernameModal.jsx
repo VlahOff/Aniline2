@@ -10,7 +10,7 @@ import { onUsernameChange } from '../../redux/auth-actions';
 import { validatePassword } from '../../utils/passwordValidation';
 import { validateUsername } from '../../utils/usernameValidation';
 
-import classes from './ChangeUsernameModal.module.css';
+import styles from './ChangeUsernameModal.module.css';
 
 const ChangeUsernameModal = () => {
 	const dispatch = useDispatch();
@@ -35,11 +35,11 @@ const ChangeUsernameModal = () => {
 	return (
 		<Modal
 			onClose={onCloseModalHandler}
-			className={classes.modal}
+			className={styles.modal}
 		>
 			<form onSubmit={onFormSubmitHandler}>
-				<h1 className={classes.title}>Change Username</h1>
-				<div className={classes['input-container']}>
+				<h1 className={styles.title}>Change Username</h1>
+				<div className={styles['input-container']}>
 					<Input
 						label={'New Username'}
 						id={'newUsername'}
@@ -58,10 +58,10 @@ const ChangeUsernameModal = () => {
 						type={'password'}
 					/>
 				</div>
-				<div className={classes['btn-container']}>
+				<div className={styles['btn-container']}>
 					<Button
 						onClick={onCloseModalHandler}
-						className={classes['cancel-btn']}
+						className={styles['cancel-btn']}
 					>
 						Cancel
 					</Button>

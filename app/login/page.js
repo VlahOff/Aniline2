@@ -1,21 +1,25 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
 
-import styles from './page.module.css';
-import { useForm } from '@/hooks/useForm';
+import Button from '@/components/button/Button';
 import Card from '@/components/card/Card';
 import Input from '@/components/input/Input';
+import PasswordErrorMessage from '@/components/passwordErrorMessage/PasswordErrorMessage';
+import { useForm } from '@/hooks/useForm';
+import { onLogin } from '@/redux/actions/authActions';
 import { validateEmail } from '@/utils/emailValidation';
 import { validatePassword } from '@/utils/passwordValidation';
-import PasswordErrorMessage from '@/components/passwordErrorMessage/PasswordErrorMessage';
 import ForgotPassword from './ForgotPassword';
-import Button from '@/components/button/Button';
+
+import styles from './page.module.css';
 
 const Login = () => {
-	// const navigate = useNavigate();
+	const router = useRouter();
 	const dispatch = useDispatch();
+	
 	const { formValues, isFormValid, changeHandler } = useForm({
 		email: '',
 		emailValid: null,
@@ -27,9 +31,7 @@ const Login = () => {
 
 	const onFormSubmitHandler = event => {
 		event.preventDefault();
-		if (isFormValid) {
-			// dispatch(onLogin(formValues, navigate));
-		}
+		isFormValid && dispatch(onLogin(formValues, router));
 	};
 
 	const toggleSelectedPassReset = () => {

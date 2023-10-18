@@ -1,11 +1,12 @@
 'use client';
 import { useDispatch } from 'react-redux';
+
+import Button from '@/components/button/Button';
+import Input from '@/components/input/Input';
 import { useForm } from '@/hooks/useForm';
+import { validateEmail } from '@/utils/emailValidation';
 
 import styles from './page.module.css';
-import Input from '@/components/input/Input';
-import Button from '@/components/button/Button';
-import { validateEmail } from '@/utils/emailValidation';
 
 const ForgotPassword = () => {
 	// const navigate = useNavigate();

@@ -1,27 +1,37 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { isUserLoggedIn, onLogout } from '@/redux/actions/authActions';
+import { toggleTheme } from '@/redux/actions/uiActions';
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Twirl as Hamburger } from 'hamburger-react';
 import ButtonLink from '../buttonLink/ButtonLink';
 import LinkTo from '../linkTo/LinkTo';
+
 import darkLogo from '../../public/logo-no-background-black.svg';
 import lightLogo from '../../public/logo-no-background-white.svg';
-import classes from './Navigation.module.css';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleTheme } from '@/redux/actions/uiActions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import styles from './Navigation.module.css';
 
 const Navigation = () => {
+	const router = useRouter();
+	const dispatch = useDispatch();
+
 	const [isNavSticky, setIsNavSticky] = useState(false);
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 	const theme = useSelector(state => state.ui.theme);
 	const user = useSelector(state => state.auth.user);
 
 	useEffect(() => {
+		dispatch(isUserLoggedIn());
+
 		window.onscroll = () => {
 			if (window.scrollY >= 200) {
 				setIsNavSticky(true);
@@ -31,10 +41,8 @@ const Navigation = () => {
 		};
 	}, []);
 
-	const dispatch = useDispatch();
-
 	const logoutHandler = () => {
-		// dispatch(onLogout(navigate));
+		dispatch(onLogout(router));
 	};
 
 	const toggleThemeHandler = () => {
@@ -46,21 +54,21 @@ const Navigation = () => {
 	};
 
 	return (
-		<nav className={`${classes.nav} ${isNavSticky && classes.sticky}`}>
+		<nav className={`${styles.nav} ${isNavSticky && styles.sticky}`}>
 			<Link
 				href={'/'}
-				className={classes['logo-wrapper']}
+				className={styles['logo-wrapper']}
 			>
 				<Image
 					src={theme === 'light' ? darkLogo : lightLogo}
 					alt="site logo"
-					className={classes.logo}
+					className={styles.logo}
 				/>
 			</Link>
 
 			<ul
-				className={`${classes.links} 
-        ${isMenuOpen ? classes['links-open'] : classes['links-close']}`}
+				className={`${styles.links} 
+        ${isMenuOpen ? styles['links-open'] : styles['links-close']}`}
 				onClick={onLinkSelectHandler}
 			>
 				<li>
@@ -108,19 +116,19 @@ const Navigation = () => {
 						{theme === 'light' ? (
 							<FontAwesomeIcon
 								icon={faSun}
-								className={classes['theme-indicator']}
+								className={styles['theme-indicator']}
 							/>
 						) : (
 							<FontAwesomeIcon
 								icon={faMoon}
-								className={classes['theme-indicator']}
+								className={styles['theme-indicator']}
 							/>
 						)}
 					</ButtonLink>
 				</li>
 			</ul>
 
-			<div className={classes['menu-btn']}>
+			<div className={styles['menu-btn']}>
 				<Hamburger
 					toggled={isMenuOpen}
 					toggle={setIsMenuOpen}

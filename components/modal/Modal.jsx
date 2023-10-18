@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 
 import Card from '../card/Card';
 
-import classes from './Modal.module.css';
+import styles from './Modal.module.css';
 
 const Backdrop = ({ onClose }) => {
 	return (
 		<div
-			className={classes.backdrop}
+			className={styles.backdrop}
 			onClick={onClose}
 		></div>
 	);
@@ -22,7 +22,7 @@ const Modal = ({ className, children, onClose }) => {
 		};
 	});
 
-	const styles = `${classes.modal} ${className}`;
+	const styles = `${styles.modal} ${className}`;
 
 	return (
 		<>

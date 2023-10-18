@@ -2,11 +2,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getCoinDetails } from '@/redux/actions/cryptoActions';
 import { createChart } from 'lightweight-charts';
 import Button from '../button/Button';
 
-import classes from './CoinChart.module.css';
-import { getCoinDetails } from '@/redux/actions/cryptoActions';
+import styles from './CoinChart.module.css';
 
 const CoinChart = ({ coinName, coinId, coinDetailsOHLC, className }) => {
 	const dispatch = useDispatch();
@@ -86,54 +86,54 @@ const CoinChart = ({ coinName, coinId, coinDetailsOHLC, className }) => {
 	};
 
 	return (
-		<div className={`${classes['chart-container']} ${className}`}>
+		<div className={`${styles['chart-container']} ${className}`}>
 			<div
-				className={classes['btn-wrapper']}
+				className={styles['btn-wrapper']}
 				onClick={onPeriodSelection}
 			>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '1' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '1' && styles['btn-active']
 					}`}
 					id="1"
 				>
 					1D
 				</Button>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '7' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '7' && styles['btn-active']
 					}`}
 					id="7"
 				>
 					1W
 				</Button>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '14' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '14' && styles['btn-active']
 					}`}
 					id="14"
 				>
 					2W
 				</Button>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '30' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '30' && styles['btn-active']
 					}`}
 					id="30"
 				>
 					1M
 				</Button>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '90' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '90' && styles['btn-active']
 					}`}
 					id="90"
 				>
 					3M
 				</Button>
 				<Button
-					className={`${classes.btn} ${
-						activePeriod == '180' && classes['btn-active']
+					className={`${styles.btn} ${
+						activePeriod == '180' && styles['btn-active']
 					}`}
 					id="180"
 				>
@@ -141,7 +141,7 @@ const CoinChart = ({ coinName, coinId, coinDetailsOHLC, className }) => {
 				</Button>
 			</div>
 			<div
-				className={`${className} ${classes.chart}`}
+				className={`${className} ${styles.chart}`}
 				ref={chartContainerRef}
 			/>
 		</div>

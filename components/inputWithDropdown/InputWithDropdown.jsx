@@ -1,4 +1,4 @@
-import classes from './InputWithDropdown.module.css';
+import styles from './InputWithDropdown.module.css';
 
 const InputWithDropdown = ({
 	children,
@@ -14,13 +14,13 @@ const InputWithDropdown = ({
 	isDropdownShown,
 }) => {
 	return (
-		<div className={`${classes['input-wrapper']} ${className}`}>
+		<div className={`${styles['input-wrapper']} ${className}`}>
 			<input
 				type={type || 'text'}
 				name={id}
 				id={id}
 				placeholder={label}
-				className={classes.input}
+				className={styles.input}
 				onChange={onChange}
 				onBlur={onBlur}
 				value={value}
@@ -28,21 +28,21 @@ const InputWithDropdown = ({
 			/>
 			<label
 				htmlFor={id}
-				className={classes.label}
+				className={styles.label}
 			>
 				{label}
 			</label>
 			<div
 				className={
 					isDropdownShown?.length
-						? classes['drop-down-shown']
-						: classes['drop-down']
+						? styles['drop-down-shown']
+						: styles['drop-down']
 				}
 			>
 				{children}
 			</div>
 			{error === false && (
-				<p className={classes['error-message']}>{errorMessage}</p>
+				<p className={styles['error-message']}>{errorMessage}</p>
 			)}
 		</div>
 	);

@@ -1,9 +1,9 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { usdPriceParser } from '../../utils/priceParser';
 import PercentTicker from '../percentTicker/PercentTicker';
-import Image from 'next/image';
 
 import styles from './CoinDataTable.module.css';
-import Link from 'next/link';
 
 const CoinDataTable = ({ coinData }) => {
 	return (

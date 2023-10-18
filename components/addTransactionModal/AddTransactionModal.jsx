@@ -11,7 +11,7 @@ import {
 	submitTransaction,
 } from '../../redux/portfolio-actions';
 
-import classes from './AddTransactionModal.module.css';
+import styles from './AddTransactionModal.module.css';
 
 const isNumberPositive = value => {
 	return Number(value) > 0;
@@ -62,11 +62,11 @@ const AddTransactionModal = ({ allCoinsList }) => {
 	return (
 		<Modal
 			onClose={onCloseHandler}
-			className={classes.modal}
+			className={styles.modal}
 		>
 			<form onSubmit={onSubmitHandler}>
-				<h1 className={classes.title}>Add Transaction</h1>
-				<div className={classes['input-container']}>
+				<h1 className={styles.title}>Add Transaction</h1>
+				<div className={styles['input-container']}>
 					<InputWithDropdown
 						label={'Coin'}
 						id={'coinId'}
@@ -81,7 +81,7 @@ const AddTransactionModal = ({ allCoinsList }) => {
 								return (
 									<p
 										key={c.id}
-										className={classes.item}
+										className={styles.item}
 										onClick={() => onCoinSelectHandler(c)}
 									>
 										{c.name} - {c.symbol.toUpperCase()}
@@ -114,10 +114,10 @@ const AddTransactionModal = ({ allCoinsList }) => {
 						disabled={true}
 					/>
 				</div>
-				<div className={classes['btn-container']}>
+				<div className={styles['btn-container']}>
 					<Button
 						onClick={onCloseHandler}
-						className={classes['cancel-btn']}
+						className={styles['cancel-btn']}
 					>
 						Cancel
 					</Button>

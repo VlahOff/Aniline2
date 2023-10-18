@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
-import classes from './LoadingSpinner.module.css';
+import styles from './LoadingSpinner.module.css';
 
 const Backdrop = () => {
-	return <div className={classes.backdrop}></div>;
+	return <div className={styles.backdrop}></div>;
 };
 
 const Loader = () => {
 	return (
-		<div className={classes.wrapper}>
-			<span className={classes.loader}></span>
+		<div className={styles.wrapper}>
+			<span className={styles.loader}></span>
 		</div>
 	);
 };

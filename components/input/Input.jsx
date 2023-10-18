@@ -1,4 +1,4 @@
-import classes from './Input.module.css';
+import styles from './Input.module.css';
 
 const Input = ({
 	className,
@@ -13,13 +13,13 @@ const Input = ({
 	errorMessage,
 }) => {
 	return (
-		<div className={`${classes['input-wrapper']} ${className}`}>
+		<div className={`${styles['input-wrapper']} ${className}`}>
 			<input
 				type={type || 'text'}
 				name={id}
 				id={id}
 				placeholder={label}
-				className={classes.input}
+				className={styles.input}
 				onChange={onChange}
 				onBlur={onBlur}
 				value={value}
@@ -28,12 +28,12 @@ const Input = ({
 			/>
 			<label
 				htmlFor={id}
-				className={classes.label}
+				className={styles.label}
 			>
 				{label}
 			</label>
 			{error === false && (
-				<div className={classes['error-message']}>{errorMessage}</div>
+				<div className={styles['error-message']}>{errorMessage}</div>
 			)}
 		</div>
 	);

@@ -9,7 +9,7 @@ import { portfolioActions } from '../../redux/portfolio';
 import { submitEditedTransaction } from '../../redux/portfolio-actions';
 import DeleteTransactionModal from '../deleteTransactionModal/DeleteTransactionModal';
 
-import classes from './EditTransactionModal.module.css';
+import styles from './EditTransactionModal.module.css';
 
 const isNumberPositive = value => {
 	return Number(value) > 0;
@@ -50,12 +50,12 @@ const EditTransactionModal = () => {
 	return (
 		<Modal
 			onClose={onCloseHandler}
-			className={classes.modal}
+			className={styles.modal}
 		>
 			{!startedDeletion ? (
 				<form onSubmit={onSubmitHandler}>
-					<h1 className={classes.title}>Edit Transaction</h1>
-					<div className={classes['input-container']}>
+					<h1 className={styles.title}>Edit Transaction</h1>
+					<div className={styles['input-container']}>
 						<Input
 							label={'Coin'}
 							id={'coinId'}
@@ -87,22 +87,22 @@ const EditTransactionModal = () => {
 							disabled={true}
 						/>
 					</div>
-					<div className={classes['btn-container']}>
+					<div className={styles['btn-container']}>
 						<Button
-							className={classes['cancel-btn']}
+							className={styles['cancel-btn']}
 							onClick={onCloseHandler}
 						>
 							Cancel
 						</Button>
 						<Button
-							className={classes['edit-btn']}
+							className={styles['edit-btn']}
 							type={'submit'}
 							disabled={!isFormValid}
 						>
 							Edit
 						</Button>
 						<Button
-							className={classes['delete-btn']}
+							className={styles['delete-btn']}
 							onClick={onDeleteTransactionHandler}
 						>
 							Delete

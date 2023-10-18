@@ -9,7 +9,7 @@ import { authActions } from '../../redux/auth';
 import { onPasswordChange } from '../../redux/auth-actions';
 import { validatePassword } from '../../utils/passwordValidation';
 
-import classes from './ChangePasswordModal.module.css';
+import styles from './ChangePasswordModal.module.css';
 
 const ChangePasswordModal = () => {
 	const dispatch = useDispatch();
@@ -36,11 +36,11 @@ const ChangePasswordModal = () => {
 	return (
 		<Modal
 			onClose={onCloseModalHandler}
-			className={classes.modal}
+			className={styles.modal}
 		>
 			<form onSubmit={onFormSubmitHandler}>
-				<h1 className={classes.title}>Change Password</h1>
-				<div className={classes['input-container']}>
+				<h1 className={styles.title}>Change Password</h1>
+				<div className={styles['input-container']}>
 					<Input
 						label={'Old password'}
 						id={'oldPassword'}
@@ -69,10 +69,10 @@ const ChangePasswordModal = () => {
 						type={'password'}
 					/>
 				</div>
-				<div className={classes['btn-container']}>
+				<div className={styles['btn-container']}>
 					<Button
 						onClick={onCloseModalHandler}
-						className={classes['cancel-btn']}
+						className={styles['cancel-btn']}
 					>
 						Cancel
 					</Button>

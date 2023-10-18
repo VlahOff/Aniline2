@@ -1,9 +1,9 @@
-import classes from './ButtonLink.module.css';
+import styles from './ButtonLink.module.css';
 
 const ButtonLink = ({ className, type, onClick, disabled, children }) => {
 	return (
 		<button
-			className={`${className} ${classes.btn}`}
+			className={`${className} ${styles.btn}`}
 			type={type || 'button'}
 			onClick={onClick}
 			disabled={disabled}

@@ -1,15 +1,18 @@
 'use client';
+
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './page.module.css';
+
+import Card from '@/components/card/Card';
+import CoinChart from '@/components/coinChart/CoinChart';
+import PercentTicker from '@/components/percentTicker/PercentTicker';
 import { getCoinDetails } from '@/redux/actions/cryptoActions';
 import { cryptoActions } from '@/redux/slices/cryptoSlice';
-import Image from 'next/image';
-import Card from '@/components/card/Card';
-import { usdPriceParser } from '@/utils/priceParser';
-import PercentTicker from '@/components/percentTicker/PercentTicker';
 import { percentParser } from '@/utils/percentParser';
-import CoinChart from '@/components/coinChart/CoinChart';
+import { usdPriceParser } from '@/utils/priceParser';
+
+import styles from './page.module.css';
 
 const timeParser = date => {
 	return new Date(date).toLocaleString('en-UK', {

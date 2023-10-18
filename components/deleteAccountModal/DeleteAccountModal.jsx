@@ -10,7 +10,7 @@ import { authActions } from '../../redux/auth';
 import { onAccountDeletion } from '../../redux/auth-actions';
 import { validatePassword } from '../../utils/passwordValidation';
 
-import classes from './DeleteAccountModal.module.css';
+import styles from './DeleteAccountModal.module.css';
 
 const DeleteAccountModal = () => {
 	const dispatch = useDispatch();
@@ -34,10 +34,10 @@ const DeleteAccountModal = () => {
 	return (
 		<Modal
 			onClose={onCloseModalHandler}
-			className={classes.modal}
+			className={styles.modal}
 		>
 			<form onSubmit={onFormSubmitHandler}>
-				<h1 className={classes.title}>Delete Account</h1>
+				<h1 className={styles.title}>Delete Account</h1>
 				<Input
 					label={'Password'}
 					id={'password'}
@@ -47,10 +47,10 @@ const DeleteAccountModal = () => {
 					errorMessage={<PasswordErrorMessage />}
 					type={'password'}
 				/>
-				<div className={classes['btn-container']}>
+				<div className={styles['btn-container']}>
 					<Button
 						onClick={onCloseModalHandler}
-						className={classes['cancel-btn']}
+						className={styles['cancel-btn']}
 					>
 						Cancel
 					</Button>

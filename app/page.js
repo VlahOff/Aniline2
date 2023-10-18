@@ -1,13 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import CryptoCard from '@/components/cryptoCard/CryptoCard';
+import { getTopThree } from '@/redux/actions/cryptoActions';
+
 import logoBlack from '../public/logo-no-background-black.svg';
 import logoWhite from '../public/logo-no-background-white.svg';
 import styles from './page.module.css';
-import CryptoCard from '@/components/cryptoCard/CryptoCard';
-import { useEffect } from 'react';
-import { getTopThree } from '@/redux/actions/cryptoActions';
 
 export default function Home() {
 	const dispatch = useDispatch();

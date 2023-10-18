@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import classes from './LinkTo.module.css';
+import styles from './LinkTo.module.css';
 
 const LinkTo = ({ href, target, children, className }) => {
-	const styles = `${classes.link} ${className}`;
+	const stylesMerge = `${styles.link} ${className}`;
 	return (
 		<Link
 			href={href}
 			target={target}
-			className={styles}
+			className={stylesMerge}
 		>
 			{children}
 		</Link>
