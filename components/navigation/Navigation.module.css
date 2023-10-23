@@ -36,6 +36,7 @@
 
 .theme-indicator {
   color: var(--text-color);
+  cursor: pointer;
 }
 
 .menu-btn {

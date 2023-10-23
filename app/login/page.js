@@ -19,7 +19,7 @@ import styles from './page.module.css';
 const Login = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	
+
 	const { formValues, isFormValid, changeHandler } = useForm({
 		email: '',
 		emailValid: null,
@@ -39,51 +39,53 @@ const Login = () => {
 	};
 
 	return (
-		<Card className={styles.card}>
-			{!selectedPassReset ? (
-				<>
-					<h1 className={styles.title}>Login</h1>
-					<form
-						onSubmit={onFormSubmitHandler}
-						className={styles.form}
-					>
-						<Input
-							label="Email"
-							id="email"
-							type="email"
-							onChange={e => changeHandler(e, validateEmail)}
-							value={formValues.email}
-							error={formValues.emailValid}
-							errorMessage={'Invalid e-mail.'}
-						/>
-						<Input
-							label="Password"
-							id="password"
-							type="password"
-							onChange={e => changeHandler(e, validatePassword)}
-							value={formValues.password}
-							error={formValues.passwordValid}
-							errorMessage={<PasswordErrorMessage />}
-						/>
-						<Button
-							className={styles.btn}
-							disabled={!isFormValid}
-							type="submit"
+		<section className={styles.wrapper}>
+			<Card className={styles.card}>
+				{!selectedPassReset ? (
+					<>
+						<h1 className={styles.title}>Login</h1>
+						<form
+							onSubmit={onFormSubmitHandler}
+							className={styles.form}
 						>
-							Login
-						</Button>
-					</form>
-					<button
-						onClick={toggleSelectedPassReset}
-						className={styles['pass-reset-btn']}
-					>
-						Forgot your password?
-					</button>
-				</>
-			) : (
-				<ForgotPassword />
-			)}
-		</Card>
+							<Input
+								label="Email"
+								id="email"
+								type="email"
+								onChange={e => changeHandler(e, validateEmail)}
+								value={formValues.email}
+								error={formValues.emailValid}
+								errorMessage={'Invalid e-mail.'}
+							/>
+							<Input
+								label="Password"
+								id="password"
+								type="password"
+								onChange={e => changeHandler(e, validatePassword)}
+								value={formValues.password}
+								error={formValues.passwordValid}
+								errorMessage={<PasswordErrorMessage />}
+							/>
+							<Button
+								className={styles.btn}
+								disabled={!isFormValid}
+								type="submit"
+							>
+								Login
+							</Button>
+						</form>
+						<button
+							onClick={toggleSelectedPassReset}
+							className={styles['pass-reset-btn']}
+						>
+							Forgot your password?
+						</button>
+					</>
+				) : (
+					<ForgotPassword />
+				)}
+			</Card>
+		</section>
 	);
 };
 

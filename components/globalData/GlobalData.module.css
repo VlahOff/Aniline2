@@ -5,6 +5,7 @@
   row-gap: 2rem;
   justify-content: space-evenly;
   color: var(--text-color);
+  padding: 2rem 0;
 }
 
 .card {

@@ -1,7 +1,10 @@
+'use client';
+
+import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 
-import { portfolioActions } from '../../redux/portfolio';
-import { usdPriceParser } from '../../utils/priceParser';
+import { portfolioActions } from '@/redux/slices/portfolioSlice';
+import { usdPriceParser } from '@/utils/priceParser';
 import PercentTicker from '../percentTicker/PercentTicker';
 
 import styles from './PortfolioTable.module.css';
@@ -50,9 +53,10 @@ const PortfolioTable = ({ transactions }) => {
 									<td
 										className={`${styles['first-col']} ${styles['sticky-col']}`}
 									>
-										<img
+										<Image
 											src={t.image}
 											alt="coin logo"
+											quality={100}
 										/>
 										<div className="asset-name">
 											<strong>{t.name}</strong>

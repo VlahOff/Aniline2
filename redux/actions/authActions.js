@@ -116,7 +116,7 @@ export const isUserLoggedIn = () => {
 	};
 };
 
-// export const onUsernameChange = formData => {
+export const onUsernameChange = formData => {
 // 	return dispatch => {
 // 		dispatch(uiActions.startLoading());
 // 		authService
@@ -146,48 +146,48 @@ export const isUserLoggedIn = () => {
 // 			)
 // 			.finally(() => dispatch(uiActions.stopLoading()));
 // 	};
-// };
+};
 
-// export const onPasswordChange = formData => {
-// 	return dispatch => {
-// 		dispatch(uiActions.startLoading());
-// 		authService
-// 			.changePassword(formData.oldPassword, formData.password)
-// 			.then(res => {
-// 				if (res.errorMessage) {
-// 					dispatch(
-// 						uiActions.setNotificationMessage({
-// 							message: res.errorMessage,
-// 							type: NotificationTypes.Error,
-// 						})
-// 					);
-// 					return;
-// 				}
+export const onPasswordChange = formData => {
+	// return dispatch => {
+	// 	dispatch(uiActions.startLoading());
+	// 	authService
+	// 		.changePassword(formData.oldPassword, formData.password)
+	// 		.then(res => {
+	// 			if (res.errorMessage) {
+	// 				dispatch(
+	// 					uiActions.setNotificationMessage({
+	// 						message: res.errorMessage,
+	// 						type: NotificationTypes.Error,
+	// 					})
+	// 				);
+	// 				return;
+	// 			}
 
-// 				if (res.message) {
-// 					dispatch(
-// 						uiActions.setNotificationMessage({
-// 							message: res.message,
-// 							type: NotificationTypes.Normal,
-// 						})
-// 					);
-// 				}
+	// 			if (res.message) {
+	// 				dispatch(
+	// 					uiActions.setNotificationMessage({
+	// 						message: res.message,
+	// 						type: NotificationTypes.Normal,
+	// 					})
+	// 				);
+	// 			}
 
-// 				dispatch(authActions.toggleChangePasswordModal());
-// 			})
-// 			.catch(err =>
-// 				dispatch(
-// 					uiActions.setNotificationMessage({
-// 						message: err,
-// 						type: NotificationTypes.Error,
-// 					})
-// 				)
-// 			)
-// 			.finally(() => dispatch(uiActions.stopLoading()));
-// 	};
-// };
+	// 			dispatch(authActions.toggleChangePasswordModal());
+	// 		})
+	// 		.catch(err =>
+	// 			dispatch(
+	// 				uiActions.setNotificationMessage({
+	// 					message: err,
+	// 					type: NotificationTypes.Error,
+	// 				})
+	// 			)
+	// 		)
+	// 		.finally(() => dispatch(uiActions.stopLoading()));
+	// };
+};
 
-// export const onAccountDeletion = (password, navigate) => {
+export const onAccountDeletion = (password, navigate) => {
 // 	return dispatch => {
 // 		dispatch(uiActions.startLoading());
 // 		authService
@@ -227,7 +227,7 @@ export const isUserLoggedIn = () => {
 // 			)
 // 			.finally(() => dispatch(uiActions.stopLoading()));
 // 	};
-// };
+};
 
 // export const onForgotPassword = (email, navigate) => {
 // 	return dispatch => {

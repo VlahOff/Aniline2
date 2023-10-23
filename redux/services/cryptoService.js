@@ -61,7 +61,7 @@ export const fetchFiatMap = async () => {
 
 export const convertCurrency = async (amount, from, to) => {
 	const res = await axios.get(
-		`http://localhost:3000/api/crypto/convert?amount=${amount}&from=${from}&to=${to}`,
+		`http://localhost:3000/api/crypto/convertCurrency?amount=${amount}&from=${from}&to=${to}`,
 		{
 			headers: { 'Content-Type': 'application/json' },
 		}

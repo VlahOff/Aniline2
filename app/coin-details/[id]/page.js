@@ -51,6 +51,7 @@ const CoinDetails = ({ params }) => {
 								alt="Coin logo"
 								width={32}
 								height={32}
+								quality={100}
 							/>
 							<h1 className={styles['coin-name']}>{coin?.name}</h1>
 							<strong className={styles.symbol}>

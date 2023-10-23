@@ -28,12 +28,14 @@ export default function Home() {
 						src={logoWhite}
 						alt="Site logo"
 						className={styles.logo}
+						quality={100}
 					/>
 				) : (
 					<Image
 						src={logoBlack}
 						alt="Site logo"
 						className={styles.logo}
+						quality={100}
 					/>
 				)}
 				<h1 className={styles.title}>Track your crypto gains!</h1>

@@ -1,13 +1,15 @@
+'use client';
+
 import { useDispatch } from 'react-redux';
 
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import Modal from '../../components/modal/Modal';
-import PasswordErrorMessage from '../../components/passwordErrorMessage/PasswordErrorMessage';
-import { useForm } from '../../hooks/useForm';
-import { authActions } from '../../redux/auth';
-import { onPasswordChange } from '../../redux/auth-actions';
-import { validatePassword } from '../../utils/passwordValidation';
+import { useForm } from '@/hooks/useForm';
+import { onPasswordChange } from '@/redux/actions/authActions';
+import { authActions } from '@/redux/slices/authSlice';
+import { validatePassword } from '@/utils/passwordValidation';
+import Button from '../button/Button';
+import Input from '../input/Input';
+import Modal from '../modal/Modal';
+import PasswordErrorMessage from '../passwordErrorMessage/PasswordErrorMessage';
 
 import styles from './ChangePasswordModal.module.css';
 

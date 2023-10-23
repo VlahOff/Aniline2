@@ -1,13 +1,15 @@
+'use client';
+
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import Modal from '../../components/modal/Modal';
-import { useForm } from '../../hooks/useForm';
-import { portfolioActions } from '../../redux/portfolio';
-import { submitEditedTransaction } from '../../redux/portfolio-actions';
+import { useForm } from '@/hooks/useForm';
+import { submitEditedTransaction } from '@/redux/actions/portfolioActions';
+import { portfolioActions } from '@/redux/slices/portfolioSlice';
+import Button from '../button/Button';
 import DeleteTransactionModal from '../deleteTransactionModal/DeleteTransactionModal';
+import Input from '../input/Input';
+import Modal from '../modal/Modal';
 
 import styles from './EditTransactionModal.module.css';
 

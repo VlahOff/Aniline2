@@ -1,7 +1,11 @@
+.wrapper {
+  padding-top: 120px;
+  height: calc(100vh - 72px);
+}
+
 .card {
   max-width: 500px;
-  margin: 120px auto;
-  margin-bottom: 0;
+  margin: 0 auto;
 }
 
 .title {
@@ -29,8 +33,8 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .card {
-    margin-top: 38px;
+  .wrapper {
+    padding-top: 38px;
   }
 }
 

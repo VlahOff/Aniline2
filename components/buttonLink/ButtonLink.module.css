@@ -5,6 +5,7 @@
   text-decoration: none;
   color: var(--text-color);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .btn::after {

@@ -46,7 +46,7 @@ const Navigation = () => {
 	};
 
 	const toggleThemeHandler = () => {
-		dispatch(toggleTheme);
+		dispatch(toggleTheme());
 	};
 
 	const onLinkSelectHandler = () => {
@@ -63,6 +63,7 @@ const Navigation = () => {
 					src={theme === 'light' ? darkLogo : lightLogo}
 					alt="site logo"
 					className={styles.logo}
+					quality={100}
 				/>
 			</Link>
 

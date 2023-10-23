@@ -70,11 +70,11 @@ export const getConvertResult = amount => {
 	return dispatch => {
 		// dispatch(uiActions.startLoading());
 		dispatch(findToCurrencyResultObject());
-		const { selectedFromInput: selectedFrom, selectedToInput: selectedTo } =
-			store.getState().converter;
+		const { selectedFromInput, selectedToInput } = store.getState().converter;
 		cryptoService
-			.convertCurrency(amount, selectedFrom, selectedTo)
+			.convertCurrency(amount, selectedFromInput, selectedToInput)
 			.then(res => {
+				console.log(res);
 				// if (res.errorMessage) {
 				// 	dispatch(
 				// 		uiActions.setNotificationMessage({

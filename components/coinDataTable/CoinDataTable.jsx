@@ -34,7 +34,7 @@ const CoinDataTable = ({ coinData }) => {
 						return (
 							<Link
 								key={coin.id}
-								href={`/coinDetails/${coin.id}`}
+								href={`/coin-details/${coin.id}`}
 							>
 								<tr className="table-row">
 									<td
@@ -50,6 +50,7 @@ const CoinDataTable = ({ coinData }) => {
 											alt={`${coin.symbol} logo`}
 											width={35}
 											height={35}
+											quality={100}
 										/>
 									</td>
 									<td

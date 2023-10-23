@@ -4,6 +4,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { Poppins } from 'next/font/google';
 import './globals.css';
+import ThemeProvider from '@/redux/ThemeProvider';
 
 config.autoAddCss = false;
 const poppins = Poppins({
@@ -21,10 +22,12 @@ export default function RootLayout({ children }) {
 		<Providers>
 			<html lang="en">
 				<body className={poppins.className}>
-					<header>
-						<Navigation />
-					</header>
-					<main>{children}</main>
+					<ThemeProvider>
+						<header>
+							<Navigation />
+						</header>
+						<main>{children}</main>
+					</ThemeProvider>
 				</body>
 			</html>
 		</Providers>

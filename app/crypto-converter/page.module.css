@@ -1,5 +1,10 @@
+.wrapper {
+  padding-top: 120px;
+  height: calc(100vh - 72px);
+}
+
 .converter {
-  margin: 120px auto 0 auto;
+  margin: 0 auto;
   max-width: 800px;
 }
 
@@ -58,8 +63,8 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .converter {
-    margin-top: 38px;
+  .wrapper {
+    padding-top: 38px;
   }
 }
 

@@ -8,6 +8,7 @@ export async function GET(req) {
 		const toCurrency = query.get('toCurrency');
 
 		const data = await getConversionResult(amount, fromCurrency, toCurrency);
+		console.log(data);
 
 		return Response.json({ data }, { status: 200 });
 	} catch (error) {

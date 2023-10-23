@@ -1,20 +1,21 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+'use client';
 
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import Modal from '../../components/modal/Modal';
-import PasswordErrorMessage from '../../components/passwordErrorMessage/PasswordErrorMessage';
-import { useForm } from '../../hooks/useForm';
-import { authActions } from '../../redux/auth';
-import { onAccountDeletion } from '../../redux/auth-actions';
-import { validatePassword } from '../../utils/passwordValidation';
+import { useDispatch } from 'react-redux';
+
+import { useForm } from '@/hooks/useForm';
+import { onAccountDeletion } from '@/redux/actions/authActions';
+import { authActions } from '@/redux/slices/authSlice';
+import { validatePassword } from '@/utils/passwordValidation';
+import Button from '../button/Button';
+import Input from '../input/Input';
+import Modal from '../modal/Modal';
+import PasswordErrorMessage from '../passwordErrorMessage/PasswordErrorMessage';
 
 import styles from './DeleteAccountModal.module.css';
 
 const DeleteAccountModal = () => {
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+
 	const { formValues, isFormValid, changeHandler } = useForm({
 		password: '',
 		passwordValid: null,
@@ -27,7 +28,7 @@ const DeleteAccountModal = () => {
 	const onFormSubmitHandler = event => {
 		event.preventDefault();
 		if (isFormValid) {
-			dispatch(onAccountDeletion(formValues.password, navigate));
+			dispatch(onAccountDeletion(formValues.password));
 		}
 	};
 

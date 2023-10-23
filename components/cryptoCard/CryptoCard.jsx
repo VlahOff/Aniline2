@@ -34,6 +34,7 @@ const CryptoCard = ({
 					className={styles['coin-logo']}
 					width={58}
 					height={58}
+					quality={100}
 				/>
 			</header>
 			<main className={styles['card-main']}>

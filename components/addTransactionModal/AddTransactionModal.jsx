@@ -1,15 +1,14 @@
+'use client';
+
 import { useDispatch } from 'react-redux';
 
-import Button from '../../components/button/Button';
-import Input from '../../components/input/Input';
-import InputWithDropdown from '../../components/inputWithDropdown/InputWithDropdown';
-import Modal from '../../components/modal/Modal';
-import { useForm } from '../../hooks/useForm';
-import { portfolioActions } from '../../redux/portfolio';
-import {
-	filterAllCoinsList,
-	submitTransaction,
-} from '../../redux/portfolio-actions';
+import { useForm } from '@/hooks/useForm';
+import { filterAllCoinsList, submitTransaction } from '@/redux/actions/portfolioActions';
+import { portfolioActions } from '@/redux/slices/portfolioSlice';
+import Button from '../button/Button';
+import Input from '../input/Input';
+import InputWithDropdown from '../inputWithDropdown/InputWithDropdown';
+import Modal from '../modal/Modal';
 
 import styles from './AddTransactionModal.module.css';
 

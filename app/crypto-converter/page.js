@@ -120,85 +120,97 @@ const CryptoConverter = () => {
 	};
 
 	return (
-		<Card className={styles.converter}>
-			<form
-				onSubmit={onConvertSubmitHandler}
-				className={styles.form}
-			>
-				<h1 className={styles.title}>Cryptocurrency Converter</h1>
-				<div className={styles['inputs-wrapper']}>
-					<InputWithDropdown
-						label={`From ${fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
-						id="fromValue"
-						onChange={onInputFromHandler}
-						value={formValues.fromValue}
-						error={formValues.fromValueValid && formValues.isFromSelectedValid}
-						errorMessage={'Please select a currency.'}
-						isDropdownShown={fromCryptoToFiat ? cryptoMapResult : fiatMapResult}
-					>
-						{(fromCryptoToFiat ? cryptoMapResult : fiatMapResult).map(item => {
-							return (
-								<p
-									className={styles.item}
-									key={item.id}
-									onClick={() => selectFrom(item)}
-								>
-									{item.name} - {item.symbol}
-								</p>
-							);
-						})}
-					</InputWithDropdown>
-					<Button onClick={toggleFromTo}>
-						<FontAwesomeIcon icon={faRepeat} />
-					</Button>
-					<InputWithDropdown
-						label={`To ${!fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
-						id="toValue"
-						onChange={onInputToHandler}
-						value={formValues.toValue}
-						error={formValues.toValueValid && formValues.isToSelectedValid}
-						errorMessage={'Please select a currency.'}
-						isDropdownShown={fromCryptoToFiat ? fiatMapResult : cryptoMapResult}
-					>
-						{(fromCryptoToFiat ? fiatMapResult : cryptoMapResult).map(item => {
-							return (
-								<p
-									className={styles.item}
-									key={item.id}
-									onClick={() => selectTo(item)}
-								>
-									{item.name} - {item.symbol}
-								</p>
-							);
-						})}
-					</InputWithDropdown>
-				</div>
-				<Input
-					label={'Amount'}
-					id={'amount'}
-					type={'number'}
-					onChange={e => changeHandler(e, isAmountValid)}
-					value={formValues.amount}
-					error={formValues.amountValid}
-					errorMessage={'Please provide a value greater than 0.'}
-				/>
-				<Button
-					type="submit"
-					disabled={!isFormValid}
-					className={styles['submit-btn']}
+		<section className={styles.wrapper}>
+			<Card className={styles.converter}>
+				<form
+					onSubmit={onConvertSubmitHandler}
+					className={styles.form}
 				>
-					Convert
-				</Button>
-			</form>
-			{result && (
-				<p className={styles.result}>
-					{result?.amount} {result?.name} ({result?.symbol}) ={' '}
-					{priceParser(result?.quote[selectedToInput]?.price)} {toObject?.name}{' '}
-					({toObject?.symbol})
-				</p>
-			)}
-			<p className={styles['powered-by']}>Powered by CoinMarketCap</p>
-		</Card>
+					<h1 className={styles.title}>Cryptocurrency Converter</h1>
+					<div className={styles['inputs-wrapper']}>
+						<InputWithDropdown
+							label={`From ${fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
+							id="fromValue"
+							onChange={onInputFromHandler}
+							value={formValues.fromValue}
+							error={
+								formValues.fromValueValid && formValues.isFromSelectedValid
+							}
+							errorMessage={'Please select a currency.'}
+							isDropdownShown={
+								fromCryptoToFiat ? cryptoMapResult : fiatMapResult
+							}
+						>
+							{(fromCryptoToFiat ? cryptoMapResult : fiatMapResult).map(
+								item => {
+									return (
+										<p
+											className={styles.item}
+											key={item.id}
+											onClick={() => selectFrom(item)}
+										>
+											{item.name} - {item.symbol}
+										</p>
+									);
+								}
+							)}
+						</InputWithDropdown>
+						<Button onClick={toggleFromTo}>
+							<FontAwesomeIcon icon={faRepeat} />
+						</Button>
+						<InputWithDropdown
+							label={`To ${!fromCryptoToFiat ? 'Crypto' : 'Fiat'}`}
+							id="toValue"
+							onChange={onInputToHandler}
+							value={formValues.toValue}
+							error={formValues.toValueValid && formValues.isToSelectedValid}
+							errorMessage={'Please select a currency.'}
+							isDropdownShown={
+								fromCryptoToFiat ? fiatMapResult : cryptoMapResult
+							}
+						>
+							{(fromCryptoToFiat ? fiatMapResult : cryptoMapResult).map(
+								item => {
+									return (
+										<p
+											className={styles.item}
+											key={item.id}
+											onClick={() => selectTo(item)}
+										>
+											{item.name} - {item.symbol}
+										</p>
+									);
+								}
+							)}
+						</InputWithDropdown>
+					</div>
+					<Input
+						label={'Amount'}
+						id={'amount'}
+						type={'number'}
+						onChange={e => changeHandler(e, isAmountValid)}
+						value={formValues.amount}
+						error={formValues.amountValid}
+						errorMessage={'Please provide a value greater than 0.'}
+					/>
+					<Button
+						type="submit"
+						disabled={!isFormValid}
+						className={styles['submit-btn']}
+					>
+						Convert
+					</Button>
+				</form>
+				{result && (
+					<p className={styles.result}>
+						{result?.amount} {result?.name} ({result?.symbol}) ={' '}
+						{priceParser(result?.quote[selectedToInput]?.price)}{' '}
+						{toObject?.name} ({toObject?.symbol})
+					</p>
+				)}
+				<p className={styles['powered-by']}>Powered by CoinMarketCap</p>
+			</Card>
+		</section>
 	);
 };
 

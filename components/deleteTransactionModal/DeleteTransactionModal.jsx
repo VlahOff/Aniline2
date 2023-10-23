@@ -1,7 +1,9 @@
+'use client';
+
 import { useDispatch } from 'react-redux';
 
-import Button from '../../components/button/Button';
-import { deleteTransaction } from '../../redux/portfolio-actions';
+import { deleteTransaction } from '@/redux/actions/portfolioActions';
+import Button from '../button/Button';
 
 import styles from './DeleteTransactionModal.module.css';
 
