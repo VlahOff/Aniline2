@@ -22,12 +22,12 @@ const Modal = ({ className, children, onClose }) => {
 		};
 	});
 
-	const styles = `${styles.modal} ${className}`;
+	const cssStyles = `${styles.modal} ${className}`;
 
 	return (
 		<>
 			<Backdrop onClose={onClose} />
-			<Card className={styles}>{children}</Card>
+			<Card className={cssStyles}>{children}</Card>
 		</>
 	);
 };

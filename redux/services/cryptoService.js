@@ -44,7 +44,7 @@ export const fetchGlobalData = async () => {
 };
 
 export const fetchCryptoMap = async () => {
-	const res = await axios.get(`http://localhost:3000/api/crypto/cryptoMap`, {
+	const res = await axios.get('http://localhost:3000/api/crypto/cryptoMap', {
 		headers: { 'Content-Type': 'application/json' },
 	});
 
@@ -52,7 +52,7 @@ export const fetchCryptoMap = async () => {
 };
 
 export const fetchFiatMap = async () => {
-	const res = await axios.get(`http://localhost:3000/api/crypto/fiatMap`, {
+	const res = await axios.get('http://localhost:3000/api/crypto/fiatMap', {
 		headers: { 'Content-Type': 'application/json' },
 	});
 

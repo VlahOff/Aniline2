@@ -44,6 +44,10 @@ ol {
   margin: 0px;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 html:focus-within {
   scroll-behavior: smooth;
 }
@@ -52,11 +56,10 @@ body {
   font-family: 'Poppins', sans-serif;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
 main {
-  /* min-height: 100vh; */
-  /* height: 100%; */
   background-image: url('../public/background.svg');
   background-color: var(--background);
 }

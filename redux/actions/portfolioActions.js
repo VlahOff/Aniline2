@@ -1,6 +1,7 @@
 import { debounce } from 'lodash';
 import { store } from '../store';
 import { portfolioActions } from '../slices/portfolioSlice';
+import * as portfolioService from '../services/portfolioService';
 
 const worker = new Worker('worker.js');
 
@@ -9,44 +10,43 @@ const filterAllCoins = debounce((input, map) => {
 }, 600);
 
 export const initializePortfolioState = () => {
-	// return dispatch => {
-	// 	dispatch(uiActions.startLoading());
-	// 	Promise.all([
-	// 		portfolioService.fetchAllCoinsList(),
-	// 		portfolioService.fetchUserTransactions(),
-	// 	])
-	// 		.then(res => {
-	// 			if (res[0].message || res[1].message) {
-	// 				dispatch(
-	// 					uiActions.setNotificationMessage({
-	// 						message: res[0].message || res[1].message,
-	// 						type: NotificationTypes.Error,
-	// 					})
-	// 				);
-	// 				return;
-	// 			}
+	return dispatch => {
+		// dispatch(uiActions.startLoading());
+		Promise.all([
+			portfolioService.fetchAllCoinsList(),
+			portfolioService.fetchUserTransactions(),
+		]).then(res => {
+			// if (res[0].message || res[1].message) {
+			// 	dispatch(
+			// 		uiActions.setNotificationMessage({
+			// 			message: res[0].message || res[1].message,
+			// 			type: NotificationTypes.Error,
+			// 		})
+			// 	);
+			// 	return;
+			// }
 
-	// 			dispatch(portfolioActions.setAllCoinsList(res[0]));
-	// 			dispatch(portfolioActions.setTransactions(res[1]));
-	// 			dispatch(portfolioActions.calculateTransactionsValue());
-	// 		})
-	// 		.catch(err =>
-	// 			dispatch(
-	// 				uiActions.setNotificationMessage({
-	// 					message: err,
-	// 					type: NotificationTypes.Error,
-	// 				})
-	// 			)
-	// 		)
-	// 		.finally(() => dispatch(uiActions.stopLoading()));
-	// };
+			dispatch(portfolioActions.setAllCoinsList(res[0]));
+			dispatch(portfolioActions.setTransactions(res[1]));
+			dispatch(portfolioActions.calculateTransactionsValue());
+		});
+		// .catch(err =>
+		// 	dispatch(
+		// 		uiActions.setNotificationMessage({
+		// 			message: err,
+		// 			type: NotificationTypes.Error,
+		// 		})
+		// 	)
+		// )
+		// .finally(() => dispatch(uiActions.stopLoading()));
+	};
 };
 
 export const filterAllCoinsList = input => {
-	// return dispatch => {
-	// 	const allCoinsList = store.getState().portfolio.allCoinsList;
-	// 	filterAllCoins(input, allCoinsList);
-	// };
+	return dispatch => {
+		const allCoinsList = store.getState().portfolio.allCoinsList;
+		filterAllCoins(input, allCoinsList);
+	};
 };
 
 worker.onmessage = event => {
@@ -60,7 +60,6 @@ export const submitTransaction = formData => {
 	// 		coinPrice: formData.coinPrice,
 	// 		quantity: formData.quantity,
 	// 	};
-
 	// 	dispatch(uiActions.startLoading());
 	// 	portfolioService
 	// 		.addUserTransaction(transaction)
@@ -74,7 +73,6 @@ export const submitTransaction = formData => {
 	// 				);
 	// 				return;
 	// 			}
-
 	// 			dispatch(portfolioActions.setTransactions(res));
 	// 			dispatch(portfolioActions.calculateTransactionsValue());
 	// 			dispatch(portfolioActions.toggleAddModal());
@@ -98,7 +96,6 @@ export const submitEditedTransaction = (formData, transactionId) => {
 	// 		coinPrice: formData.coinPrice,
 	// 		quantity: formData.quantity,
 	// 	};
-
 	// 	dispatch(uiActions.startLoading());
 	// 	portfolioService
 	// 		.editUserTransaction(transaction, transactionId)
@@ -112,7 +109,6 @@ export const submitEditedTransaction = (formData, transactionId) => {
 	// 				);
 	// 				return;
 	// 			}
-
 	// 			dispatch(portfolioActions.setTransactions(res));
 	// 			dispatch(portfolioActions.calculateTransactionsValue());
 	// 			dispatch(portfolioActions.toggleEditModal());
@@ -144,7 +140,6 @@ export const deleteTransaction = transactionId => {
 	// 				);
 	// 				return;
 	// 			}
-
 	// 			dispatch(portfolioActions.removeTransaction(transactionId));
 	// 			dispatch(portfolioActions.calculateTransactionsValue());
 	// 			dispatch(portfolioActions.toggleEditModal());

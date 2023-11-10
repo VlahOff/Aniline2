@@ -21,14 +21,12 @@ export default function RootLayout({ children }) {
 	return (
 		<Providers>
 			<html lang="en">
-				<body className={poppins.className}>
-					<ThemeProvider>
-						<header>
-							<Navigation />
-						</header>
-						<main>{children}</main>
-					</ThemeProvider>
-				</body>
+				<ThemeProvider className={poppins.className}>
+					<header>
+						<Navigation />
+					</header>
+					<main>{children}</main>
+				</ThemeProvider>
 			</html>
 		</Providers>
 	);

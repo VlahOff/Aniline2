@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTheme } from './actions/uiActions';
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children, className }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getTheme());
@@ -12,7 +12,14 @@ const ThemeProvider = ({ children }) => {
 
 	const theme = useSelector(state => state.ui.theme);
 
-	return <div data-theme={theme}>{children}</div>;
+	return (
+		<body
+			className={className}
+			data-theme={theme}
+		>
+			{children}
+		</body>
+	);
 };
 
 export default ThemeProvider;

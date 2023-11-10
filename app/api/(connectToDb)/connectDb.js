@@ -3,9 +3,14 @@ import mongoose from 'mongoose';
 const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 
 export default async function connectDb() {
+	console.log(mongoose.connections);
+	if (mongoose.connections[0].readyState) {
+		return;
+	}
+
 	try {
 		mongoose.set('strictQuery', true);
-		await mongoose.connect(DB_CONNECTION_STRING, { dbName: 'aniline' });
+		await mongoose.connect(DB_CONNECTION_STRING, { dbName: 'aniline2' });
 		console.log('Database connected');
 	} catch (error) {
 		console.error('Error initializing database');

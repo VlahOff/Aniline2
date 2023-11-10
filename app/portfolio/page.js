@@ -2,18 +2,19 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import AddTransactionModal from '@/components/addTransactionModal/AddTransactionModal';
 import Button from '@/components/button/Button';
 import Card from '@/components/card/Card';
 import EditTransactionModal from '@/components/editTransactionModal/EditTransactionModal';
 import PortfolioTable from '@/components/portfolioTable/PortfolioTable';
 import { usdPriceParser } from '@/utils/priceParser';
-
 import styles from './page.module.css';
+import { initializePortfolioState } from '@/redux/actions/portfolioActions';
+import { portfolioActions } from '@/redux/slices/portfolioSlice';
 
 const Portfolio = () => {
 	const dispatch = useDispatch();
+
 	const {
 		filteredAllCoinsList,
 		transactions,
@@ -24,11 +25,11 @@ const Portfolio = () => {
 	} = useSelector(state => state.portfolio);
 
 	useEffect(() => {
-		// dispatch(initializePortfolioState());
+		dispatch(initializePortfolioState());
 	}, []);
 
 	const openAddTransactionModal = () => {
-		// dispatch(portfolioActions.toggleAddModal());
+		dispatch(portfolioActions.toggleAddModal());
 	};
 
 	return (

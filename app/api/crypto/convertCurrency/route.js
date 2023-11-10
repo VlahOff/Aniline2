@@ -4,11 +4,10 @@ export async function GET(req) {
 	try {
 		const query = req.nextUrl.searchParams;
 		const amount = query.get('amount');
-		const fromCurrency = query.get('fromCurrency');
-		const toCurrency = query.get('toCurrency');
+		const fromCurrency = query.get('from');
+		const toCurrency = query.get('to');
 
 		const data = await getConversionResult(amount, fromCurrency, toCurrency);
-		console.log(data);
 
 		return Response.json({ data }, { status: 200 });
 	} catch (error) {
